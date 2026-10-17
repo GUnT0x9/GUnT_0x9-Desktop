@@ -48,3 +48,9 @@
 !/config/profiles/Daily.json
 !/config/profiles/Gaming.json
 !/config/profiles/Focus.json
+
+# Local developer workspace preferences and execution history
+/config/developer.json
+/config/development-sessions.json
+/config/commands.json
+/config/smart-automation.json

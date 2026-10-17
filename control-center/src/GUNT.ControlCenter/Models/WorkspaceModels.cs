@@ -2,7 +2,7 @@ using System;using System.Collections.Generic;
 namespace Gunt.ControlCenter.Models {
  public sealed class ChoiceOption {public string Key{get;set;}public string Value{get;set;}public ChoiceOption(string key,string value){Key=key;Value=value;}public override string ToString(){return Value;}}
 
- public sealed class ProjectEntry {public string Id{get;set;}public string Name{get;set;}public string Directory{get;set;}public string Ide{get;set;}public string Terminal{get;set;}public string RepositoryUrl{get;set;}public bool Pinned{get;set;}public int Order{get;set;}public List<string> Commands{get;set;}public override string ToString(){return (Pinned?"고정 · ":"")+Name+"\n"+Directory;}}
+ public sealed class ProjectEntry {public DeveloperPreferences Developer{get;set;}public string Id{get;set;}public string Name{get;set;}public string Directory{get;set;}public string Ide{get;set;}public string Terminal{get;set;}public string RepositoryUrl{get;set;}public bool Pinned{get;set;}public int Order{get;set;}public List<string> Commands{get;set;}public override string ToString(){return (Pinned?"고정 · ":"")+Name+"\n"+Directory;}}
  public sealed class ProjectStore {public int SchemaVersion{get;set;}public List<ProjectEntry> Projects{get;set;}}
  public sealed class HealthEntry {public string Id,Name,Status,Detail,ActionLabel,Action;public DateTimeOffset Checked=DateTimeOffset.Now;}
  public sealed class ProfileEntry {public string Id,Name,Path;public bool Builtin;public Dictionary<string,object> Data;public override string ToString(){return Name+(Builtin?" · 기본":" · 사용자");}}
