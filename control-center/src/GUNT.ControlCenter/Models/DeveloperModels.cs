@@ -1,7 +1,7 @@
 using System;using System.Collections.Generic;
 namespace Gunt.ControlCenter.Models {
  public sealed class DeveloperPreferences {
-  public string TerminalHost{get;set;}public string WslDistribution{get;set;}public string DefaultAiCli{get;set;}public string Editor{get;set;}public string SessionPreset{get;set;}public string WorkspaceProfile{get;set;}public string CodexExecutable{get;set;}public string OpenCodeExecutable{get;set;}
+  public string TerminalHost{get;set;}public string WslDistribution{get;set;}public string WslUser{get;set;}public string DefaultAiCli{get;set;}public string Editor{get;set;}public string SessionPreset{get;set;}public string WorkspaceProfile{get;set;}public string CodexExecutable{get;set;}public string OpenCodeExecutable{get;set;}
  }
  public sealed class DeveloperStore {public int SchemaVersion=1;public List<string> Roots=new List<string>();public int ScanDepth=1;public bool ShowHidden;public DeveloperPreferences Defaults=new DeveloperPreferences{TerminalHost="windows-terminal",DefaultAiCli="codex",Editor="vscode",SessionPreset="ai-coding",CodexExecutable="codex",OpenCodeExecutable="opencode"};public string SelectedProjectId;public List<DeveloperTool> Tools=new List<DeveloperTool>();}
  public sealed class DeveloperTool {public string Id,Name,Executable;public override string ToString(){return Name;}}
