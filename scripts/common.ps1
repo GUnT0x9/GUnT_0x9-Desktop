@@ -1,4 +1,6 @@
-﻿$ErrorActionPreference = 'Stop'
+﻿[Console]::OutputEncoding = New-Object Text.UTF8Encoding($false)
+$OutputEncoding = [Console]::OutputEncoding
+$ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 $script:Root = Split-Path $PSScriptRoot -Parent
 $script:Utf8 = New-Object Text.UTF8Encoding($false)

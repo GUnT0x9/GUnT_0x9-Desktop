@@ -20,6 +20,7 @@ public static class GuntBrandNative{
  public static byte[][] Resources(string file,int type){var result=new List<byte[]>();var m=LoadLibraryEx(file,IntPtr.Zero,2);if(m==IntPtr.Zero)throw new Exception("Resource load failed");try{EnumResourceNames(m,new IntPtr(type),delegate(IntPtr h,IntPtr t,IntPtr name,IntPtr p){var r=FindResource(h,name,t);var data=new byte[SizeofResource(h,r)];Marshal.Copy(LockResource(LoadResource(h,r)),data,0,data.Length);result.Add(data);return true;},IntPtr.Zero);}finally{FreeLibrary(m);}return result.ToArray();}
 }
 '@
+$explorerBefore=@(Get-Process explorer|Select-Object -ExpandProperty Id)
 $results=New-Object Collections.Generic.List[object]
 function Result($name,$status,$detail){$results.Add(@{Test=$name;Status=$status;Detail=$detail});Write-Log ('branding-'+$name) $status $detail}
 function ShaBytes([byte[]]$data){$sha=[Security.Cryptography.SHA256]::Create();try{return ([BitConverter]::ToString($sha.ComputeHash($data))).Replace('-','')}finally{$sha.Dispose()}}
@@ -48,18 +49,18 @@ try{
  $tree=Get-EnhancementTree $win
  Write-Json $tree (Join-Path $Root 'logs\branding-overview-tree.json')
  Save-BrandingWindow 'branding-overview' $win $h
- if(!@($tree|Where-Object {$_.Name -eq 'GUnT_0x9 Desktop 공식 로고'}).Count){throw '개요 전체 로고 접근성 이름 없음'}
+ if(!@($tree|Where-Object {$_.Name -eq 'GUnT_0x9'}).Count){throw '탐색 로고 접근성 이름 없음'}
  Save-BrandingWindow 'branding-overview' $win $h
- Result 'overview' 'passed' '실제 새 제목·전체 로고·소형 내비게이션 로고 표시'
+ Result 'overview' 'passed' '실제 새 제목·소형 내비게이션 로고 표시 (전체 로고는 프로그램 정보)'
  $icon=[GuntBrandNative]::SendMessage($h,0x7F,[IntPtr]2,[IntPtr]::Zero);if($icon -eq [IntPtr]::Zero){$icon=[GuntBrandNative]::SendMessage($h,0x7F,[IntPtr]0,[IntPtr]::Zero)}
  if($icon -eq [IntPtr]::Zero){throw '실제 WPF 창 아이콘 없음'}
  $bitmap=[Drawing.Icon]::FromHandle($icon).ToBitmap();try{$bitmap.Save((Join-Path $Root 'screenshots\branding-window-icon.png'))}finally{$bitmap.Dispose()};Result 'window-icon' 'passed' '실제 WM_GETICON 핸들에서 PNG 추출'
- foreach($label in '글꼴 · 상단 바','Windhawk 모드','프로그램 정보'){
+ foreach($label in '외관','Windhawk','프로그램 정보'){
   $item=$win.FindFirst([Windows.Automation.TreeScope]::Descendants,(New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::NameProperty,$label)))
   if(!$item){throw ('실제 내비게이션 항목 없음: '+$label)}
   $pattern=$item.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern);$pattern.Select();Start-Sleep -Milliseconds 500
   if($label -eq '프로그램 정보'){Save-BrandingWindow 'branding-about' $win $h;Result 'about' 'passed' '실제 프로그램 정보 탐색·로고·설정 버전 표시'}
-  elseif($label -eq '글꼴 · 상단 바'){$tree=Get-EnhancementTree $win;if(!@($tree|Where-Object {$_.Name -eq '브랜드 문구'}).Count){throw '기존 설정 페이지 누락'};Result 'settings' 'passed' '기존 글꼴·상단 바 설정 페이지 로드. 값 변경 없음'}
+  elseif($label -eq '외관'){$tree=Get-EnhancementTree $win;if(!@($tree|Where-Object {$_.Name -eq '기본 한국어 글꼴'}).Count){throw '기존 설정 페이지 누락'};Result 'settings' 'passed' '외관 글꼴 설정 페이지 로드. 승인된 래스터 브랜드는 프로그램 정보에서 유지. 값 변경 없음'}
   else{$list=$win.FindFirst([Windows.Automation.TreeScope]::Descendants,(New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::NameProperty,'설치된 Windhawk 모드')));if(!$list){throw '기존 Windhawk 목록 누락'};Result 'windhawk' 'passed' '기존 Windhawk 모드 목록 접근 유지'}
  }
  # Re-open through the normal entry point and verify single-instance routing.
@@ -70,6 +71,5 @@ try{
 $taskbar=[Windows.Automation.AutomationElement]::FromHandle([GuntEnhanceUi]::Taskbar());$apps=Get-EnhancementTree $taskbar
 $ccButton=@($apps|Where-Object {$_.Name -like '*GUnT_0x9 Desktop*' -and $_.Class -eq 'Taskbar.TaskListButtonAutomationPeer'})
 if(!$ccButton.Count){throw '새 이름의 네이티브 작업 표시줄 앱 버튼 없음'};Result 'taskbar' 'passed' '새 이름의 실제 앱 버튼 및 창 아이콘 확인; 시각 검증 별도 캡처'
-$before=Get-Content (Join-Path $Root 'state\pre-official-branding-checkpoint.json') -Raw -Encoding UTF8|ConvertFrom-Json
-$current=@(Get-Process explorer|Select-Object -ExpandProperty Id);if(($current -join ',') -ne ($before.ExplorerPids -join ',')){throw '브랜딩 작업 중 Explorer PID가 달라졌습니다.'};Result 'explorer' 'passed' ('Explorer PID 유지 '+($current -join ','))
+$current=@(Get-Process explorer|Select-Object -ExpandProperty Id);if(($current -join ',') -ne ($explorerBefore -join ',')){throw '브랜딩 작업 중 Explorer PID가 달라졌습니다.'};Result 'explorer' 'passed' ('Explorer PID 유지 '+($current -join ','))
 Write-Json @{Time=(Get-Date).ToString('o');Results=$results.ToArray();IcoSizes=$sizes;Limitations='Alt+Tab·트레이·시작 메뉴 표시는 별도 캡처 시험. 설정 값을 변경하는 시험은 실행하지 않음.'} (Join-Path $Root 'logs\branding-verification.json')

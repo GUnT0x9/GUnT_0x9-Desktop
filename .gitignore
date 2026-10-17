@@ -37,3 +37,14 @@
 /windhawk/*.deployment.json
 # User wallpaper artwork and videos are not redistributed
 /wallpaper/
+
+# UX workspace records contain private paths
+/config/projects.json
+/config/wallpaper-gallery.json
+/config/profiles/user-*.json
+
+/config/profiles/*.json
+!/config/profiles/Developer.json
+!/config/profiles/Daily.json
+!/config/profiles/Gaming.json
+!/config/profiles/Focus.json

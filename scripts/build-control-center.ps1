@@ -9,6 +9,7 @@ $args=@(('/win32icon:'+(Join-Path $Root 'assets\branding\icons\gunt-app.ico')),'
 foreach($ref in 'System.dll','System.Core.dll','System.Drawing.dll','System.Windows.Forms.dll','System.Web.Extensions.dll','System.Xaml.dll'){$args+=('/reference:'+(Join-Path $framework $ref))}
 foreach($ref in 'PresentationFramework.dll','PresentationCore.dll','WindowsBase.dll'){$args+=('/reference:'+(Join-Path $wpf $ref))}
 $args+=('/reference:'+(Join-Path $Root 'bin\Gunt.Configuration.dll'))
+$args+=('/reference:'+(Join-Path $Root 'bin\Gunt.Sensors.dll'))
 $args+=@(Get-ChildItem (Join-Path $Root 'control-center\src') -Filter '*.cs' -Recurse|Select-Object -ExpandProperty FullName)
 & $csc @args
 if($LASTEXITCODE -ne 0 -or !(Test-Path $out)){throw '제어 센터 빌드 실패. 기존 실행 파일은 보존했습니다.'}

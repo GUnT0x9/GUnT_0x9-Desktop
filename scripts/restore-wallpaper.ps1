@@ -19,6 +19,8 @@ try{
   $request=Start-Process $engine -ArgumentList ('setwp --file "'+$c.activeProject+'"') -PassThru
   if(!$request.WaitForExit(10000) -or $request.ExitCode -ne 0){throw 'Lively 배경 복원 요청에 실패했습니다.'}
  }
+ $playbackPath=Join-Path $Root 'state\wallpaper-playback.json'
+ if(Test-Path $playbackPath){$policy=Get-Content $playbackPath -Raw -Encoding UTF8|ConvertFrom-Json;if([bool]$policy.ManualPaused){try{$pause=Start-Process $engine -ArgumentList 'app --play false' -PassThru -WindowStyle Hidden;if(!$pause.WaitForExit(10000) -or $pause.ExitCode -ne 0){throw '수동 중지 정책 응답을 확인하지 못했습니다.'};Write-Log 'wallpaper-policy-restore' 'requested' '저장된 수동 중지 정책을 요청했습니다. 실제 프레임 재생은 Lively에서 확인하세요.'}catch{Write-Log 'wallpaper-policy-restore' 'partial' $_.Exception.Message}}}
  Write-Log 'wallpaper-restore' 'passed' '기존 Lively 배경과 엔진을 보존했습니다. 재생 정책은 Lively가 관리합니다.'
 }catch{
  & "$PSScriptRoot\apply-wallpaper.ps1"

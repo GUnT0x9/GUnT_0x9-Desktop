@@ -55,3 +55,7 @@ Windhawk가 공개한 [1.7.3 portable 설정 구현](https://github.com/ramensof
 ## 개별 복구
 
 `powershell.exe -NoProfile -File scripts\set-v24-mod.ps1 -Id <ID> -Disable`로 신규 선택 모드를 해제한다. 직전 설정 복구는 `scripts/rollback-windhawk-enhancement.ps1 -ModId <ID>`, 전체 확장 구성 복구는 같은 스크립트에서 인자 생략. 자동 Explorer 재시작·소프트웨어 제거는 수행하지 않는다. [복구 절차](../docs/windhawk-recovery.md).
+
+## v2.5 제어 센터 Dock 적용 시험 참고 — 2026-10-17
+
+기존 핵심 Dock 모드와 스타일은 유지했습니다. 모서리 12→10→12의 설정·INI 반영 직후에는 문제가 확인되지 않았으나 약 29초 후 Explorer 프로세스 교체를 관찰했습니다. 자동 재시작 명령과 해당 시간 응용 프로그램 충돌 이벤트는 확인되지 않아 원인을 확정하지 않았습니다. 현재 스타일·크기·라이브러리는 시험 전과 같으며, 로컬 안전 보류 파일이 있는 동안 CC의 Dock 자동 쓰기를 막았습니다. 이것을 모드 조합의 전체 안정성 통과로 간주하지 않습니다. [검사 기록](../docs/v25-testing.md)과 [복구](../docs/v25-recovery.md)를 참고하세요. 기존 충돌 모드인 File Explorer Styler는 재활성화하지 않았습니다.
