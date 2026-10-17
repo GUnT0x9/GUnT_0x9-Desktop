@@ -1,0 +1,39 @@
+{
+  "width": 360,
+  "margin": 24,
+  "topGap": 20,
+  "updateMs": 2000,
+  "radius": 6,
+  "compact": false,
+  "showCpu": true,
+  "showRam": true,
+  "showDisk": true,
+  "showNetwork": true,
+  "showUptime": true,
+  "showGpu": true,
+  "showBattery": true,
+  "showIp": false,
+  "position": {
+    "mode": "auto",
+    "locked": false,
+    "monitorId": null,
+    "xDip": 0,
+    "yDip": 0
+  },
+  "graphHistorySeconds": 60,
+  "networkFixedMaxBytesPerSecond": 10485760,
+  "sensorProvider": "auto",
+  "showCpuGraph": true,
+  "networkScaleMode": "dynamic",
+  "showNetworkGraph": true,
+  "storageVolumes": [
+    "C:",
+    "D:"
+  ],
+  "showGpuGraph": false,
+  "schemaVersion": 2,
+  "showRemovable": false,
+  "gpuAdapterIndex": 0,
+  "graphStyle": "lineWithGuides",
+  "visible": true
+}

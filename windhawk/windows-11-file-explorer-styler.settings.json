@@ -1,0 +1,7 @@
+{
+  "theme": "",
+  "xamlDiagnosticsHandling": "allow",
+  "controlStyles[0].target": "Grid#NavigationBarControlGrid",
+  "controlStyles[0].styles[0]": "Background:=<SolidColorBrush Color=\"#FF0E0E12\" />",
+  "themeResourceVariables[0]": "SystemAccentColor=#A78BFA"
+}

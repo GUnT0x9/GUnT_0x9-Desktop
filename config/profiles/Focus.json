@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "name": "집중",
+  "builtin": true,
+  "monitorVisible": false,
+  "compact": true,
+  "manualPaused": true,
+  "notifications": "Windows 기본 알림 유지"
+}

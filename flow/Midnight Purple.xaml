@@ -1,0 +1,18 @@
+<!-- Name: Midnight Purple; IsDark: True; HasBlur: False -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ResourceDictionary.MergedDictionaries><ResourceDictionary Source="pack://application:,,,/Themes/Base.xaml" /></ResourceDictionary.MergedDictionaries>
+  <Style x:Key="WindowBorderStyle" TargetType="Border" BasedOn="{StaticResource BaseWindowBorderStyle}">
+    <Setter Property="Background" Value="#0E0E12"/><Setter Property="BorderBrush" Value="#23232B"/><Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="12"/>
+  </Style>
+  <Style x:Key="QueryBoxStyle" TargetType="TextBox" BasedOn="{StaticResource BaseQueryBoxStyle}">
+    <Setter Property="Background" Value="#0E0E12"/><Setter Property="Foreground" Value="#F4F4F5"/><Setter Property="CaretBrush" Value="#A78BFA"/><Setter Property="FontFamily" Value="Segoe UI Variable Text"/><Setter Property="FontSize" Value="22"/>
+  </Style>
+  <Style x:Key="ItemTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseItemTitleStyle}"><Setter Property="Foreground" Value="#F4F4F5"/><Setter Property="FontFamily" Value="Segoe UI Variable Text"/></Style>
+  <Style x:Key="ItemTitleSelectedStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseItemTitleSelectedStyle}"><Setter Property="Foreground" Value="#A78BFA"/></Style>
+  <Style x:Key="ItemSubTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseItemSubTitleStyle}"><Setter Property="Foreground" Value="#A1A1AA"/></Style>
+  <Style x:Key="ItemSubTitleSelectedStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseItemSubTitleSelectedStyle}"><Setter Property="Foreground" Value="#A1A1AA"/></Style>
+  <Style x:Key="HighlightStyle"><Setter Property="Inline.Foreground" Value="#C084FC"/><Setter Property="Inline.FontWeight" Value="SemiBold"/></Style>
+  <SolidColorBrush x:Key="ItemSelectedBackgroundColor">#23232B</SolidColorBrush>
+  <Style x:Key="SearchIconStyle" TargetType="Path" BasedOn="{StaticResource BaseSearchIconStyle}"><Setter Property="Fill" Value="#A1A1AA"/></Style>
+  <Style x:Key="SeparatorStyle" TargetType="Rectangle" BasedOn="{StaticResource BaseSeparatorStyle}"><Setter Property="Fill" Value="#23232B"/></Style>
+</ResourceDictionary>

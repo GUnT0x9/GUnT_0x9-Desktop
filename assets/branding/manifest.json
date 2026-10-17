@@ -1,0 +1,127 @@
+{
+  "brand": "GUnT_0x9",
+  "subtitle": "Desktop",
+  "masterSize": [
+    1254,
+    1254
+  ],
+  "sourceSHA256": "34b8e30432713acdfb953d70427aaed9186cc24e262620d583a2a1195d5f9e13",
+  "icoSizes": [
+    16,
+    24,
+    32,
+    48,
+    64,
+    128,
+    256
+  ],
+  "processing": "Original RGB preserved; detached alpha components under 500px removed outside a 2px guard; fixed crops; premultiplied LANCZOS resizing. No generative redraw.",
+  "crops": {
+    "mascot": [
+      228,
+      145,
+      1044,
+      984
+    ],
+    "wordmark": [
+      160,
+      981,
+      1094,
+      1111
+    ],
+    "full": [
+      156,
+      145,
+      1098,
+      1200
+    ]
+  },
+  "removedAlphaPixels": 28104,
+  "files": [
+    {
+      "file": "full/gunt-logo-dark-surface.png",
+      "sha256": "670f759816caf3a580cd92aa5060d27d6bfb9bfb904cdfb6aa634f20697579ff",
+      "bytes": 595123
+    },
+    {
+      "file": "full/gunt-logo-full-160.png",
+      "sha256": "f9cf92457d851d54fe48c742ae89a9a069cf1892e22b83b461b5bf9249b6c44e",
+      "bytes": 41814
+    },
+    {
+      "file": "full/gunt-logo-full-240.png",
+      "sha256": "0ee63bf1fb9e4cb355d74e547df320703d6fd05848727821ca783c4e13824d37",
+      "bytes": 80000
+    },
+    {
+      "file": "full/gunt-logo-full.png",
+      "sha256": "694d90484d4d5a46e7e332ad6df02bf235ae1fd836c07ba9a7924911f0ad7b97",
+      "bytes": 732116
+    },
+    {
+      "file": "icons/gunt-app-128.png",
+      "sha256": "759ce197771cdaa588bbfcc5b21fab259b39da97b54a3bfd79db61fbf4899285",
+      "bytes": 24781
+    },
+    {
+      "file": "icons/gunt-app-16.png",
+      "sha256": "f739b07e0c7833b3a2855609a590a1e23e0ae5fd0b7e0b5da6d0f05524700a45",
+      "bytes": 905
+    },
+    {
+      "file": "icons/gunt-app-24.png",
+      "sha256": "e9f5dcbb7328105efeaf3a564d3ea465620e9e72d683e28da7e8056ef87d95c2",
+      "bytes": 1728
+    },
+    {
+      "file": "icons/gunt-app-256.png",
+      "sha256": "966173c80ac6bc2400127b43779f089dbe9aa5bec17f0024ff8715014334933e",
+      "bytes": 78802
+    },
+    {
+      "file": "icons/gunt-app-32.png",
+      "sha256": "bc6bc13f179e5afcb534eeb5254e8ea4f060e88ef0fe87762f48512b24300806",
+      "bytes": 2656
+    },
+    {
+      "file": "icons/gunt-app-48.png",
+      "sha256": "0f820a136f2e269504ce1fa5757c8bcb735331e9d281335f5fe09ee36c336047",
+      "bytes": 5218
+    },
+    {
+      "file": "icons/gunt-app-64.png",
+      "sha256": "e5f926adeba047e0c50cc44dabfbf3b0a597ce320463016bd3fc688764f2dd27",
+      "bytes": 8192
+    },
+    {
+      "file": "icons/gunt-app.ico",
+      "sha256": "15d017854a82dbcb5e63df3ec5aaca17e97a2d5e6dd4240dfd7cf51c57bfc1a2",
+      "bytes": 122400
+    },
+    {
+      "file": "icons/gunt-mascot-master.png",
+      "sha256": "6d25c8741eec610180b92352f0b1371b43df2aefe85c82d50521024fe8f66360",
+      "bytes": 601935
+    },
+    {
+      "file": "previews/icon-contact-sheet.png",
+      "sha256": "06ad07cd46811f76100cd0bdf1dc8491ccb305e2ce27cb172f3b509342c7f16a",
+      "bytes": 266534
+    },
+    {
+      "file": "source/gunt-logo-original.png",
+      "sha256": "34b8e30432713acdfb953d70427aaed9186cc24e262620d583a2a1195d5f9e13",
+      "bytes": 826534
+    },
+    {
+      "file": "wordmark/gunt-logo-compact.png",
+      "sha256": "4a9ea40f54b6c3529259d0909bf67f3da9173cc81b209ee67e5d32097bf90838",
+      "bytes": 43221
+    },
+    {
+      "file": "wordmark/gunt-wordmark.png",
+      "sha256": "f0b38a8959cc1d109d459301df44e05a58058f8b57ea8c4f727594a1e53bd89b",
+      "bytes": 92477
+    }
+  ]
+}

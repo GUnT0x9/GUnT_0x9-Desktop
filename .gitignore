@@ -1,0 +1,39 @@
+# Local tools, installers, runtime data and recovery snapshots
+/apps/
+/backups/
+/bin/
+/downloads/
+/logs/
+/state/
+/diagnostics/
+/screenshots/
+/tests/
+/.codegraph/
+/.omo/
+*.previous
+*.tmp
+*.log
+*.pdb
+**/obj/
+**/__pycache__/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.user
+*.suo
+# Machine-specific runtime paths, monitor identities, sensor mappings
+/config/apps.json
+/config/runtime.json
+/config/layout.json
+/config/dock-layout.json
+/config/monitor.json
+/config/sensors.json
+/config/wallpaper.json
+# Generated installed-mod snapshot and deployment logs
+/windhawk/mods.json
+/windhawk/*.deployment.json
+# User wallpaper artwork and videos are not redistributed
+/wallpaper/

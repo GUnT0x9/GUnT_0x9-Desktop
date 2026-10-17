@@ -1,0 +1,32 @@
+[
+  {
+    "file": "SCDream4.otf",
+    "family": "S-Core Dream 4 Regular",
+    "source": "https://s-core.co.kr/wp-content/uploads/2020/03/S-Core_Dream_OTF.zip",
+    "sha256": "1dc288e8cfdf96eb083c0b016fb5f107bc83208e748b6a61422404b9e42a95a4"
+  },
+  {
+    "file": "SCDream5.otf",
+    "family": "S-Core Dream 5 Medium",
+    "source": "https://s-core.co.kr/wp-content/uploads/2020/03/S-Core_Dream_OTF.zip",
+    "sha256": "ab29b870fcd8351cd19f683c2407de2938a1b663440ca1ac82d3c02fc3736b79"
+  },
+  {
+    "file": "SCDream6.otf",
+    "family": "S-Core Dream 6 Bold",
+    "source": "https://s-core.co.kr/wp-content/uploads/2020/03/S-Core_Dream_OTF.zip",
+    "sha256": "7dd3e0240002feedd37d0f33033a44e17b1ab11f84a93acf8482184adc33aa1a"
+  },
+  {
+    "file": "manrope-regular.ttf",
+    "family": "Manrope",
+    "source": "https://raw.githubusercontent.com/googlefonts/manrope/master/fonts/ttf/manrope-regular.ttf",
+    "sha256": "d23d6eedf51dd495138aa1a83588027d4a63549cdfcc2fa5e0d8e84e09cf4cb1"
+  },
+  {
+    "file": "manrope-medium.ttf",
+    "family": "Manrope Medium",
+    "source": "https://raw.githubusercontent.com/googlefonts/manrope/master/fonts/ttf/manrope-medium.ttf",
+    "sha256": "502ee33a6e140ad6ef10ef8b762a8e5cf01f33316f318800795725f4cfd539d9"
+  }
+]

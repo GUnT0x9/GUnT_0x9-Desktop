@@ -1,0 +1,22 @@
+{
+  "theme": "",
+  "controlStyles[0].target": "Grid#RootPageGrid",
+  "controlStyles[0].styles[0]": "Background=#FF0E0E12",
+  "controlStyles[1].target": "Frame#PermanentNavRootFrame",
+  "controlStyles[1].styles[0]": "Background=#FF0E0E12",
+  "controlStyles[2].target": "Microsoft.UI.Xaml.Controls.NavigationView#PermanentNavigationView",
+  "controlStyles[2].styles[0]": "Background=#FF0E0E12",
+  "controlStyles[3].target": "SystemSettings.View.EntityItem",
+  "controlStyles[3].styles[0]": "Background=#FF15151C",
+  "controlStyles[4].target": "SystemSettings.View.ButtonEntityItem > Button#ContainerButton > ContentPresenter#ContentPresenter",
+  "controlStyles[4].styles[0]": "Background=#FF15151C",
+  "controlStyles[4].styles[1]": "CornerRadius=6",
+  "controlStyles[5].target": "TextBox#CommandSearchTextBox",
+  "controlStyles[5].styles[0]": "CornerRadius=6",
+  "controlStyles[5].styles[1]": "Background=#FF15151C",
+  "controlStyles[5].styles[2]": "BorderBrush=#FF23232B",
+  "controlStyles[5].styles[3]": "BorderThickness=1",
+  "themeResourceVariables[0]": "SystemAccentColor=#A78BFA",
+  "themeResourceVariables[1]": "SystemAccentColorLight1=#C084FC",
+  "themeResourceVariables[2]": "SystemAccentColorLight2=#C4B5FD"
+}

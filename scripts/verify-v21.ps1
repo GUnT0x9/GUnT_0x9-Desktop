@@ -1,0 +1,1 @@
+﻿& "$PSScriptRoot\verify.ps1"

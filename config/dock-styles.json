@@ -1,0 +1,61 @@
+[
+  {
+    "target": "Taskbar.TaskbarFrame",
+    "styles": [
+      "HorizontalAlignment=Center",
+      "Margin=0,0,156,0"
+    ]
+  },
+  {
+    "target": "Taskbar.TaskbarFrame > Grid#RootGrid",
+    "styles": [
+      "Background:=<SolidColorBrush Color=\"#FF0E0E12\" />",
+      "Margin=0,0,0,14",
+      "Padding=14,0,14,0",
+      "CornerRadius=12",
+      "BorderThickness=1",
+      "BorderBrush:=<SolidColorBrush Color=\"#FF23232B\" />"
+    ]
+  },
+  {
+    "target": "StackPanel#SystemTrayFrameGrid, Grid#SystemTrayFrameGrid",
+    "styles": [
+      "Background:=<SolidColorBrush Color=\"#FF0E0E12\" />",
+      "Margin=8,0,8,14",
+      "CornerRadius=12",
+      "BorderThickness=1",
+      "BorderBrush:=<SolidColorBrush Color=\"#FF23232B\" />",
+      "Padding=8,0,8,0"
+    ]
+  },
+  {
+    "target": "Taskbar.TaskListLabeledButtonPanel > Rectangle#RunningIndicator",
+    "styles": [
+      "Fill:=<SolidColorBrush Color=\"#FFA78BFA\" />"
+    ]
+  },
+  {
+    "target": "Taskbar.SearchBoxButton",
+    "styles": [
+      "Visibility=Collapsed"
+    ]
+  },
+  {
+    "target": "Taskbar.AugmentedEntryPointButton#AugmentedEntryPointButton",
+    "styles": [
+      "Visibility=Collapsed"
+    ]
+  },
+  {
+    "target": "Taskbar.TaskViewButton",
+    "styles": [
+      "Visibility=Collapsed"
+    ]
+  },
+  {
+    "target": "SystemTray.TextIconContent > Grid#ContainerGrid > SystemTray.AdaptiveTextBlock#Base > TextBlock#InnerTextBlock",
+    "styles": [
+      "Foreground:=<SolidColorBrush Color=\"#FFF4F4F5\" />"
+    ]
+  }
+]

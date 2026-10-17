@@ -1,0 +1,15 @@
+{
+  "volumeIndicator": "win11",
+  "scrollArea": "notification_area",
+  "additionalScrollRegions": "",
+  "middleClickToMute": 1,
+  "ctrlScrollVolumeChange": 0,
+  "scrollAnywhereKeys.shift": 0,
+  "scrollAnywhereKeys.ctrl": 0,
+  "scrollAnywhereKeys.alt": 0,
+  "scrollAnywhereKeys.win": 0,
+  "fullScreenScrolling": "disabled",
+  "noAutomaticMuteToggle": 0,
+  "volumeChangeStep": 2,
+  "oldTaskbarOnWin11": 0
+}

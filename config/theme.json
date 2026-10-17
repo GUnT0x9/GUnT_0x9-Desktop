@@ -1,0 +1,51 @@
+{
+    "name":  "Midnight Purple",
+    "palette":  {
+                    "background":  "#000000",
+                    "text":  "#F4F4F5",
+                    "muted":  "#A1A1AA",
+                    "panel":  "#0E0E12",
+                    "border":  "#23232B",
+                    "accent":  "#A78BFA",
+                    "secondary":  "#C084FC",
+                    "special":  "#67E8F9",
+                    "surface":  "#15151C",
+                    "elevated":  "#1B1B24",
+                    "dim":  "#71717A"
+                },
+    "fonts":  {
+                  "fallback":  "Consolas",
+                  "ui":  "S-Core Dream 4 Regular",
+                  "heading":  "S-Core Dream 6 Bold",
+                  "secondary":  "S-Core Dream 4 Regular",
+                  "metrics":  "S-Core Dream 5 Medium",
+                  "latin":  "Manrope Medium"
+              },
+    "monitor":  {
+                    "width":  360,
+                    "margin":  24,
+                    "topGap":  20,
+                    "updateMs":  2000,
+                    "radius":  6,
+                    "gpu":  false
+                },
+    "bar":  {
+                "height":  42,
+                "primaryOnly":  true,
+                "reserveWorkArea":  true
+            },
+    "dock":  {
+                 "theme":  "DockLike",
+                 "iconSize":  38,
+                 "height":  60
+             },
+    "launcher":  {
+                     "hotkey":  "Alt + Space",
+                     "radius":  12
+                 },
+    "desktop":  {
+                    "hideIcons":  true
+                },
+    "startup":  true,
+    "version":  "2.4"
+}

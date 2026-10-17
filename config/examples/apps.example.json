@@ -1,0 +1,12 @@
+{
+  "explorer": "C:\\WINDOWS\\explorer.exe",
+  "terminal": "{userProfile}\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+  "code": "{userProfile}\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+  "wsl": "C:\\WINDOWS\\System32\\wsl.exe",
+  "settings": "ms-settings:",
+  "browser": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "github": null,
+  "powershell": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+  "git": "C:\\Program Files\\Git\\git-bash.exe",
+  "docker": "C:\\Program Files\\Docker\\Docker\\Docker Desktop.exe"
+}

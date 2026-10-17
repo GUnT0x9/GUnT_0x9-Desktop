@@ -1,0 +1,7 @@
+{
+  "showSeconds": true,
+  "pauseSecondsOnBattery": true,
+  "timeFormat": "HH:mm:ss",
+  "dateFormat": "M'월' d'일' '('ddd')'",
+  "locale": "ko-KR"
+}

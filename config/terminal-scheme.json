@@ -1,0 +1,23 @@
+{
+    "name":  "GUNT Midnight Purple",
+    "background":  "#000000",
+    "foreground":  "#F4F4F5",
+    "cursorColor":  "#A78BFA",
+    "selectionBackground":  "#23232B",
+    "black":  "#0E0E12",
+    "red":  "#F87171",
+    "green":  "#86EFAC",
+    "yellow":  "#FDE68A",
+    "blue":  "#A78BFA",
+    "purple":  "#C084FC",
+    "cyan":  "#67E8F9",
+    "white":  "#F4F4F5",
+    "brightBlack":  "#A1A1AA",
+    "brightRed":  "#FCA5A5",
+    "brightGreen":  "#BBF7D0",
+    "brightYellow":  "#FEF08A",
+    "brightBlue":  "#C4B5FD",
+    "brightPurple":  "#E9D5FF",
+    "brightCyan":  "#A5F3FC",
+    "brightWhite":  "#FFFFFF"
+}

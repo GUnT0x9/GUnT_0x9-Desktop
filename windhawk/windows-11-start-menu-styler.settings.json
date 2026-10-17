@@ -1,0 +1,23 @@
+{
+  "theme": "",
+  "xamlDiagnosticsHandling": "allow",
+  "controlStyles[0].target": "Border#AcrylicBorder",
+  "controlStyles[0].styles[0]": "Background:=<SolidColorBrush Color=\"#FF0E0E12\" />",
+  "themeResourceVariables[0]": "SystemAccentColor=#A78BFA",
+  "disableNewStartMenuLayout": "default",
+  "controlStyles[0].styles[1]": "CornerRadius=6",
+  "controlStyles[0].styles[2]": "BorderBrush:=<SolidColorBrush Color=\"#FF23232B\" />",
+  "controlStyles[0].styles[3]": "BorderThickness=1",
+  "controlStyles[1].target": "StartMenu.SearchBoxToggleButton > Grid > Border#BorderElement",
+  "controlStyles[1].styles[0]": "Background:=<SolidColorBrush Color=\"#FF15151C\" />",
+  "controlStyles[1].styles[1]": "CornerRadius=6",
+  "controlStyles[1].styles[2]": "BorderBrush:=<SolidColorBrush Color=\"#FF23232B\" />",
+  "controlStyles[1].styles[3]": "BorderThickness=1",
+  "controlStyles[2].target": "MenuFlyoutPresenter",
+  "controlStyles[2].styles[0]": "Background:=<SolidColorBrush Color=\"#FF15151C\" />",
+  "controlStyles[2].styles[1]": "CornerRadius=6",
+  "controlStyles[2].styles[2]": "BorderBrush:=<SolidColorBrush Color=\"#FF23232B\" />",
+  "controlStyles[2].styles[3]": "BorderThickness=1",
+  "themeResourceVariables[1]": "SystemAccentColorLight1=#C084FC",
+  "themeResourceVariables[2]": "SystemAccentColorDark1=#8B6BD6"
+}

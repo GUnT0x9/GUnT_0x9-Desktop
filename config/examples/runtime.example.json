@@ -1,0 +1,16 @@
+{
+  "rainmeter": "{projectRoot}\\apps\\Rainmeter\\Rainmeter.exe",
+  "rainmeterIni": "{projectRoot}\\apps\\Rainmeter\\Rainmeter.ini",
+  "skin": "{projectRoot}\\apps\\Rainmeter\\Skins\\GUNT-System-Monitor",
+  "variables": "{projectRoot}\\apps\\Rainmeter\\Skins\\GUNT-System-Monitor\\@Resources\\Variables.inc",
+  "flow": "{projectRoot}\\apps\\FlowLauncher\\FlowLauncher\\app-2.1.4\\Flow.Launcher.exe",
+  "flowData": "{projectRoot}\\apps\\FlowLauncher\\FlowLauncher\\app-2.1.4\\UserData",
+  "hotkeyAvailable": true,
+  "scale": 1.75,
+  "widgetX": 2242,
+  "widgetY": 82,
+  "topBar": "native AppBar",
+  "dock": "Windhawk DockLike / Midnight Purple",
+  "windhawk": "{projectRoot}\\apps\\Windhawk\\windhawk.exe",
+  "widgetScale": 1.75
+}

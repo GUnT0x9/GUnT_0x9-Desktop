@@ -1,0 +1,7 @@
+{
+  "staleSeconds": 10,
+  "provider": "auto",
+  "schemaVersion": 2,
+  "providerPath": null,
+  "mappings": []
+}

@@ -1,0 +1,9 @@
+{
+  "TriggerActionOptions[0].KeyboardTriggers[0]": "lctrl",
+  "TriggerActionOptions[0].MouseTrigger": "leftDouble",
+  "TriggerActionOptions[0].TaskbarType": "primary",
+  "TriggerActionOptions[0].Action": "ACTION_TASK_MANAGER",
+  "TriggerActionOptions[0].AdditionalArgs": "",
+  "oldTaskbarOnWin11": 0,
+  "eagerTriggerEvaluation": 1
+}

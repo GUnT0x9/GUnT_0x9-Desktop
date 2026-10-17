@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "restoreWallpaper": true,
+  "restoreLayout": true,
+  "delaySeconds": 2,
+  "retryCount": 2,
+  "retryDelaySeconds": 2
+}

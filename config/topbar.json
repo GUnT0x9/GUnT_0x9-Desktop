@@ -1,0 +1,29 @@
+{
+  "height": 42,
+  "fontSize": 14,
+  "dropdownFontSize": 14,
+  "statusFontSize": 12,
+  "dateFormat": "M월 d일 (ddd)",
+  "timeFormat": "tt h:mm",
+  "visibleMenus": [
+    "GUNT",
+    "작업공간",
+    "개발",
+    "도구",
+    "시스템"
+  ],
+  "showNetwork": false,
+  "showAudio": false,
+  "showBattery": false,
+  "showClock": false,
+  "showNotifications": false,
+  "showMonitor": true,
+  "showWallpaper": true,
+  "showFocus": true,
+  "showDisplay": true,
+  "showSettings": true,
+  "brandText": "GUnT_0x9",
+  "brandFont": "Manrope Medium",
+  "brandSize": 20,
+  "iconSize": 20
+}

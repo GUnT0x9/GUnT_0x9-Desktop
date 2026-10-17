@@ -1,0 +1,15 @@
+{
+    "height":  60,
+    "iconSize":  38,
+    "hitArea":  46,
+    "radius":  12,
+    "bottomMargin":  14,
+    "padding":  14,
+    "hoverEnabled":  false,
+    "hoverDurationMs":  150,
+    "alignment":  "center",
+    "leftMargin":  0,
+    "maxWidthRatio":  0.66,
+    "controlGap":  20,
+    "anchor":  "before-control-dock"
+}

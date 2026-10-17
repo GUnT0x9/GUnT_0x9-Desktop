@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "name": "일상",
+  "builtin": true,
+  "monitorVisible": true,
+  "compact": true,
+  "manualPaused": false,
+  "notifications": "Windows 기본 알림 유지"
+}
