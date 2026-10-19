@@ -77,3 +77,35 @@ README에는 현재 제품과 대표 화면을 먼저 소개하고, 이 문서�
 [공개 이미지 manifest](images/releases/manifest.json)는 파일 해시·출처·버전·검토 상태를 기록합니다. 원본 경로와 개인 실행 로그는 Git에서 제외합니다. 자동 검사는 육안 개인정보 검토를 대신하지 않습니다.
 
 [디자인 시스템](v30-ui-design-system.md) · [dev.2 구현](v30-ui-overhaul.md) · [후속 범위](v30-roadmap.md) · [다음 버전의 이미지 관리](readme-maintenance.md)
+
+## v3.0.0-dev.3 — UI Polish & Optimization
+
+**개발·캡처: 2026-10-20.** 기존 UI의 작은 창 동작·보조 편집창·팔레트 하단을 정리했습니다. 새로운 기능이나 실행 엔진을 추가하지 않았습니다.
+
+### 작은 창의 실행 동작
+
+| dev.2 — 780×560 DIP | dev.3 — 780×560 DIP |
+|---|---|
+| ![보존 dev.2 실제 작은 세션 창](images/releases/v3.0/dev.2/development-sessions-compact.png) | ![dev.3 작은 세션 창의 상단 저장과 프리셋 선택](images/releases/v3.0/dev.3/development-sessions-compact.png) |
+
+같은 175%·예제 프리셋·창 크기입니다. 원래 저장/시작은 본문 아래에 있었고, 이제 제목 아래에 유지됩니다. 편집 내용을 모두 첫 화면에 억지로 넣지 않고 본문은 계속 스크롤합니다. dev.2 화면은 보존 빌드를 이번 날짜에 다시 실행한 비교 자료입니다.
+
+### 보조 편집창
+
+| dev.2 — 프로젝트 설정 | dev.3 — 같은 설정 |
+|---|---|
+| ![dev.2 편집창 — 저장·취소가 긴 폼 아래](images/releases/v3.0/dev.2/project-editor-compact.png) | ![dev.3 편집창 — 고정 저장·취소와 폼 스크롤](images/releases/v3.0/dev.3/project-editor-compact.png) |
+
+같은 780×560 DIP 소유 창에서 열었습니다. 실제 편집창 높이는 각 버전의 최대 높이 처리 때문에 약간 다릅니다. 저장·취소 위치와 스크롤 구조의 차이를 보여 주며 잘린 폼을 합성해 늘리지 않았습니다. 이 캡처에서는 설정값을 편집하거나 저장하지 않았습니다.
+
+### 개발 탐색과 팔레트
+
+| 개발 세팅 | 명령 팔레트 |
+|---|---|
+| ![dev.3 실제 공개 예제 프로젝트 행·정보·환경](images/releases/v3.0/dev.3/developer-setup.png) | ![dev.3 실제 팔레트 — 프로젝트 문맥과 하단 키 안내](images/releases/v3.0/dev.3/palette.png) |
+
+프로젝트는 이름·최근 사용과 유형·Git을 두 줄로 정리했습니다. 팔레트는 결과만 스크롤하고 실행·키 안내는 하단에 남습니다. WSL 미설정과 사용 기록 없음은 그대로 표시합니다. 이 화면에서 CLI 실행 성공을 검증한 것은 아닙니다.
+
+최종 RGB PNG 6개를 다시 열어 검토했습니다. 예제 데이터로 개인정보를 배제해 불투명 가림은 필요하지 않았습니다. 개인 원본과 권리를 확인하지 못한 갤러리 썸네일은 공개하지 않습니다. 기존 13개 이미지 경로는 유지합니다.
+
+[dev.3 보고](v30-dev3-report.md) · [수치·퇴행·제외 범위](v30-performance.md) · [화면 검증 범위](v30-screenshots.md) · [공개 manifest](images/releases/manifest.json)

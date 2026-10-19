@@ -27,7 +27,7 @@ README는 제품 소개·대표 화면·현재 버전·기능·빌드 진입점�
 
 ```powershell
 # 기존 제어 센터/팝업을 정상 종료한 뒤, 검증한 실행 파일로 실행
-powershell.exe -MTA -NoProfile -ExecutionPolicy Bypass -File .\scripts\capture-readme-demo.ps1 -Executable .\bin\GUNT.ControlCenter.exe -Version 3.0.0-dev.2
+powershell.exe -MTA -NoProfile -ExecutionPolicy Bypass -File .\scripts\capture-readme-demo.ps1 -Executable .\bin\GUNT.ControlCenter.exe -Version 3.0.0-dev.3
 ```
 
 `C:\GUNT-DocDemo\<새 식별자>` 생성 권한과 Git for Windows가 필요합니다. 예제 Git 저장소의 작성자는 `Documentation Demo`, 주소는 예약된 `demo@example.invalid`이며 원격 저장소는 등록하지 않습니다. 실행 파일 해시는 로컬 capture manifest에 남깁니다. `-Version`은 **해당 소스로 검증한 실제 빌드 버전과 일치하게** 지정해야 하며 앱 버전을 바꿔 역사 화면을 꾸미는 용도가 아닙니다. 보존 빌드 비교는 해당 빌드·의존 DLL과 기록이 있는 경우에만 수행합니다.
@@ -101,3 +101,9 @@ Git 변경에는 README·보고서·검토한 public PNG·manifest·관리 스�
 - [ ] 상대 링크·앵커·PNG 검사 통과
 - [ ] 스테이징한 텍스트·바이너리·경로 검토, 원본·사용자 설정 제외
 - [ ] 문서 커밋·허용된 브랜치 push 성공 여부 보고
+
+## dev.3에서 확장한 캡처 옵션
+
+`capture-readme-demo.ps1`의 `-WidthDip 780 -HeightDip 560`은 작은 본문 창을, `-ProjectEditor`는 개발 세팅의 실제 보조 편집창을 추가 캡처합니다. 기본은 1400×860 DIP입니다. `-Pages` 배열은 Windows PowerShell에서 `@('developer-setup','development-sessions')`처럼 전달합니다. 편집창에서는 값을 바꾸지 않고 닫습니다. 캡처 전에 포인터를 창 밖으로 옮기고 종료 후 원위치로 돌립니다.
+
+보존 버전 비교는 의존 DLL을 갖춘 실제 과거 실행 파일을 지정합니다. 현재 소스에 과거 버전 문자열만 붙여 역사 화면을 만들지 않습니다. 창 크기·DPI·데이터·캡처 날짜 차이를 비교 설명과 manifest에 남깁니다.

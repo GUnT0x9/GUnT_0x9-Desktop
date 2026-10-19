@@ -12,11 +12,11 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 
 ## 현재 버전
 
-- **개발 프리뷰: 3.0.0-dev.2 — Visual Completion**, `feat/v30-ui-foundation`.
+- **개발 프리뷰: 3.0.0-dev.3 — UI Polish & Optimization**, `feat/v30-ui-foundation`.
 - **main 공개 기준: v2.5 소스**. v2.6 기능 개발 이력은 `feat/v26-developer-workspace`에 보존합니다.
 - 새 PC용 설치 패키지와 정식 3.0 배포는 준비되지 않았습니다. 이 저장소는 소스·설정 예시·검증 기록을 제공합니다.
 
-![3.0.0-dev.2 개발 세팅 — 실제 Windows 앱의 프로젝트 목록과 선택 상세](docs/images/releases/v3.0/dev.2/developer-setup.png)
+![3.0.0-dev.3 개발 세팅 — 실제 Windows 앱의 두 줄 프로젝트 행과 구분된 개발 환경](docs/images/releases/v3.0/dev.3/developer-setup.png)
 
 실제 Windows 앱을 별도 문서용 설정으로 실행한 화면입니다. `atlas-web` 등은 공개용 예제 폴더이며 Git 변경 개수는 해당 예제 저장소를 실제로 조회한 값입니다. WSL 미지정·사용 기록 없음 상태를 그대로 표시합니다. 사용자 프로젝트와 설정은 바꾸지 않았습니다.
 
@@ -32,18 +32,20 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 
 ## 최신 업데이트
 
-**3.0.0-dev.2 · 2026-10-19 · 개발 프리뷰**
+**3.0.0-dev.3 · 2026-10-20 · UI Polish & Optimization · 개발 프리뷰**
 
-- 프로젝트 목록에 유형·Git 분기·수정 상태·행 내부 즐겨찾기를 모으고 창 폭에 따라 상세를 재배치했습니다.
-- 세션 속성을 본문 단계 편집기로 통합하고 실행 미리보기·접힌 전체 이력을 분리했습니다.
-- 배경 갤러리를 적응형 가상화 그리드로 변경하고 검색·포커스·입력 크기를 보정했습니다.
-- 실제 Windows 175%에서 주요 화면 10개를 검토했습니다. 다른 DPI·물리 다중 화면·전체 접근성·장시간 성능은 추가 검증 대상입니다.
+- 보조 편집창의 저장·취소를 폼 스크롤과 분리하고 미저장 확인·검증 오류를 공통 구조로 통일했습니다.
+- 작은 창에서는 탐색 폭과 세션 선택 목록을 줄이고 개발 도구·세션 저장·시작을 상단에 유지합니다.
+- 세션 단계 컨트롤과 갤러리 템플릿을 재사용하고, 갤러리는 하나의 스크롤 영역으로 정리했습니다.
+- 팔레트의 실행·단축키 안내를 고정하고 실제 대상 프로젝트를 표시합니다. 센서의 중복 상태 문구도 줄였습니다.
 
-![3.0.0-dev.2 개발 세션 — 단계 편집과 분리된 실행 미리보기](docs/images/releases/v3.0/dev.2/development-sessions.png)
+| dev.2 — 780×560 DIP | dev.3 — 같은 크기 |
+|---|---|
+| ![dev.2 실제 작은 세션 창 — 저장 동작이 첫 화면 아래](docs/images/releases/v3.0/dev.2/development-sessions-compact.png) | ![dev.3 실제 작은 세션 창 — 상단 저장·시작과 압축된 프리셋 선택](docs/images/releases/v3.0/dev.3/development-sessions-compact.png) |
 
-프로젝트 페이지 구성 시간은 비교 표본에서 줄었지만 세션·갤러리 구성 비용과 메모리는 증가했습니다. 화면이 간결해졌다는 이유로 전체 성능 개선을 주장하지 않습니다.
+175% 실제 Windows 캡처이며 공개 예제 설정을 사용했습니다. 펼친 세션 단계 이동은 3회 비교의 회차별 중앙값 기준 약 68% 줄었습니다. 초기 화면 구성·메모리의 변동과 퇴행도 [성능 보고](docs/v30-performance.md)에 함께 공개합니다. 전체 시작·CPU 절감을 주장하지 않습니다.
 
-[dev.1 → dev.2 화면 비교](docs/visual-history.md#v300-dev1--v300-dev2-비교) · [구현·한계](docs/v30-ui-overhaul.md) · [측정 조건과 수치](docs/v30-performance.md) · [변경 기록](CHANGELOG.md)
+[팔레트·편집창 비교](docs/visual-history.md#v300-dev3--ui-polish--optimization) · [dev.3 구현·검증·남은 문제](docs/v30-dev3-report.md) · [변경 기록](CHANGELOG.md)
 
 ## 버전 기록
 
@@ -77,6 +79,12 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 
 [공개 화면 모음과 전후 비교](docs/visual-history.md) · [개발 보고](docs/v30-ui-overhaul.md) · [실제 검증 범위](docs/v30-screenshots.md)
 
+### v3.0.0-dev.3 — UI Polish & Optimization
+
+**2026-10-20.** 작은 창의 주요 동작과 보조 편집창을 정리하고 세션 행·갤러리 템플릿을 재사용했습니다. 실제 Windows 빌드·175% 화면·WPF 상호작용 42개·OS 키 입력/상단 바 통합 15개를 확인했습니다. 정식 3.0 또는 모든 환경의 시각 완성을 뜻하지 않습니다.
+
+[실제 화면·전후 비교](docs/visual-history.md#v300-dev3--ui-polish--optimization) · [결과 보고](docs/v30-dev3-report.md) · [전후 측정](docs/v30-performance.md)
+
 ## 빌드와 실행
 
 검증 환경은 **Windows 11, Windows PowerShell 5.1, .NET Framework 4.8**입니다. 기존 Framework C# 컴파일러를 사용하며 Electron·Node.js 기반 UI 도구는 필요하지 않습니다.
@@ -98,7 +106,7 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 
 - **Dock 자동 적용 보류**, **File Explorer Styler 비활성**을 유지합니다. 원인 미확정인 과거 Explorer 교체를 해결 완료로 표시하지 않습니다.
 - 자동화 규칙은 기본 중지 상태이며 사용자가 켭니다. 모든 전원·앱·화면 조합을 검증한 것은 아닙니다.
-- dev.2의 실제 화면 검증은 연결 화면 1개·2880×1800·175%입니다. 다른 DPI, 물리 다중 화면 재연결, 고대비·스크린리더, 재로그인·장시간 사용은 후속 범위입니다.
+- dev.3의 실제 화면 검증은 현재 연결 화면 1개·2880×1800·175%입니다. 다른 DPI, 물리 다중 화면 재연결, 고대비·스크린리더, 재로그인·장시간 사용은 후속 범위입니다.
 - HWiNFO 설치·공급자 갱신·개별 장치 연결과 WSL 도구 설치·인증은 해당 PC에서 준비해야 합니다.
 
 문제가 생기면 [v2.6 구성 요소 복구](docs/v26-recovery.md), [제어 센터·설정 복구](docs/v25-recovery.md), [Windhawk 복구](docs/windhawk-recovery.md)를 확인하세요. 다른 PC의 과거 체크포인트를 그대로 적용하지 마세요.
@@ -113,7 +121,7 @@ C# WinForms 상단 바와 WPF/.NET Framework 4.8 제어 센터가 기존 개발 
 
 ## 다음 개발
 
-다른 DPI·접근성·장시간 사용 검증, 남은 보조창 통일, 편집기·갤러리 구성 비용을 먼저 검토합니다. 아직 구현하지 않은 다음 기능은 현재 기능 목록에 포함하지 않습니다.
+다른 DPI·접근성·장시간 사용 검증과 초기 구성·메모리의 남은 비용을 먼저 검토합니다. 아직 구현하지 않은 다음 기능은 현재 기능 목록에 포함하지 않습니다.
 
 [실제 v3.0 로드맵](docs/v30-roadmap.md)
 

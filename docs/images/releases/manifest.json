@@ -228,6 +228,114 @@
       "reviewStatus": "reviewed",
       "privacyReview": "재사용 전에 직접 열어 확인. 개인 경로/계정/비공개 정보/고유 장치 ID/타사 배경 이미지 없음. 초기 상태/결측 그대로 보존.",
       "rights": "기존 공개 GUNT 자체 UI와 승인 브랜드. 타사 배경/사용자 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.3/developer-setup.png",
+      "version": "3.0.0-dev.3",
+      "capturedAt": "2026-10-20T08:38:50.1080402+09:00",
+      "sourceRevision": "60af707",
+      "sourceExecutableSha256": "7755c7284c9dcc9c5034e81d71bcd5530337008a41d2e092628b647c7d304499",
+      "sourceImageSha256": "ebb7bc93784d6b92dfa6f29b504eeceb40d82cbac611e00a1ce41a391ea9995c",
+      "dimensions": [
+        1600,
+        983
+      ],
+      "sha256": "20c9f1192e918ecbce21676ffce8a9a76d050265be5dfaea0ab6440743075529",
+      "source": "실제 Windows 앱, 독립 문서용 예제 설정. 1400×860 DIP 개발 세팅; DPI 168(175%). 재캡처 시점은 2026-10-20이며 과거 사용자 상태의 복원이 아님.",
+      "processing": "별도 24bit RGB PNG로 재인코딩, 최대 폭 1600px. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 작은 글자·경로·제목·버튼·잘림을 확인. C:\\GUNT-DocDemo 예제 경로만 표시. 계정·홈·개인 프로젝트·장치 ID·알림·타사 배경 없음. 최근 실행과 WSL 미설정 상태를 꾸미지 않음.",
+      "rights": "승인된 GUNT 브랜드와 자체 앱 UI. 설치 배경·타사 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.3/palette.png",
+      "version": "3.0.0-dev.3",
+      "capturedAt": "2026-10-20T08:38:50.1080402+09:00",
+      "sourceRevision": "60af707",
+      "sourceExecutableSha256": "7755c7284c9dcc9c5034e81d71bcd5530337008a41d2e092628b647c7d304499",
+      "sourceImageSha256": "8a3f2f79e11276082e948bef3d5b8791f453ba3d8d15a26f3b482ae157b88d15",
+      "dimensions": [
+        1190,
+        805
+      ],
+      "sha256": "353ac95383b13aa6fd557b62f7780167478a0b75ab8f08ca963b36133eb4d417",
+      "source": "실제 Windows 앱, 독립 문서용 예제 설정. 680×460 DIP 팔레트, 포인터를 창 밖으로 이동; DPI 168(175%). 재캡처 시점은 2026-10-20이며 과거 사용자 상태의 복원이 아님.",
+      "processing": "별도 24bit RGB PNG로 재인코딩, 최대 폭 1600px. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 작은 글자·경로·제목·버튼·잘림을 확인. C:\\GUNT-DocDemo 예제 경로만 표시. 계정·홈·개인 프로젝트·장치 ID·알림·타사 배경 없음. 최근 실행과 WSL 미설정 상태를 꾸미지 않음.",
+      "rights": "승인된 GUNT 브랜드와 자체 앱 UI. 설치 배경·타사 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.3/development-sessions-compact.png",
+      "version": "3.0.0-dev.3",
+      "capturedAt": "2026-10-20T08:39:05.1674820+09:00",
+      "sourceRevision": "60af707",
+      "sourceExecutableSha256": "7755c7284c9dcc9c5034e81d71bcd5530337008a41d2e092628b647c7d304499",
+      "sourceImageSha256": "b65e6994b5fb3cf2b0d31194d3cb4e406c313e9be24b719d30d9fcfac7b7ff51",
+      "dimensions": [
+        1365,
+        980
+      ],
+      "sha256": "969cebb0560d8973ff92a1548a72b12cbacdb283aa2d4b5788ce9bbed15808fe",
+      "source": "실제 Windows 앱, 독립 문서용 예제 설정. 780×560 DIP 세션; DPI 168(175%). 재캡처 시점은 2026-10-20이며 과거 사용자 상태의 복원이 아님.",
+      "processing": "별도 24bit RGB PNG로 재인코딩, 최대 폭 1600px. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 작은 글자·경로·제목·버튼·잘림을 확인. C:\\GUNT-DocDemo 예제 경로만 표시. 계정·홈·개인 프로젝트·장치 ID·알림·타사 배경 없음. 최근 실행과 WSL 미설정 상태를 꾸미지 않음.",
+      "rights": "승인된 GUNT 브랜드와 자체 앱 UI. 설치 배경·타사 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.3/project-editor-compact.png",
+      "version": "3.0.0-dev.3",
+      "capturedAt": "2026-10-20T08:39:05.1674820+09:00",
+      "sourceRevision": "60af707",
+      "sourceExecutableSha256": "7755c7284c9dcc9c5034e81d71bcd5530337008a41d2e092628b647c7d304499",
+      "sourceImageSha256": "1fbb559ed7afed5ebbb1d37755fd500f78c610c4977b61bd64d32c80471d9e7d",
+      "dimensions": [
+        1085,
+        952
+      ],
+      "sha256": "acfac4aebc0fe8a65dd4a0aedd3d54847a70b1d8dd52c70f116f15a54fb5e254",
+      "source": "실제 Windows 앱, 독립 문서용 예제 설정. 780×560 DIP 소유 창의 실제 프로젝트 설정 편집창; DPI 168(175%). 재캡처 시점은 2026-10-20이며 과거 사용자 상태의 복원이 아님.",
+      "processing": "별도 24bit RGB PNG로 재인코딩, 최대 폭 1600px. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 작은 글자·경로·제목·버튼·잘림을 확인. C:\\GUNT-DocDemo 예제 경로만 표시. 계정·홈·개인 프로젝트·장치 ID·알림·타사 배경 없음. 최근 실행과 WSL 미설정 상태를 꾸미지 않음.",
+      "rights": "승인된 GUNT 브랜드와 자체 앱 UI. 설치 배경·타사 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.2/development-sessions-compact.png",
+      "version": "3.0.0-dev.2",
+      "capturedAt": "2026-10-20T08:28:01.9451485+09:00",
+      "sourceRevision": "ce664bf",
+      "sourceExecutableSha256": "3eefc348f7d2bdcd5002aa71bdaaf29fa73550e1d6845b5ceea7a8482a8ec920",
+      "sourceImageSha256": "70fda383ee2677719dca2ee0a7a25ca3658307497b9ffe661960786e937ef242",
+      "dimensions": [
+        1365,
+        980
+      ],
+      "sha256": "fa8bbfcda18d16ae4ba3cf9abba4bcbcdedbad52a552a6e9bc728af27bde198a",
+      "source": "실제 Windows 앱, 독립 문서용 예제 설정. 보존 dev.2 빌드를 780×560 DIP에서 재실행한 세션; DPI 168(175%). 재캡처 시점은 2026-10-20이며 과거 사용자 상태의 복원이 아님.",
+      "processing": "별도 24bit RGB PNG로 재인코딩, 최대 폭 1600px. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 작은 글자·경로·제목·버튼·잘림을 확인. C:\\GUNT-DocDemo 예제 경로만 표시. 계정·홈·개인 프로젝트·장치 ID·알림·타사 배경 없음. 최근 실행과 WSL 미설정 상태를 꾸미지 않음.",
+      "rights": "승인된 GUNT 브랜드와 자체 앱 UI. 설치 배경·타사 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.2/project-editor-compact.png",
+      "version": "3.0.0-dev.2",
+      "capturedAt": "2026-10-20T08:28:01.9451485+09:00",
+      "sourceRevision": "ce664bf",
+      "sourceExecutableSha256": "3eefc348f7d2bdcd5002aa71bdaaf29fa73550e1d6845b5ceea7a8482a8ec920",
+      "sourceImageSha256": "a4cc32357700633258d71a390bf72b8f24a8615bc19ee170ea495031a58c8827",
+      "dimensions": [
+        1085,
+        945
+      ],
+      "sha256": "b48edc8b5bec67694bfef84e3ecfd5ef926e2a1892967685653b08e3bc38f139",
+      "source": "실제 Windows 앱, 독립 문서용 예제 설정. 보존 dev.2 빌드의 780×560 DIP 소유 창에서 재실행한 편집창; DPI 168(175%). 재캡처 시점은 2026-10-20이며 과거 사용자 상태의 복원이 아님.",
+      "processing": "별도 24bit RGB PNG로 재인코딩, 최대 폭 1600px. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 작은 글자·경로·제목·버튼·잘림을 확인. C:\\GUNT-DocDemo 예제 경로만 표시. 계정·홈·개인 프로젝트·장치 ID·알림·타사 배경 없음. 최근 실행과 WSL 미설정 상태를 꾸미지 않음.",
+      "rights": "승인된 GUNT 브랜드와 자체 앱 UI. 설치 배경·타사 미디어 없음."
     }
   ]
 }
