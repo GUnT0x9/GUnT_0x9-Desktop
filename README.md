@@ -6,7 +6,21 @@
 
 **Midnight Purple · Windows 11 개발자 데스크톱**
 
-네이티브 Windows 작업 표시줄과 시스템 기능을 유지하면서, 한국어 명령 바·실시간 시스템 모니터·배경화면 제어·WPF 제어 센터를 연결한 개인 데스크톱 커스터마이징 프로젝트입니다. 현재 프로젝트 설정 버전은 **2.5**이며, v2.6 생산성 기능 일부를 함께 통합했습니다.
+네이티브 Windows 작업 표시줄과 시스템 기능을 유지하면서, 한국어 명령 바·실시간 시스템 모니터·배경화면 제어·WPF 제어 센터를 연결한 개인 데스크톱 커스터마이징 프로젝트입니다. 현재 개발 버전은 **2.6 Developer Workspace**입니다. 게시된 v2.5는 `main`에 보존하고 v2.6은 `feat/v26-developer-workspace`에서 개발합니다.
+
+## v2.6 Developer Workspace
+
+**프로젝트 선택 → WSL + Codex / OpenCode / VS Code**를 정확한 폴더에서 시작합니다.
+
+- 프로젝트 루트·깊이 제한 탐색, 기존 프로젝트 목록 공유, 즐겨찾기·최근 사용·전역/프로젝트별 기본값.
+- 실제 WSL 배포판·일반 사용자·도구 확인, 한글/공백/특수문자 경로 검증, Windows Terminal/CMD의 대화형 CLI.
+- 편집 가능한 개발 세션·실행 전 요약·개별 결과·이전 실행 구성·중복 시작 방지.
+- 공유 명령 레지스트리·별칭·즐겨찾기, **Ctrl+Alt+Space** 명령 팔레트, 상단 바 브랜드 메뉴의 **빠른 패널**.
+- 선택 시 조회하는 읽기 전용 Git 상태와 WSL 도구 버전. 사용자가 켜는 자동화 규칙·cooldown·수동 변경 보호.
+
+[사용 방법·설정 형식](docs/v26-developer-workspace.md) · [개발 세션](docs/v26-development-sessions.md) · [명령·빠른 패널](docs/v26-command-palette.md) · [자동화](docs/v26-automation.md) · [검사·미검증 범위](docs/v26-testing.md) · [복구](docs/v26-recovery.md)
+
+![v2.6 개발 세팅 — 개인 경로가 없는 실제 최초 상태](docs/images/v26-developer-setup.png)
 
 ## v2.5 UX 개선
 

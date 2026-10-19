@@ -1,8 +1,8 @@
 ﻿[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact='Medium')]
-param([ValidateSet('ControlCenter','TopBar','All')][string]$Component='ControlCenter')
+param([ValidateSet('ControlCenter','TopBar','All')][string]$Component='ControlCenter',[ValidatePattern('^[a-zA-Z0-9-]+$')][string]$Checkpoint='pre-v25-ux-overhaul',[ValidatePattern('^[a-zA-Z0-9-]+$')][string]$AppliedState='v25-applied-files')
 . "$PSScriptRoot\common.ps1"
-$pointer=Join-Path $Root 'state\pre-v25-ux-overhaul-checkpoint.json'
-$appliedPath=Join-Path $Root 'state\v25-applied-files.json'
+$pointer=Join-Path $Root ('state\'+$Checkpoint+'-checkpoint.json')
+$appliedPath=Join-Path $Root ('state\'+$AppliedState+'.json')
 if(!(Test-Path $pointer) -or !(Test-Path $appliedPath)){throw '원본 체크포인트 또는 적용 파일 목록이 없습니다. 임의 복구하지 않았습니다.'}
 $baseline=Get-Content $pointer -Raw -Encoding UTF8|ConvertFrom-Json
 $applied=Get-Content $appliedPath -Raw -Encoding UTF8|ConvertFrom-Json
