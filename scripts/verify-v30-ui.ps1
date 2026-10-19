@@ -1,73 +1,63 @@
-# 실제 Windows 대화형 세션에서 실행. 화면·UIA 검사는 읽기/탐색만 수행한다.
-param([ValidateSet('before','after')][string]$Label='after',[ValidateRange(3,10)][int]$Samples=5)
+﻿param([ValidatePattern('^[a-z0-9.-]+$')][string]$Label='dev2',[ValidateRange(3,10)][int]$Samples=5,[string]$Executable,[switch]$IncludeSizes)
 . "$PSScriptRoot\enhancement-ui-common.ps1"
-if(Get-Process 'GUNT.ControlCenter' -ErrorAction SilentlyContinue){throw '열려 있는 제어 센터와 빠른 패널을 먼저 닫으세요. 미저장 작업은 자동으로 닫지 않습니다.'}
 Add-Type @'
 using System;using System.Runtime.InteropServices;
-public static class V30Capture {
- [DllImport("user32.dll")]public static extern bool PrintWindow(IntPtr window,IntPtr dc,uint flags);
- [DllImport("user32.dll")]public static extern uint GetDpiForWindow(IntPtr window);
+public static class Dev2Native {
+ [DllImport("user32.dll")]public static extern bool PrintWindow(IntPtr h,IntPtr dc,uint f);
+ [DllImport("user32.dll")]public static extern uint GetDpiForWindow(IntPtr h);
 }
 '@
-$exe=Join-Path $Root 'bin\GUNT.ControlCenter.exe'
-$directory=Join-Path $Root ('screenshots\v30-'+$Label)
-New-Item -ItemType Directory -Force $directory|Out-Null
-$windowFile=Join-Path $Root 'state\control-center-window.json'
-$originalWindow=if(Test-Path $windowFile){[IO.File]::ReadAllBytes($windowFile)}else{$null}
-$oldMetrics=$env:GUNT_UI_METRICS
-$env:GUNT_UI_METRICS='1'
-$owned=New-Object Collections.ArrayList
-$startup=@();$navigation=@();$captures=@();$idle=@()
-function Find-Name($parent,$name){$parent.FindFirst([Windows.Automation.TreeScope]::Descendants,(New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::NameProperty,$name)))}
-function Wait-Window($process){
+$exe=if($Executable){$Executable}else{Join-Path $Root 'bin\GUNT.ControlCenter.exe'};if(!(Test-Path $exe)){throw '실행 파일 없음'};$shots=Join-Path $Root ('screenshots\v30-'+$Label);New-Item -ItemType Directory -Force $shots|Out-Null
+$records=@();$captures=@();$owned=@();$oldMetrics=$env:GUNT_UI_METRICS;$env:GUNT_UI_METRICS='1'
+$metricFile=Join-Path $Root 'logs\v30-ui-timings.jsonl';$initialLines=if(Test-Path $metricFile){@(Get-Content $metricFile).Count}else{0}
+function Find-Id($win,$id){$win.FindFirst([Windows.Automation.TreeScope]::Descendants,(New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::AutomationIdProperty,$id)))}
+function Wait-Ready($p,$title='GUnT_0x9 Desktop',$page='개요'){
  $watch=[Diagnostics.Stopwatch]::StartNew()
- do{$process.Refresh();if($process.HasExited){throw '제어 센터 프로세스가 종료됐습니다.'};if($process.MainWindowHandle -ne [IntPtr]::Zero){return [Windows.Automation.AutomationElement]::FromHandle($process.MainWindowHandle)};Start-Sleep -Milliseconds 25}while($watch.Elapsed.TotalSeconds -lt 20)
- throw '창 표시 시간 초과'
+ do{Start-Sleep -Milliseconds 30;$win=Get-EnhancementWindows|Where-Object {$_.Current.ProcessId -eq $p.Id -and $_.Current.Name -eq $title}|Select-Object -First 1
+ if($win){if($title -ne 'GUnT_0x9 Desktop'){if(@(Get-EnhancementTree $win).Count -gt 10){return $win}}else{$heading=Find-Id $win 'PageTitle';if($heading -and $heading.Current.Name -eq $page){return $win}}}
+ if($p.HasExited){throw '대상 앱 종료'}
+ }while($watch.Elapsed.TotalSeconds -lt 20)
+ throw ('화면 준비 시간 초과: '+$page)
 }
-function Close-Owned($window,$process){($window.GetCurrentPattern([Windows.Automation.WindowPattern]::Pattern)).Close();if(!$process.WaitForExit(10000)){throw '창이 정상 종료되지 않았습니다. 강제 종료하지 않습니다.'}}
-function Capture($window,$name){
- Start-Sleep -Milliseconds 400
- $rect=$window.Current.BoundingRectangle
- $bitmap=New-Object Drawing.Bitmap([int]$rect.Width,[int]$rect.Height)
- $graphics=[Drawing.Graphics]::FromImage($bitmap);$dc=$graphics.GetHdc()
- try{if(![V30Capture]::PrintWindow([IntPtr]$window.Current.NativeWindowHandle,$dc,2)){throw '창 캡처 실패'}}finally{$graphics.ReleaseHdc($dc);$graphics.Dispose()}
- try{$bitmap.Save((Join-Path $directory ($name+'.png')))}finally{$bitmap.Dispose()}
- $script:captures+=@{File=$name+'.png';Width=$rect.Width;Height=$rect.Height;ActualDpi=[V30Capture]::GetDpiForWindow([IntPtr]$window.Current.NativeWindowHandle);VisualReview='미검토: 이미지 파일을 실제로 열어 확인해야 함'}
+function Capture($win,$name){
+ Start-Sleep -Milliseconds 650;$r=$win.Current.BoundingRectangle
+ if($r.X -lt -10000 -or $r.Width -lt 200){throw '최소화된 창 캡처 거절'}
+ $b=New-Object Drawing.Bitmap([int]$r.Width,[int]$r.Height);$g=[Drawing.Graphics]::FromImage($b);$dc=$g.GetHdc()
+ try{if(![Dev2Native]::PrintWindow([IntPtr]$win.Current.NativeWindowHandle,$dc,2)){throw 'PrintWindow 실패'}}finally{$g.ReleaseHdc($dc);$g.Dispose()}
+ try{$b.Save((Join-Path $shots ($name+'.png')))}finally{$b.Dispose()}
+ $script:captures+=@{Name=$name;Width=$r.Width;Height=$r.Height;Dpi=[Dev2Native]::GetDpiForWindow([IntPtr]$win.Current.NativeWindowHandle)}
+ Write-Json (Get-EnhancementTree $win) (Join-Path $Root ('logs\v30-'+$Label+'-'+$name+'-tree.json'))
 }
-function Median($values){$sorted=@($values|Sort-Object);if(!$sorted.Count){return $null};$middle=[int][math]::Floor($sorted.Count/2);if($sorted.Count%2){return $sorted[$middle]};return ($sorted[$middle-1]+$sorted[$middle])/2}
+function Close-App($win,$p){if($p.HasExited){return};if($win.Current.Name -ne 'GUnT_0x9 Desktop'){[GuntEnhanceUi]::SetForegroundWindow([IntPtr]$win.Current.NativeWindowHandle)|Out-Null;[GuntEnhanceUi]::Tap(27)}else{$p.CloseMainWindow()|Out-Null};if(!$p.WaitForExit(10000)){throw '정상 종료 실패: 강제 종료하지 않음'}}
+$existing=Get-Process GUNT.ControlCenter -ErrorAction SilentlyContinue
+if($existing){throw '열려 있는 제어 센터/빠른 패널을 먼저 닫으세요. 기존 창과 미저장 편집을 자동으로 닫지 않습니다.'}
+$windowFile=Join-Path $Root 'state\control-center-window.json';$originalWindow=if(Test-Path $windowFile){[IO.File]::ReadAllBytes($windowFile)}else{$null}
+$failure=$null
+
 try{
- for($sample=0;$sample -lt $Samples;$sample++){
-  $watch=[Diagnostics.Stopwatch]::StartNew();$process=Start-Process $exe -ArgumentList ('"'+$Root+'" overview') -PassThru;$null=$owned.Add($process);$window=Wait-Window $process;$watch.Stop()
-  $startup+=@{Sample=$sample;WindowHandleMs=$watch.Elapsed.TotalMilliseconds;CacheState=if($sample -eq 0){'첫 실행: OS 캐시 초기화 안 함'}else{'반복 실행'}}
-  if($sample -lt $Samples-1){Close-Owned $window $process;Start-Sleep -Milliseconds 300}
+ for($i=0;$i -lt $Samples;$i++){$watch=[Diagnostics.Stopwatch]::StartNew();$p=Start-Process $exe -ArgumentList ('"'+$Root+'" overview') -PassThru;$owned+=,$p;$win=Wait-Ready $p;$records+=@{Metric='ready';Sample=$i;Ms=$watch.Elapsed.TotalMilliseconds};if($i -lt $Samples-1){Close-App $win $p;Start-Sleep -Milliseconds 250}}
+ foreach($page in @(@('overview','개요'),@('developer-setup','개발 세팅'),@('development-sessions','개발 세션'),@('wsl-environments','WSL 환경'),@('smart-automation','스마트 자동화'),@('wallpaper','배경화면'),@('monitor','시스템 모니터'),@('diagnostics','진단 및 복구'))){
+  $watch=[Diagnostics.Stopwatch]::StartNew();$request=Start-Process $exe -ArgumentList ('"'+$Root+'" '+$page[0]) -PassThru;$null=$request.WaitForExit(10000);$request.Dispose();$win=Wait-Ready $p 'GUnT_0x9 Desktop' $page[1];$records+=@{Metric='navigate';Page=$page[0];Ms=$watch.Elapsed.TotalMilliseconds};Capture $win $page[0]
  }
- $pages=@(@('overview','개요'),@('developer-setup','개발 세팅'),@('projects','프로젝트'),@('development-sessions','개발 세션'),@('wsl-environments','WSL 환경'),@('appearance','외관'),@('dock','Dock'),@('topbar','상단 바'),@('wallpaper','배경화면'),@('profiles','프로필'),@('displays','디스플레이'),@('monitor','시스템 모니터'),@('sensors','하드웨어 센서'),@('windhawk','Windhawk'),@('commands','명령어 관리'),@('smart-automation','스마트 자동화'),@('automation','시작 · 자동화'),@('diagnostics','진단 및 복구'),@('about','프로그램 정보'))
- $nav=Find-Name $window '페이지 탐색'
- if(!$nav){$nav=$window} # v2.6 기준 화면에서도 동일 스크립트로 캡처 가능
- foreach($page in $pages){
-  $item=Find-Name $nav $page[1];if(!$item){throw ('탐색 항목 없음: '+$page[0])}
-  $watch=[Diagnostics.Stopwatch]::StartNew();($item.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern)).Select()
-  # UIA 선택 응답의 왕복 시간이며 전체 렌더링 완료 시간은 아님.
-  $watch.Stop();$navigation+=@{Page=$page[0];SelectionRoundTripMs=$watch.Elapsed.TotalMilliseconds}
-  Capture $window $page[0]
+ if($IncludeSizes){
+  $h=[IntPtr]$win.Current.NativeWindowHandle;$scale=[Dev2Native]::GetDpiForWindow($h)/96.0;$work=[Windows.Forms.Screen]::FromHandle($h).WorkingArea
+  foreach($size in @(@(780,560),@(1180,800),@(1500,900))){
+   $width=[int][math]::Min($size[0]*$scale,$work.Width-16);$height=[int][math]::Min($size[1]*$scale,$work.Height-16)
+   [GuntEnhanceUi]::SetWindowPos($h,[IntPtr]::Zero,$work.Left+8,$work.Top+8,$width,$height,0x14)|Out-Null
+   foreach($page in @(@('developer-setup','개발 세팅'),@('development-sessions','개발 세션'),@('wallpaper','배경화면'))){$request=Start-Process $exe -ArgumentList ('"'+$Root+'" '+$page[0]) -PassThru;$null=$request.WaitForExit(10000);$request.Dispose();$win=Wait-Ready $p 'GUnT_0x9 Desktop' $page[1];Capture $win ($page[0]+'-'+$size[0]+'x'+$size[1])}
+  }
  }
- # 표시 가능한 실제 화면 작업 영역 안의 크기만 시험. DPI는 OS 설정을 변경하지 않는다.
- $handle=[IntPtr]$window.Current.NativeWindowHandle;$scale=[V30Capture]::GetDpiForWindow($handle)/96.0
- $work=[Windows.Forms.Screen]::FromHandle($handle).WorkingArea
- foreach($size in @(@(780,560),@(1180,800),@(1500,900))){
-  $width=[int][math]::Min($size[0]*$scale,$work.Width);$height=[int][math]::Min($size[1]*$scale,$work.Height)
-  [GuntEnhanceUi]::SetWindowPos($handle,[IntPtr]::Zero,$work.Left,$work.Top,$width,$height,0x14)|Out-Null
-  $item=Find-Name $nav '개발 세팅';($item.GetCurrentPattern([Windows.Automation.SelectionItemPattern]::Pattern)).Select();Capture $window ('developer-'+$size[0]+'x'+$size[1]+'-requested')
- }
- # 유휴 상태 표본은 기존 화면을 유지하며 다른 프로세스를 종료하지 않는다.
- $process.Refresh();$cpu=$process.TotalProcessorTime.TotalSeconds;$watch=[Diagnostics.Stopwatch]::StartNew()
- for($sample=0;$sample -lt 5;$sample++){Start-Sleep -Seconds 2;$process.Refresh();$idle+=@{WorkingSetMiB=$process.WorkingSet64/1MB;PrivateMiB=$process.PrivateMemorySize64/1MB}}
- $cpuPercent=100*($process.TotalProcessorTime.TotalSeconds-$cpu)/$watch.Elapsed.TotalSeconds/[Environment]::ProcessorCount
- Close-Owned $window $process
- foreach($kind in @('palette','quick-panel')){$popup=Start-Process $exe -ArgumentList ('"'+$Root+'" '+$kind) -PassThru;$null=$owned.Add($popup);$popupWindow=Wait-Window $popup;Capture $popupWindow $kind;Close-Owned $popupWindow $popup}
- Write-Json @{Label=$Label;Time=(Get-Date).ToString('o');Startup=$startup;StartupMedianMs=Median @($startup.WindowHandleMs);StartupMinMs=($startup.WindowHandleMs|Measure-Object -Minimum).Minimum;StartupMaxMs=($startup.WindowHandleMs|Measure-Object -Maximum).Maximum;Navigation=$navigation;IdleCpuPercent=$cpuPercent;IdleWorkingSetMedianMiB=Median @($idle.WorkingSetMiB);IdleSamples=$idle;Captures=$captures;ConnectedDisplays=@([Windows.Forms.Screen]::AllScreens|ForEach-Object {@{Primary=$_.Primary;Bounds=$_.Bounds.ToString()}});Limitations='콜드 OS 캐시 미초기화. 캡처 자동 저장은 시각 검토 통과를 뜻하지 않음. 실제 DPI만 기록. 키보드·외부 도구 실행·다른 DPI·다중 화면은 별도 검증.'} (Join-Path $Root ('logs\v30-ui-'+$Label+'.json'))
-}finally{
- foreach($process in $owned){try{if(!$process.HasExited){$process.CloseMainWindow()|Out-Null;$null=$process.WaitForExit(5000)}}finally{$process.Dispose()}}
- $env:GUNT_UI_METRICS=$oldMetrics
- if(!@(Get-Process 'GUNT.ControlCenter' -ErrorAction SilentlyContinue).Count){if($null -ne $originalWindow){[IO.File]::WriteAllBytes($windowFile,$originalWindow)}elseif(Test-Path $windowFile){Remove-Item -LiteralPath $windowFile}}
+ # Same idle screen for both versions.
+ $request=Start-Process $exe -ArgumentList ('"'+$Root+'" overview') -PassThru;$null=$request.WaitForExit(10000);$request.Dispose();$win=Wait-Ready $p
+ Start-Sleep -Seconds 2;$p.Refresh();$cpu=$p.TotalProcessorTime.TotalSeconds;$idleWatch=[Diagnostics.Stopwatch]::StartNew();$memory=@()
+ for($i=0;$i -lt 5;$i++){Start-Sleep -Seconds 2;$p.Refresh();$memory+=@{WorkingSetMiB=$p.WorkingSet64/1MB;PrivateMiB=$p.PrivateMemorySize64/1MB}}
+ $cpuPercent=100*($p.TotalProcessorTime.TotalSeconds-$cpu)/$idleWatch.Elapsed.TotalSeconds/[Environment]::ProcessorCount
+ Close-App $win $p
+ foreach($kind in @('palette','quick-panel')){$title=if($kind -eq 'palette'){'GUnT_0x9 명령 팔레트'}else{'GUnT_0x9 빠른 패널'};$p=Start-Process $exe -ArgumentList ('"'+$Root+'" '+$kind) -PassThru;$owned+=,$p;$win=Wait-Ready $p $title;Capture $win $kind;Close-App $win $p}
+
+}catch{$failure=$_.Exception.Message;throw}finally{
+ $metrics=@(Get-Content $metricFile|Select-Object -Skip $initialLines|ForEach-Object {$_|ConvertFrom-Json})
+ Write-Json @{Version=$Label;Failure=$failure;ExecutableSha256=(Get-FileHash $exe).Hash;Records=$records;Metrics=$metrics;Captures=$captures;Memory=$memory;IdleCpuPercent=$cpuPercent;Screens=@([Windows.Forms.Screen]::AllScreens|ForEach-Object {$_.Bounds.ToString()});Notes='첫 실행도 OS 캐시 초기화 안 함. ready는 PageTitle UIA 준비까지. navigation은 IPC 포함. 비동기 데이터 완료 제외. 실제 화면 검토는 별도.'} (Join-Path $Root ('logs\v30-'+$Label+'-results.json'))
+foreach($process in $owned){try{if(!$process.HasExited){$process.CloseMainWindow()|Out-Null;$null=$process.WaitForExit(5000)}}finally{$process.Dispose()}};$env:GUNT_UI_METRICS=$oldMetrics
+if(!@(Get-Process GUNT.ControlCenter -ErrorAction SilentlyContinue).Count){if($null -ne $originalWindow){[IO.File]::WriteAllBytes($windowFile,$originalWindow)}elseif(Test-Path $windowFile){Remove-Item -LiteralPath $windowFile}}
 }
