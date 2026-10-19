@@ -6,7 +6,15 @@
 
 **Midnight Purple · Windows 11 개발자 데스크톱**
 
-네이티브 Windows 작업 표시줄과 시스템 기능을 유지하면서, 한국어 명령 바·실시간 시스템 모니터·배경화면 제어·WPF 제어 센터를 연결한 개인 데스크톱 커스터마이징 프로젝트입니다. 현재 개발 버전은 **2.6 Developer Workspace**입니다. 게시된 v2.5는 `main`에 보존하고 v2.6은 `feat/v26-developer-workspace`에서 개발합니다.
+네이티브 Windows 작업 표시줄과 시스템 기능을 유지하면서, 한국어 명령 바·실시간 시스템 모니터·배경화면 제어·WPF 제어 센터를 연결한 개인 데스크톱 커스터마이징 프로젝트입니다. 현재 개발 버전은 **3.0.0-dev.1 UI Foundation**입니다. 게시된 v2.5는 `main`, v2.6 기능 기준은 `feat/v26-developer-workspace`에 보존하고 UI 작업은 `feat/v30-ui-foundation`에서 진행합니다.
+
+## 3.0.0-dev.1 UI Foundation
+
+공통 WPF 스타일·그룹 탐색·개발 프로젝트 브라우저·세션 단계 편집·명령 팔레트·빠른 패널·가상화 배경 목록과 자원 관리를 개선하는 개발 프리뷰입니다. 기존 2.x 기능과 기술 스택을 유지합니다.
+
+**안정판 3.0 또는 전체 리뉴얼 완료 상태가 아닙니다.** .NET Framework 4.8 참조 기준 교차 컴파일과 검색 회귀 검사는 통과했지만, 이번 환경에서는 Windows 실행이 차단돼 실제 화면 캡처·175% DPI·전후 성능 비교를 수행하지 못했습니다. 아래 v2.x 이미지는 이전 버전의 기록입니다.
+
+[구현 범위·남은 작업](docs/v30-ui-overhaul.md) · [디자인 시스템](docs/v30-ui-design-system.md) · [UI 소스 점검](docs/v30-ui-audit.md) · [성능·재현 방법](docs/v30-performance.md) · [화면 검증 상태](docs/v30-screenshots.md) · [로드맵](docs/v30-roadmap.md)
 
 ## v2.6 Developer Workspace
 
