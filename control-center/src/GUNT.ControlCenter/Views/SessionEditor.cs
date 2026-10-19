@@ -20,6 +20,13 @@ namespace Gunt.ControlCenter.Views
         readonly HashSet<string> expandedSessionSteps = new HashSet<string>();
         readonly System.Windows.Threading.DispatcherTimer sessionPreviewTimer = new System.Windows.Threading.DispatcherTimer();
         bool sessionPreviewHooked;
+        readonly Dictionary<string, SessionStepView> sessionStepViews = new Dictionary<string, SessionStepView>();
+        sealed class SessionStepView
+        {
+            public Border Row; public Expander Editor; public TextBlock Title, Target;
+            public CheckBox Enabled; public Button Up, Down;
+        }
+        System.Windows.DataTemplate sessionListTemplate;
 
         bool SessionDraftDirty
         {
@@ -30,6 +37,8 @@ namespace Gunt.ControlCenter.Views
         {
             sessionDraft = null;
             sessionOriginal = null;
+            sessionStepViews.Clear();
+            CaptureSessionProject();
             var layout = new Grid();
             layout.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(224) });
             layout.ColumnDefinitions.Add(new ColumnDefinition());
@@ -43,8 +52,19 @@ namespace Gunt.ControlCenter.Views
             content.Children.Add(layout);
 
             sessionList = DataList("개발 세션 목록", 272);
-            sessionList.ItemTemplate = (DataTemplate)System.Windows.Markup.XamlReader.Parse(@"<DataTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation'><StackPanel><TextBlock Text='{Binding}' TextWrapping='Wrap'/><TextBlock Text='{Binding Summary}' Foreground='#A1A1AA' FontSize='12'/></StackPanel></DataTemplate>");
+            if(sessionListTemplate==null){
+                var body=new FrameworkElementFactory(typeof(StackPanel));
+                var title=new FrameworkElementFactory(typeof(TextBlock));title.SetBinding(TextBlock.TextProperty,new System.Windows.Data.Binding());body.AppendChild(title);
+                var summary=new FrameworkElementFactory(typeof(TextBlock));summary.SetBinding(TextBlock.TextProperty,new System.Windows.Data.Binding("Summary"));summary.SetValue(TextBlock.ForegroundProperty,Muted);summary.SetValue(TextBlock.FontSizeProperty,12.0);body.AppendChild(summary);
+                sessionListTemplate=new DataTemplate{VisualTree=body};
+            }
+            sessionList.ItemTemplate=sessionListTemplate;
             presets.Children.Add(sessionList);
+            var compactPicker=new ComboBox{Visibility=Visibility.Collapsed,Margin=new Thickness(0,0,0,8)};
+            AutomationProperties.SetName(compactPicker,"개발 세션 선택");
+            compactPicker.SetBinding(ItemsControl.ItemsSourceProperty,new System.Windows.Data.Binding("ItemsSource"){Source=sessionList});
+            compactPicker.SetBinding(System.Windows.Controls.Primitives.Selector.SelectedItemProperty,new System.Windows.Data.Binding("SelectedItem"){Source=sessionList,Mode=System.Windows.Data.BindingMode.TwoWay});
+            presets.Children.Add(compactPicker);
             var presetActions = new WrapPanel();
             presets.Children.Add(presetActions);
             LocalButton(presetActions, "새 세션", () =>
@@ -93,7 +113,8 @@ namespace Gunt.ControlCenter.Views
                 layout.ColumnDefinitions[1].Width = narrow ? new GridLength(0) : new GridLength(1, GridUnitType.Star);
                 Grid.SetColumn(editor, narrow ? 0 : 1);
                 Grid.SetRow(editor, narrow ? 1 : 0);
-                sessionList.Height = narrow ? 144 : 272;
+                sessionList.Visibility=narrow?Visibility.Collapsed:Visibility.Visible;compactPicker.Visibility=narrow?Visibility.Visible:Visibility.Collapsed;
+                sessionList.Height = 272;
             };
             if (!sessionPreviewHooked)
             {
@@ -125,7 +146,7 @@ namespace Gunt.ControlCenter.Views
 
         void OpenSessionDraft(DevelopmentSession original, bool unsaved)
         {
-            CaptureSessionProject();
+            sessionStepViews.Clear();
             sessionDraft = CloneSession(original);
             sessionOriginal = unsaved ? "" : vm.Service.Json.Serialize(sessionDraft);
             changingSession = true;
@@ -147,8 +168,9 @@ namespace Gunt.ControlCenter.Views
                 var step = new SessionAction { Kind = "ide" };
                 sessionDraft.Actions.Add(step); expandedSessionSteps.Add(step.Id); RenderSessionSteps(); SessionEdited();
             });
-            sessionSave = LocalButton(toolbar, "변경 저장", () => SaveSessionDraft());
-            LocalButton(toolbar, "세션 변경 버리기", () =>
+            var sticky=PageActions();
+            sessionSave = LocalButton(sticky, "변경 저장", () => SaveSessionDraft());
+            LocalButton(sticky, "세션 변경 버리기", () =>
             {
                 var saved = vm.Service.Sessions().Presets.FirstOrDefault(s => s.Id == sessionDraft.Id);
                 if (saved != null) OpenSessionDraft(saved, false);
@@ -162,7 +184,7 @@ namespace Gunt.ControlCenter.Views
             sessionEditorHost.Children.Add(sessionDetails);
             var launch = new WrapPanel { Margin = new Thickness(0, 12, 0, 0) };
             sessionEditorHost.Children.Add(launch);
-            Action(launch, "저장하고 세션 시작", () => LaunchSessionFromUi(false));
+            Action(sticky, "저장하고 세션 시작", () => LaunchSessionFromUi(false));
             Action(launch, "이전 세션 다시 시작", () => LaunchSessionFromUi(true));
             Action(launch, "세션 종료 기록", () => vm.Service.EndDevelopmentSession());
             PageButton(launch, "프로젝트 선택", "developer-setup");
@@ -190,29 +212,33 @@ namespace Gunt.ControlCenter.Views
 
         void RenderSessionSteps()
         {
-            sessionStepEditor.Children.Clear();
-            if (sessionDraft.Actions.Count == 0)
-                sessionStepEditor.Children.Add(new TextBlock { Text = "단계를 추가해 실행 순서를 구성하세요.", Foreground = Muted, Margin = new Thickness(0, 8, 0, 12) });
-            for (int index = 0; index < sessionDraft.Actions.Count; index++)
-            {
-                var step = sessionDraft.Actions[index];
-                var row = new DockPanel { Margin = new Thickness(0, 0, 0, 4) };
-                var buttons = new WrapPanel { VerticalAlignment = VerticalAlignment.Top };
-                DockPanel.SetDock(buttons, Dock.Right); row.Children.Add(buttons);
-                var enabled = new CheckBox { Content = "사용", IsChecked = step.Enabled, Margin = new Thickness(8, 0, 8, 0) };
-                AutomationProperties.SetName(enabled, (index + 1) + "단계 사용");
-                enabled.Click += delegate { step.Enabled = enabled.IsChecked == true; SessionEdited(); };
-                buttons.Children.Add(enabled);
-                var up = LocalButton(buttons, "↑", () => MoveSessionStep(step, -1)); up.IsEnabled = index > 0; AutomationProperties.SetName(up, (index + 1) + "단계 위로");
-                var down = LocalButton(buttons, "↓", () => MoveSessionStep(step, 1)); down.IsEnabled = index + 1 < sessionDraft.Actions.Count; AutomationProperties.SetName(down, (index + 1) + "단계 아래로");
-                LocalButton(buttons, "제거", () => { sessionDraft.Actions.Remove(step); RenderSessionSteps(); SessionEdited(); });
-                var header=new StackPanel();header.Children.Add(new TextBlock{Text=(index+1).ToString("00")+" · "+DeveloperText.Action(step.Kind)});header.Children.Add(new TextBlock{Text=sessionProject==null?"프로젝트 선택 필요":sessionProject.Name+(step.Kind=="tool"?" · "+(step.Value??"도구 선택 필요"):""),Foreground=Muted,FontSize=12,TextTrimming=TextTrimming.CharacterEllipsis});
-                var expander = new Expander { Header = header, IsExpanded = false, Padding = new Thickness(0, 4, 0, 0) };
-                AutomationProperties.SetName(expander,(index+1)+"단계 "+DeveloperText.Action(step.Kind)+" 편집");
-                expander.Expanded += delegate { expandedSessionSteps.Add(step.Id);if(expander.Content==null)expander.Content=CreateSessionStepProperties(step); };
-                expander.Collapsed += delegate { expandedSessionSteps.Remove(step.Id); };
-                expander.IsExpanded=expandedSessionSteps.Contains(step.Id);row.Children.Add(expander);
-                sessionStepEditor.Children.Add(new Border { Child = row, BorderBrush = Line, BorderThickness = new Thickness(0, 0, 0, 1), Margin = new Thickness(0, 0, 0, 8) });
+            var ids=new HashSet<string>(sessionDraft.Actions.Select(action=>action.Id));
+            foreach(string stale in sessionStepViews.Keys.Where(id=>!ids.Contains(id)).ToArray()){
+                sessionStepEditor.Children.Remove(sessionStepViews[stale].Row);sessionStepViews.Remove(stale);expandedSessionSteps.Remove(stale);
+            }
+            if(sessionDraft.Actions.Count==0){sessionStepEditor.Children.Clear();sessionStepEditor.Children.Add(new TextBlock{Text="단계 추가로 실행 순서를 구성하세요.",Foreground=Muted});return;}
+            if(sessionStepEditor.Children.OfType<TextBlock>().Any())sessionStepEditor.Children.Clear();
+            for(int index=0;index<sessionDraft.Actions.Count;index++){
+                var step=sessionDraft.Actions[index];SessionStepView view;
+                if(!sessionStepViews.TryGetValue(step.Id,out view)){
+                    view=new SessionStepView();var row=new DockPanel();var buttons=new WrapPanel{VerticalAlignment=VerticalAlignment.Top};DockPanel.SetDock(buttons,Dock.Right);row.Children.Add(buttons);
+                    var enabled=new CheckBox{Content="사용",IsChecked=step.Enabled,Margin=new Thickness(8,0,8,0)};view.Enabled=enabled;buttons.Children.Add(enabled);
+                    view.Up=LocalButton(buttons,"↑",()=>MoveSessionStep(step,-1));view.Down=LocalButton(buttons,"↓",()=>MoveSessionStep(step,1));
+                    LocalButton(buttons,"제거",()=>{sessionDraft.Actions.Remove(step);RenderSessionSteps();SessionEdited();});
+                    var header=new StackPanel();view.Title=new TextBlock();view.Target=new TextBlock{Foreground=Muted,FontSize=12,TextTrimming=TextTrimming.CharacterEllipsis};header.Children.Add(view.Title);header.Children.Add(view.Target);
+                    var editor=new Expander{Header=header,Margin=new Thickness(0,0,0,4)};view.Editor=editor;
+                    editor.Expanded+=delegate{expandedSessionSteps.Add(step.Id);if(editor.Content==null)editor.Content=CreateSessionStepProperties(step);};
+                    editor.Collapsed+=delegate{expandedSessionSteps.Remove(step.Id);};
+                    enabled.Click+=delegate{step.Enabled=enabled.IsChecked==true;RenderSessionSteps();SessionEdited();};
+                    row.Children.Add(editor);view.Row=new Border{Child=row,BorderBrush=Line,BorderThickness=new Thickness(0,0,0,1),Margin=new Thickness(0,0,0,8)};sessionStepViews.Add(step.Id,view);
+                }
+                view.Title.Text=(index+1).ToString("00")+" · "+DeveloperText.Action(step.Kind)+(step.Enabled?"":" · 제외");
+                view.Target.Text=step.Kind=="tool"?(String.IsNullOrEmpty(step.Value)?"등록 도구 선택 필요":step.Value):sessionProject==null?"프로젝트 선택 필요":sessionProject.Name;
+                ((StackPanel)view.Editor.Header).Opacity=step.Enabled?1:0.65;view.Up.IsEnabled=index>0;view.Down.IsEnabled=index+1<sessionDraft.Actions.Count;
+                AutomationProperties.SetName(view.Enabled,(index+1)+"단계 사용");AutomationProperties.SetName(view.Up,(index+1)+"단계 위로");AutomationProperties.SetName(view.Down,(index+1)+"단계 아래로");AutomationProperties.SetName(view.Editor,(index+1)+"단계 "+DeveloperText.Action(step.Kind)+" 편집");
+                view.Editor.IsExpanded=expandedSessionSteps.Contains(step.Id);
+                if(view.Editor.IsExpanded&&view.Editor.Content==null)view.Editor.Content=CreateSessionStepProperties(step);
+                int current=sessionStepEditor.Children.IndexOf(view.Row);if(current!=index){if(current>=0)sessionStepEditor.Children.RemoveAt(current);sessionStepEditor.Children.Insert(index,view.Row);}
             }
         }
 
@@ -223,22 +249,22 @@ namespace Gunt.ControlCenter.Views
                 {
                     string value=SelectedChoice(args);
                     if(value==null||value==step.Kind)return;
-                    step.Kind=value;expandedSessionSteps.Add(step.Id);SessionEdited();
+                    step.Kind=value;sessionStepViews[step.Id].Editor.Content=null;expandedSessionSteps.Add(step.Id);SessionEdited();
                     // SelectedValue is still the old value during WPF's SelectionChanged coercion.
                     // Read AddedItems and rebuild after the selector finishes its current event.
-                    Dispatcher.BeginInvoke((Action)delegate{if(page=="development-sessions"&&sessionDraft.Actions.Contains(step))RenderSessionSteps();});
+                    Dispatcher.BeginInvoke((Action)delegate{if(page!="development-sessions"||sessionDraft==null||!sessionDraft.Actions.Contains(step))return;RenderSessionSteps();var editor=sessionStepViews[step.Id].Editor;if(editor.IsExpanded&&editor.Content==null)editor.Content=CreateSessionStepProperties(step);});
                 };
                 if (step.Kind == "tool")
                 {
                     var tool = Choice(properties, "실행할 등록 도구", new[] { new ChoiceOption("", "도구 선택") }.Concat(vm.Service.Developer().Tools.Select(t => new ChoiceOption(t.Id, t.Name))), step.Value ?? "");
-                    tool.SelectionChanged += delegate(object sender,SelectionChangedEventArgs args){string value=SelectedChoice(args);if(value!=null){step.Value=value;SessionEdited();}};
+                    tool.SelectionChanged += delegate(object sender,SelectionChangedEventArgs args){string value=SelectedChoice(args);if(value!=null){step.Value=value;RenderSessionSteps();SessionEdited();}};
                 }
                 else
                 {
                     properties.Children.Add(new TextBlock { Text = SessionStepTarget(step), Foreground = Muted, TextWrapping = TextWrapping.Wrap });
                     LocalButton(properties, "프로젝트 실행 설정 편집", () =>
                     {
-                        try { EditDeveloperPreferences(vm.Service.ActiveProject()); CaptureSessionProject(); RenderSessionSteps();RefreshSessionPreview(); }
+                        try { EditDeveloperPreferences(vm.Service.ActiveProject()); CaptureSessionProject(); foreach(var view in sessionStepViews.Values)view.Editor.Content=null;RenderSessionSteps();RefreshSessionPreview(); }
                         catch (Exception error) { sessionEditStatus.Text = error.Message; }
                     });
                     if (step.Kind == "command") PageButton(properties, "프로젝트 명령 편집", "projects");
@@ -285,8 +311,9 @@ namespace Gunt.ControlCenter.Views
         void SessionEdited()
         {
             if (changingSession || sessionSave == null) return;
-            sessionSave.IsEnabled = SessionDraftDirty;
-            sessionEditStatus.Text = SessionDraftDirty ? "저장하지 않은 세션 변경이 있습니다." : "저장된 세션";
+            bool dirty=SessionDraftDirty;
+            sessionSave.IsEnabled = dirty;
+            sessionEditStatus.Text = dirty ? "저장하지 않은 세션 변경이 있습니다." : "저장된 세션";
             sessionPreviewTimer.Stop(); sessionPreviewTimer.Start();
         }
 

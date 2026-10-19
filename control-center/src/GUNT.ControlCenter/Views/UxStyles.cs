@@ -1,6 +1,6 @@
 using System;using System.Windows;using System.Windows.Controls;
 namespace Gunt.ControlCenter.Views {
- internal static class UxTheme {
+ internal static partial class UxTheme {
   internal const double Space = 8, ControlHeight = 34;
   internal static readonly System.Windows.Media.Brush Background=Color("#0E0E12"), Surface=Color("#15151C"), Text=Color("#F4F4F5"), Muted=Color("#A1A1AA"), Border=Color("#23232B"), Accent=Color("#A78BFA");
   static System.Windows.Media.Brush Color(string hex){var brush=(System.Windows.Media.SolidColorBrush)new System.Windows.Media.BrushConverter().ConvertFromString(hex);brush.Freeze();return brush;}

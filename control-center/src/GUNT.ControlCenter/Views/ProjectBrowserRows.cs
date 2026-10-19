@@ -62,19 +62,24 @@ namespace Gunt.ControlCenter.Views
             favorite.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(ProjectFavoriteClick));
             row.AppendChild(favorite);
             var labels = new FrameworkElementFactory(typeof(StackPanel));
+            var titleLine = new FrameworkElementFactory(typeof(DockPanel));
+            var recent = new FrameworkElementFactory(typeof(TextBlock));
+            recent.SetValue(DockPanel.DockProperty, Dock.Right);
+            recent.SetValue(TextBlock.ForegroundProperty, Muted);
+            recent.SetValue(TextBlock.FontSizeProperty, 11.0);
+            recent.SetValue(FrameworkElement.MarginProperty, new Thickness(8, 0, 0, 0));
+            recent.SetBinding(TextBlock.TextProperty, new Binding("Recent"));
+            titleLine.AppendChild(recent);
             var title = new FrameworkElementFactory(typeof(TextBlock));
             title.SetBinding(TextBlock.TextProperty, new Binding("Name"));
             title.SetValue(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis);
-            labels.AppendChild(title);
-            foreach (var property in new[] { "Metadata", "Recent" })
-            {
-                var text = new FrameworkElementFactory(typeof(TextBlock));
-                text.SetBinding(TextBlock.TextProperty, new Binding(property));
-                text.SetValue(TextBlock.ForegroundProperty, Muted);
-                text.SetValue(TextBlock.FontSizeProperty, 12.0);
-                text.SetValue(TextBlock.TextWrappingProperty, TextWrapping.Wrap);
-                labels.AppendChild(text);
-            }
+            titleLine.AppendChild(title); labels.AppendChild(titleLine);
+            var metadata = new FrameworkElementFactory(typeof(TextBlock));
+            metadata.SetBinding(TextBlock.TextProperty, new Binding("Metadata"));
+            metadata.SetValue(TextBlock.ForegroundProperty, Muted);
+            metadata.SetValue(TextBlock.FontSizeProperty, 12.0);
+            metadata.SetValue(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis);
+            labels.AppendChild(metadata);
             row.SetBinding(ToolTipService.ToolTipProperty, new Binding("Directory"));
             row.AppendChild(labels);
             return new DataTemplate { VisualTree = row };

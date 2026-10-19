@@ -20,7 +20,7 @@ namespace Gunt.ControlCenter.Views
         sealed class WallpaperRow : INotifyPropertyChanged
         {
             WallpaperEntry entry;
-            public WallpaperEntry Entry {get{return entry;}set{entry=value;var handler=PropertyChanged;if(handler!=null)foreach(string name in new[]{"Title","Detail","Assignment","Tooltip"})handler(this,new PropertyChangedEventArgs(name));}}
+            public WallpaperEntry Entry {get{return entry;}set{if(Object.ReferenceEquals(entry,value))return;entry=value;var handler=PropertyChanged;if(handler!=null)foreach(string name in new[]{"Title","Detail","Assignment","Tooltip"})handler(this,new PropertyChangedEventArgs(name));}}
             public string Tooltip{get{return Title+"\n"+Detail+"\n"+Assignment;}}
             bool selected;
             public string Title { get { return Entry.Title; } }
@@ -60,24 +60,30 @@ namespace Gunt.ControlCenter.Views
         WallpaperRow[] filteredWallpapers = new WallpaperRow[0];
         int galleryColumns = 1;
         TextBlock galleryEmpty;
+        DataTemplate wallpaperBandTemplate;
+        Style wallpaperBandStyle;
+        int builtGalleryColumns;
+        WallpaperRow[] builtGalleryRows;
+        readonly Dictionary<string, System.Threading.Tasks.Task<ImageSource>> thumbnailRequests = new Dictionary<string, System.Threading.Tasks.Task<ImageSource>>(StringComparer.OrdinalIgnoreCase);
+        readonly System.Threading.SemaphoreSlim thumbnailSlots = new System.Threading.SemaphoreSlim(2);
 
         void ConfigureWallpaperGrid()
         {
-            wallpaperList.Height = Math.Max(180,Math.Min(380,ActualHeight-440));
+            wallpaperList.ClearValue(FrameworkElement.HeightProperty);
             // A band has no selection chrome. Selection/focus belong to its wallpaper buttons.
-            var bandStyle = new Style(typeof(ListBoxItem));
-            bandStyle.Setters.Add(new Setter(Control.PaddingProperty, new Thickness(0)));
-            bandStyle.Setters.Add(new Setter(Control.HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch));
-            bandStyle.Setters.Add(new Setter(UIElement.FocusableProperty, false));
-            bandStyle.Setters.Add(new Setter(Control.TemplateProperty, (ControlTemplate)System.Windows.Markup.XamlReader.Parse(@"<ControlTemplate xmlns='http://schemas.microsoft.com/winfx/2006/xaml/presentation' TargetType='ListBoxItem'><ContentPresenter/></ControlTemplate>")));
-            wallpaperList.ItemContainerStyle = bandStyle;
-            var bands = new FrameworkElementFactory(typeof(ItemsControl));
-            bands.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("Entries"));
-            var grid = new FrameworkElementFactory(typeof(UniformGrid));
-            grid.SetBinding(UniformGrid.ColumnsProperty, new Binding("Columns"));
-            bands.SetValue(ItemsControl.ItemsPanelProperty, new ItemsPanelTemplate(grid));
-            bands.SetValue(ItemsControl.ItemTemplateProperty, WallpaperTileTemplate());
-            wallpaperList.ItemTemplate = new DataTemplate { VisualTree = bands };
+            if(wallpaperBandTemplate==null){
+                wallpaperBandStyle=new Style(typeof(ListBoxItem));
+                wallpaperBandStyle.Setters.Add(new Setter(Control.PaddingProperty,new Thickness(0)));
+                wallpaperBandStyle.Setters.Add(new Setter(Control.HorizontalContentAlignmentProperty,HorizontalAlignment.Stretch));
+                wallpaperBandStyle.Setters.Add(new Setter(UIElement.FocusableProperty,false));
+                wallpaperBandStyle.Setters.Add(new Setter(Control.TemplateProperty,new ControlTemplate(typeof(ListBoxItem)){VisualTree=new FrameworkElementFactory(typeof(ContentPresenter))}));
+                var bands=new FrameworkElementFactory(typeof(ItemsControl));bands.SetBinding(ItemsControl.ItemsSourceProperty,new Binding("Entries"));
+                var grid=new FrameworkElementFactory(typeof(UniformGrid));grid.SetBinding(UniformGrid.ColumnsProperty,new Binding("Columns"));
+                bands.SetValue(ItemsControl.ItemsPanelProperty,new ItemsPanelTemplate(grid));bands.SetValue(ItemsControl.ItemTemplateProperty,WallpaperTileTemplate());
+                wallpaperBandTemplate=new DataTemplate{VisualTree=bands};
+            }
+            wallpaperList.ItemContainerStyle=wallpaperBandStyle;wallpaperList.ItemTemplate=wallpaperBandTemplate;
+            builtGalleryRows=null;
             wallpaperList.SizeChanged += delegate
             {
                 int columns = Math.Max(1, Math.Min(6, (int)Math.Floor(Math.Max(1, wallpaperList.ActualWidth - 16) / 200)));
@@ -134,6 +140,22 @@ namespace Gunt.ControlCenter.Views
             return new DataTemplate { VisualTree = button };
         }
 
+        System.Threading.Tasks.Task<ImageSource> RequestThumbnail(WallpaperEntry entry)
+        {
+            if(String.IsNullOrEmpty(entry.Thumbnail))return System.Threading.Tasks.Task.FromResult<ImageSource>(null);
+            lock(thumbnailLock){
+                System.Threading.Tasks.Task<ImageSource> pending;
+                if(thumbnailRequests.TryGetValue(entry.Thumbnail,out pending))return pending;
+                pending=System.Threading.Tasks.Task.Run(async delegate{
+                    await thumbnailSlots.WaitAsync().ConfigureAwait(false);
+                    try{return Thumbnail(entry);}finally{thumbnailSlots.Release();}
+                });
+                thumbnailRequests.Add(entry.Thumbnail,pending);
+                pending.ContinueWith(done=>{lock(thumbnailLock){System.Threading.Tasks.Task<ImageSource> current;if(thumbnailRequests.TryGetValue(entry.Thumbnail,out current)&&Object.ReferenceEquals(done,current))thumbnailRequests.Remove(entry.Thumbnail);}},System.Threading.Tasks.TaskScheduler.Default);
+                return pending;
+            }
+        }
+
         void WallpaperTileClick(object sender, RoutedEventArgs args)
         {
             args.Handled = true;
@@ -154,9 +176,13 @@ namespace Gunt.ControlCenter.Views
         void BuildWallpaperBands()
         {
             if (wallpaperList == null) return;
+            if(builtGalleryColumns==galleryColumns&&Object.ReferenceEquals(builtGalleryRows,filteredWallpapers))return;
+            builtGalleryColumns=galleryColumns;builtGalleryRows=filteredWallpapers;
             var bands = new List<WallpaperBand>();
-            for (int index = 0; index < filteredWallpapers.Length; index += galleryColumns)
-                bands.Add(new WallpaperBand { Columns = galleryColumns, Entries = filteredWallpapers.Skip(index).Take(galleryColumns).ToArray() });
+            for (int index = 0; index < filteredWallpapers.Length; index += galleryColumns){
+                var entries=new WallpaperRow[Math.Min(galleryColumns,filteredWallpapers.Length-index)];Array.Copy(filteredWallpapers,index,entries,0,entries.Length);
+                bands.Add(new WallpaperBand { Columns = galleryColumns, Entries = entries });
+            }
             wallpaperList.ItemsSource = bands;
             if (galleryEmpty != null) galleryEmpty.Visibility = bands.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
