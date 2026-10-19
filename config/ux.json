@@ -1,1 +1,5 @@
-{"schemaVersion":1,"commandPaletteShortcut":"Ctrl+K"}
+{
+    "schemaVersion":  1,
+    "commandPaletteShortcut":  "Ctrl+K",
+    "globalPaletteShortcut":  "Ctrl+Alt+Space"
+}

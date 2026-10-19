@@ -1,17 +1,18 @@
 ﻿. "$PSScriptRoot\common.ps1"
 $source=Join-Path $Root 'src\GuntBar.cs';$out=Join-Path $Root 'bin\GUNT-Bar.exe'
+$developerSource=Join-Path $Root 'src\GuntDeveloperIntegration.cs'
 $sensorSource=Join-Path $Root 'src\Sensors.cs'
 $additional=Join-Path $Root 'src\AdditionalTelemetry.cs'
 $hwinfoSource=Join-Path $Root 'src\HwinfoTelemetry.cs'
 $configuration=Join-Path $Root 'bin\Gunt.Configuration.dll'
-$signature=((Get-FileHash $source).Hash+(Get-FileHash $sensorSource).Hash+(Get-FileHash $configuration).Hash+(Get-FileHash $additional).Hash+(Get-FileHash $hwinfoSource).Hash+(Get-FileHash (Join-Path $Root 'assets\branding\icons\gunt-app.ico')).Hash);$record=Join-Path $Root 'state\bar-build.sha256'
+$signature=((Get-FileHash $developerSource).Hash+(Get-FileHash $source).Hash+(Get-FileHash $sensorSource).Hash+(Get-FileHash $configuration).Hash+(Get-FileHash $additional).Hash+(Get-FileHash $hwinfoSource).Hash+(Get-FileHash (Join-Path $Root 'assets\branding\icons\gunt-app.ico')).Hash);$record=Join-Path $Root 'state\bar-build.sha256'
 if((Test-Path $out) -and (Test-Path $record) -and ((Get-Content $record -Raw).Trim() -eq $signature)){Write-Log 'build' 'existing' '상단 바 빌드가 최신입니다.';return}
 $temp=Join-Path $Root ('bin\GUNT-Bar.build-'+[guid]::NewGuid().ToString('N')+'.exe')
 $buildDir=Join-Path $Root ('bin\build-'+[guid]::NewGuid().ToString('N'));New-Item -ItemType Directory -Force $buildDir|Out-Null
 $sensorTemp=Join-Path $buildDir 'Gunt.Sensors.dll'
 Add-Type -Path @($sensorSource,$additional,$hwinfoSource) -ReferencedAssemblies System.Core,System.Web.Extensions -OutputAssembly $sensorTemp -OutputType Library
 $csc=Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
-& $csc /nologo /target:winexe /optimize+ ('/win32icon:'+(Join-Path $Root 'assets\branding\icons\gunt-app.ico')) ('/out:'+$temp) /reference:System.Windows.Forms.dll /reference:System.Drawing.dll /reference:System.Web.Extensions.dll /reference:System.Core.dll /reference:Accessibility.dll ('/reference:'+$sensorTemp) ('/reference:'+$configuration) $source
+& $csc /nologo /target:winexe /optimize+ ('/win32icon:'+(Join-Path $Root 'assets\branding\icons\gunt-app.ico')) ('/out:'+$temp) /reference:System.Windows.Forms.dll /reference:System.Drawing.dll /reference:System.Web.Extensions.dll /reference:System.Core.dll /reference:Accessibility.dll ('/reference:'+$sensorTemp) ('/reference:'+$configuration) $source $developerSource
 if($LASTEXITCODE -ne 0 -or !(Test-Path $temp)){throw '공식 아이콘을 포함한 상단 바 빌드 실패. 기존 실행 파일은 유지했습니다.'}
 if(!('GuntBuildNative' -as [type])){Add-Type @'
 using System;using System.Runtime.InteropServices;

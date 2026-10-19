@@ -9,7 +9,7 @@ if(@($names|Where-Object {$_ -in 'theme','topbar','monitor'}).Count){
  if($vars -notmatch ('(?m)^HideCPUGraph='+[int](![bool]$config['showCpuGraph'] -or [bool]$config['compact'] -or ![bool]$config['showCpu'])+'\r?$')){throw 'CPU 그래프 설정 내보내기 검증 실패'}
  $h=[GuntLayout]::MonitorWindow();if($h -eq [IntPtr]::Zero){throw 'Rainmeter 모니터 창을 확인하지 못했습니다.'}
 }
-if(@($names|Where-Object {$_ -in 'theme','topbar'}).Count){
+if(@($names|Where-Object {$_ -in 'theme','topbar','ux'}).Count){
  if(!('GuntApplyBar24' -as [type])){Add-Type @'
 using System;using System.Runtime.InteropServices;public static class GuntApplyBar24{[DllImport("user32.dll",CharSet=CharSet.Unicode)]static extern IntPtr FindWindow(string c,string t);[DllImport("user32.dll")]static extern bool PostMessage(IntPtr h,uint m,IntPtr w,IntPtr l);public static bool Reload(){var h=FindWindow(null,"GUNT Desktop \u2014 Midnight Purple");return h!=IntPtr.Zero&&PostMessage(h,0x8002,IntPtr.Zero,IntPtr.Zero);}}
 '@}
