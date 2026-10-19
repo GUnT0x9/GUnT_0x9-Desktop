@@ -53,13 +53,19 @@ namespace Gunt.ControlCenter.Views {
   void PreviewThumbnail(WallpaperEntry p){var image=new Image{Source=Thumbnail(p),Stretch=Stretch.Uniform};if(image.Source==null){vm.Status="사용할 수 있는 썸네일이 없습니다.";return;}var w=UxTheme.Dialog(this,p.Title+" · 썸네일",720,480);w.Content=image;w.PreviewKeyDown+=delegate(object sender,KeyEventArgs args){if(args.Key==Key.Escape)w.Close();};w.ShowDialog();}
   void BuildSensors(){sensorDetails=new TextBlock{TextWrapping=TextWrapping.Wrap,Foreground=Muted,Margin=new Thickness(0,0,0,16)};content.Children.Add(sensorDetails);foreach(var f in vm.Fields)AddField(f);Text("1 공급자 확인 → 2 내보낸 값 → 3 장치·단위 선택 → 4 검증 후 저장",true);metricPicker=new ComboBox{ItemsSource=new[]{new ChoiceOption("CpuTemperatureC","CPU 온도 · °C"),new ChoiceOption("GpuTemperatureC","GPU 온도 · °C"),new ChoiceOption("SsdTemperatureC","물리 SSD 온도 · °C"),new ChoiceOption("CpuPackagePowerW","CPU 패키지 전력 · W")},DisplayMemberPath="Value",SelectedValuePath="Key",SelectedIndex=0,Margin=new Thickness(0,0,0,10)};AutomationProperties.SetName(metricPicker,"연결할 측정 항목");content.Children.Add(metricPicker);sensorPicker=new ComboBox{Margin=new Thickness(0,0,0,10)};AutomationProperties.SetName(sensorPicker,"실제 HWiNFO 센서 목록");content.Children.Add(sensorPicker);metricPicker.SelectionChanged+=delegate{LoadWizardSensors();};var a=Actions();Action(a,"실제 센서 다시 읽기",()=>{Dispatcher.Invoke((Action)LoadWizardSensors);return "센서 목록을 새로 요청했습니다.";});connectSensor=Action(a,"선택한 센서 검증 · 연결",()=>{var result=SaveSensor();Dispatcher.Invoke((Action)LoadWizardSensors);return result;});Action(a,"HWiNFO 폴더",()=>{vm.Service.Open(Path.Combine(root,"apps","HWiNFO"));return "HWiNFO 폴더를 열었습니다. 관리자 실행은 별도 승인이 필요합니다.";});LoadWizardSensors();}
   int sensorWizardRequest;
-  async void LoadWizardSensors(){
+  void LoadWizardSensors(){
    if(sensorPicker==null||metricPicker==null)return;int request=++sensorWizardRequest;int generation=projectGeneration;var picker=sensorPicker;picker.IsEnabled=false;if(connectSensor!=null)connectSensor.IsEnabled=false;
-   try{var snapshot=await System.Threading.Tasks.Task.Factory.StartNew(()=>new DesktopService(root).SensorSnapshot());if(page!="sensors"||request!=sensorWizardRequest||generation!=projectGeneration)return;liveSensors=snapshot;
+   System.Threading.Tasks.Task.Factory.StartNew(()=>new DesktopService(root).SensorSnapshot()).ContinueWith(task=>{
+    if(Dispatcher.HasShutdownStarted){var ignored=task.Exception;return;}
+    Dispatcher.BeginInvoke((Action)delegate{
+     if(page!="sensors"||request!=sensorWizardRequest||generation!=projectGeneration)return;
+     try{if(task.IsFaulted)throw task.Exception.GetBaseException();liveSensors=task.Result;
    var readings=liveSensors.ContainsKey("TemperatureReadings")?liveSensors["TemperatureReadings"] as IEnumerable:null;string metric=Convert.ToString(metricPicker.SelectedValue),unit=metric=="CpuPackagePowerW"?"W":"°C";var items=new List<ComboBoxItem>();if(readings!=null)foreach(var x in readings){var d=x as Dictionary<string,object>;if(d==null||DesktopService.S(d,"Unit")!=unit)continue;string device=DesktopService.S(d,"Sensor");if(metric.StartsWith("Cpu")&&device.IndexOf("CPU [",StringComparison.OrdinalIgnoreCase)<0)continue;if(metric.StartsWith("Gpu")&&device.IndexOf("GPU [",StringComparison.OrdinalIgnoreCase)<0)continue;items.Add(new ComboBoxItem{Content=SensorDisplay(device)+" / "+DesktopService.S(d,"Label")+" · "+DesktopService.S(d,"Formatted")+" ["+DesktopService.S(d,"Quality")+"]",Tag=d});}sensorPicker.ItemsSource=items;if(items.Count>0)sensorPicker.SelectedIndex=0;if(connectSensor!=null)connectSensor.IsEnabled=items.Any(i=>DesktopService.S((Dictionary<string,object>)i.Tag,"Quality")=="valid");
    RefreshSensorDetails();
    }catch(Exception error){if(page=="sensors"&&request==sensorWizardRequest)vm.Status="센서 조회 실패: "+error.Message;}
-   finally{if(page=="sensors"&&request==sensorWizardRequest)picker.IsEnabled=true;}
+     finally{if(page=="sensors"&&request==sensorWizardRequest)picker.IsEnabled=true;}
+    });
+   });
   }
   static string SensorDisplay(string value){return System.Text.RegularExpressions.Regex.Replace(value,@"\([A-Z0-9]{10,}\)","[장치 ID 가림]");}
   static string SensorTime(string value){DateTimeOffset stamp;return DateTimeOffset.TryParse(value,out stamp)?stamp.ToLocalTime().ToString("HH:mm:ss"):"확인 불가";}
