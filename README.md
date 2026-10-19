@@ -4,139 +4,132 @@
 
 # GUnT_0x9 Desktop
 
-**Midnight Purple · Windows 11 개발자 데스크톱**
+**Midnight Purple · Windows Developer Workspace**
 
-네이티브 Windows 작업 표시줄과 시스템 기능을 유지하면서, 한국어 명령 바·실시간 시스템 모니터·배경화면 제어·WPF 제어 센터를 연결한 개인 데스크톱 커스터마이징 프로젝트입니다. 현재 개발 버전은 **3.0.0-dev.2 Visual Completion**입니다. 게시된 v2.5는 `main`, v2.6 기능 기준은 `feat/v26-developer-workspace`에 보존하고 UI 작업은 `feat/v30-ui-foundation`에서 진행합니다.
+Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티브 앱입니다. 제어 센터에서 프로젝트·WSL 개발 도구·작업공간을 관리하고, 한국어 상단 바와 빠른 패널로 모니터·배경·자주 쓰는 동작에 접근합니다.
 
-## 3.0.0-dev.2 — UI 시각 완성
+[주요 기능](#주요-기능) · [최신 업데이트](#최신-업데이트) · [버전 기록](#버전-기록) · [빌드와 실행](#빌드와-실행) · [문서](#문서)
 
-프로젝트의 유형·실제 Git 상태·최근 사용·행 내부 즐겨찾기, 본문 세션 단계 편집기, 적응형 가상화 배경 그리드를 구현했습니다. 기존 WPF/.NET Framework 4.8과 v2.6 실행 서비스를 유지합니다.
+## 현재 버전
 
-실제 Windows에서 빌드·실행하고 주요 화면 10개와 세 가지 창 크기를 **175% 배율**로 검토했습니다. 격리된 WPF 상호작용 검사와 dev.1/dev.2 각각 5회 교차 성능 측정을 수행했습니다. 프로젝트 페이지 초기 구성 중앙값은 이번 표본에서 54.8→44.1ms였습니다. 세션·갤러리 구성 비용과 약 3MiB의 메모리 증가도 함께 기록했습니다.
+- **개발 프리뷰: 3.0.0-dev.2 — Visual Completion**, `feat/v30-ui-foundation`.
+- **main 공개 기준: v2.5 소스**. v2.6 기능 개발 이력은 `feat/v26-developer-workspace`에 보존합니다.
+- 새 PC용 설치 패키지와 정식 3.0 배포는 준비되지 않았습니다. 이 저장소는 소스·설정 예시·검증 기록을 제공합니다.
 
-정식 3.0 출시 완료를 의미하지 않습니다. 다른 DPI·물리 다중 화면·스크린리더·장시간 성능은 추가 검증 대상입니다. 아래 v2.x 이미지는 이전 버전 기록이며 dev.2 증거와 구분합니다.
+![3.0.0-dev.2 개발 세팅 — 실제 Windows 앱의 프로젝트 목록과 선택 상세](docs/images/releases/v3.0/dev.2/developer-setup.png)
 
-[구현 결과](docs/v30-ui-overhaul.md) · [디자인 시스템](docs/v30-ui-design-system.md) · [실제 화면 검증·실행 명령](docs/v30-screenshots.md) · [측정 결과](docs/v30-performance.md) · [로드맵](docs/v30-roadmap.md)
+실제 Windows 앱을 별도 문서용 설정으로 실행한 화면입니다. `atlas-web` 등은 공개용 예제 폴더이며 Git 변경 개수는 해당 예제 저장소를 실제로 조회한 값입니다. WSL 미지정·사용 기록 없음 상태를 그대로 표시합니다. 사용자 프로젝트와 설정은 바꾸지 않았습니다.
 
-## v2.6 Developer Workspace
+## 주요 기능
 
-**프로젝트 선택 → WSL + Codex / OpenCode / VS Code**를 정확한 폴더에서 시작합니다.
+- **데스크톱 꾸미기** — 한국어 WinForms 상단 바, Windows 작업 표시줄 기반 Dock, 설치된 Lively 배경 검색·즐겨찾기·화면별 배치. Dock 자동 적용은 현재 보류합니다.
+- **개발 작업공간** — 프로젝트 탐색·즐겨찾기·최근 사용, 실제 Git 읽기 전용 정보, 프로젝트별 개발 기본값, WSL의 Codex·OpenCode와 VS Code·터미널 실행 요청.
+- **빠른 도구** — 명령 팔레트의 별칭·검색·즐겨찾기, 현재 프로젝트를 공유하는 빠른 패널, 키보드 탐색. [실제 화면](docs/visual-history.md#dev2-빠른-도구)
+- **시스템 모니터** — Rainmeter CPU·메모리·저장공간·네트워크와 독립 그래프. HWiNFO 온도는 공급자·단위·갱신 상태를 검사하며 누락값을 정상 수치로 대체하지 않습니다.
+- **작업공간과 복구** — 프로필 차이 미리보기, 개발 세션의 단계 편집·실행 요약·개별 결과, 사용자가 켜는 자동화 규칙, 설정 체크포인트와 구성 요소별 복구.
 
-- 프로젝트 루트·깊이 제한 탐색, 기존 프로젝트 목록 공유, 즐겨찾기·최근 사용·전역/프로젝트별 기본값.
-- 실제 WSL 배포판·일반 사용자·도구 확인, 한글/공백/특수문자 경로 검증, Windows Terminal/CMD의 대화형 CLI.
-- 편집 가능한 개발 세션·실행 전 요약·개별 결과·이전 실행 구성·중복 시작 방지.
-- 공유 명령 레지스트리·별칭·즐겨찾기, **Ctrl+Alt+Space** 명령 팔레트, 상단 바 브랜드 메뉴의 **빠른 패널**.
-- 선택 시 조회하는 읽기 전용 Git 상태와 WSL 도구 버전. 사용자가 켜는 자동화 규칙·cooldown·수동 변경 보호.
+외부 CLI를 시작했다는 결과는 로그인·대화·개발 서버 준비 완료를 뜻하지 않습니다. [개발 작업공간 사용법](docs/v26-developer-workspace.md)과 [세션 안내](docs/v26-development-sessions.md)를 참고하세요.
 
-[사용 방법·설정 형식](docs/v26-developer-workspace.md) · [개발 세션](docs/v26-development-sessions.md) · [명령·빠른 패널](docs/v26-command-palette.md) · [자동화](docs/v26-automation.md) · [검사·미검증 범위](docs/v26-testing.md) · [복구](docs/v26-recovery.md)
+## 최신 업데이트
 
-![v2.6 개발 세팅 — 개인 경로가 없는 실제 최초 상태](docs/images/v26-developer-setup.png)
+**3.0.0-dev.2 · 2026-10-19 · 개발 프리뷰**
 
-## v2.5 UX 개선
+- 프로젝트 목록에 유형·Git 분기·수정 상태·행 내부 즐겨찾기를 모으고 창 폭에 따라 상세를 재배치했습니다.
+- 세션 속성을 본문 단계 편집기로 통합하고 실행 미리보기·접힌 전체 이력을 분리했습니다.
+- 배경 갤러리를 적응형 가상화 그리드로 변경하고 검색·포커스·입력 크기를 보정했습니다.
+- 실제 Windows 175%에서 주요 화면 10개를 검토했습니다. 다른 DPI·물리 다중 화면·전체 접근성·장시간 성능은 추가 검증 대상입니다.
 
-- Dock·프로젝트 전용 목적지와 14개 페이지, 미저장 변경 보호, 적용 요약·실행 취소.
-- 실제 상태 행, 프로필 차이 미리보기·사용자 프리셋·이전 상태 1회 복원.
-- 프로젝트 관리·검색·고정·최근 실행, 설치된 Lively 배경 갤러리와 화면별 배치 정보.
-- 센서 연결 안내, 선택 설정 스냅샷 복원, 개인정보를 가린 진단 내보내기.
-- 제어 센터 내부 Ctrl+K 명령 찾기, Ctrl+S 적용, 작은 창·키보드 포커스 개선.
+![3.0.0-dev.2 개발 세션 — 단계 편집과 분리된 실행 미리보기](docs/images/releases/v3.0/dev.2/development-sessions.png)
 
-**Dock 자동 적용은 보류 중입니다.** 적용 시험 뒤 Explorer 프로세스 교체가 관찰됐고 원인은 확인되지 않았습니다. 기존 Dock을 원래 값으로 복원했으며, 안전 보류가 있는 PC에서는 Dock 페이지가 현재 값과 Windhawk 열기만 제공합니다. 충돌이 있었던 File Explorer Styler는 비활성 상태를 유지합니다.
+프로젝트 페이지 구성 시간은 비교 표본에서 줄었지만 세션·갤러리 구성 비용과 메모리는 증가했습니다. 화면이 간결해졌다는 이유로 전체 성능 개선을 주장하지 않습니다.
 
-[구현 결과·화면](docs/v25-ux-overhaul.md) · [탐색·데이터 형식](docs/v25-navigation.md) · [실제 검사와 제한](docs/v25-testing.md) · [구성 요소 복구](docs/v25-recovery.md) · [v2.6 기능 범위](docs/v26-feature-expansion.md)
+[dev.1 → dev.2 화면 비교](docs/visual-history.md#v300-dev1--v300-dev2-비교) · [구현·한계](docs/v30-ui-overhaul.md) · [측정 조건과 수치](docs/v30-performance.md) · [변경 기록](CHANGELOG.md)
 
-![v2.5 제어 센터](docs/images/v25-overview.png)
+## 버전 기록
 
-## 실제 적용 화면
+### v2.4 — Desktop Foundation
 
-![GUnT_0x9 Desktop 실제 적용 화면 — 한국어 상단 바, 시스템 모니터, 분리형 Dock](docs/images/desktop-midnight-purple.png)
+**2026-10-16.** 한국어·공식 브랜딩, Rainmeter 시간축 그래프·실제 센서 연결, DPI별 위젯 배치와 WPF 설정·복구 기반을 정리했습니다. 충돌이 확인된 File Explorer Styler는 비활성 상태로 남겼습니다.
 
-2026-10-16 사용자가 제공한 실제 적용 화면입니다. 화면 속 배경은 현재 선택된 배경이며, 배경화면 원본·영상은 저장소에 포함하지 않습니다. 메모리의 ‘수집 대기’ 등 화면에 나타난 상태를 성공 값으로 바꾸거나 숨기지 않았습니다.
+[당시 제어 센터](docs/images/v25-before-overview.png) · [구현 보고](docs/v24-report.md) · [검증·추가 수정](docs/v24-flicker-mods-report.md)
 
-## 구현된 기능
+### v2.5 — UX Overhaul
 
-- **한국어 상단 바**: 공식 마스코트·워드마크, 작업공간/개발/도구/시스템 메뉴, 모니터·배경·집중·화면·설정 빠른 동작.
-- **분리형 Dock**: Windows 앱 실행·창 전환·고정 앱을 보존한 낮은 앱 Dock과 네이티브 트레이·한국어 날짜·초 시계.
-- **Rainmeter 시스템 모니터**: CPU·RAM·GPU·C:/D: 저장공간·네트워크·배터리·가동 시간. CPU/네트워크 그래프를 독립 표시하고 시간축·스케일을 관리합니다.
-- **실제 하드웨어 센서**: HWiNFO가 보고한 CPU/GPU/NVMe 온도를 연결합니다. 누락되거나 오래된 값을 0°C로 대체하지 않습니다.
-- **배경·프로필**: 기존 Lively 선택 보존, 재생/정지·정적 대체·개발/일상/게임/집중 프로필.
-- **멀티 모니터·DPI**: 안정적인 화면 식별자, 음수 좌표, 배율별 위젯 위치 저장·복원.
-- **GUnT_0x9 제어 센터**: WPF/.NET Framework 4.8, 설정·센서·배경·시작 복원·진단·실제 Windhawk 모드 목록과 복구.
-- **시작·복구**: 중복 실행 방지, 제한된 재시도, 체크포인트와 구성 요소별 복구 스크립트.
+**2026-10-17.** 실제 상태 행, 프로젝트 관리·Lively 갤러리, 프로필 미리보기와 미저장 보호·설정 복원을 추가했습니다. Dock 자동 적용은 보류 중입니다.
 
-## 제어 센터
+[제어 센터 화면](docs/images/v25-overview.png) · [개선 보고](docs/v25-ux-overhaul.md) · [검사 기록](docs/v25-testing.md)
 
-![GUnT_0x9 Desktop 제어 센터 개요](docs/images/control-center-overview.png)
+### v2.6 — Developer Workspace
 
-![GUnT_0x9 Desktop 프로그램 정보](docs/images/control-center-about.png)
+**2026-10-17–19 개발 기록.** 프로젝트 루트 탐색, WSL CLI 실행, 개발 세션, 공유 명령 팔레트·빠른 패널과 선택형 자동화를 통합했습니다. 외부 도구 인증·대화 완료와 실제 화면 재연결은 별도 검증 범위입니다.
 
-공식 로고는 승인된 PNG에서 생성한 자산입니다. 작은 앱 아이콘은 마스코트만 사용하고, 상단 바에는 가로형 브랜드 로고를 사용합니다. 소스 PNG와 16–256px 아이콘, 다중 해상도 ICO를 함께 보관합니다.
+[개발 세팅 화면](docs/images/v26-developer-setup.png) · [기능·사용법](docs/v26-developer-workspace.md) · [검증·화면 모음](docs/v26-testing.md)
 
-## 검증 환경
+### v3.0.0-dev.1 — UI Foundation
 
-| 항목 | 확인한 환경 |
-|---|---|
-| Windows | Windows 11 Home 25H2, 26200.9711 |
-| 화면 | 기존 3대 기록, v2.5 최종 검증 시 1대 연결 · 2880×1800 / 175% |
-| Rainmeter | 4.5.28.3936 |
-| Windhawk | 1.7.3 portable, 설치 14개 / 활성 13개 |
-| Flow Launcher | 2.1.4 |
-| Lively | 2.2.1.0 |
-| UI 글꼴 | S-Core Dream, Manrope |
+**2026-10-19.** 공통 디자인 리소스, 목적별 탐색, 적응형 개발 화면과 작은 팝업의 기반을 정리했습니다. 최초 작업 시에는 소스 검사·교차 컴파일까지만 확인했으며 Windows 화면 검증은 dev.2 작업 중 이어 수행했습니다.
 
-이 표는 해당 PC의 검증 기록입니다. 다른 하드웨어와 Windows 업데이트 이후의 호환성을 보장하지 않습니다.
+[보존 빌드의 실제 화면](docs/images/releases/v3.0/dev.1/developer-setup.png) · [시각 변천사](docs/visual-history.md) · [디자인 시스템](docs/v30-ui-design-system.md)
 
-## 소스 구조
+### v3.0.0-dev.2 — Visual Completion
 
-```text
-assets/branding/  공식 로고 원본·아이콘·워드마크
-assets/fonts/     UI 글꼴과 라이선스 안내
-src/              WinForms 상단 바·센서·설정 처리
-control-center/   WPF 제어 센터
-rainmeter/        시스템 모니터 스킨과 Lua
-windhawk/         공식 모드 소스·설정·호환성표
-scripts/          빌드·설정·복구·실제 UI 검증
-config/           공통 디자인 설정과 PC별 설정 예시
-docs/             구현·검증·복구 기록과 적용 화면
-```
+**2026-10-19.** 프로젝트 탐색기·본문 세션 편집기·적응형 배경 그리드를 구현하고 실제 Windows GUI·175% 배율을 확인했습니다. 정식 3.0 전체 완료를 의미하지 않습니다.
 
-## 빌드와 실행 범위
+[공개 화면 모음과 전후 비교](docs/visual-history.md) · [개발 보고](docs/v30-ui-overhaul.md) · [실제 검증 범위](docs/v30-screenshots.md)
 
-이 저장소는 기존 사용 환경에서 이어 개발한 **소스 및 설정 스냅샷**입니다. 타사 프로그램 설치본, 개인 백업·로그, PC별 경로·센서 설정, 배경화면 원본은 제외했습니다. 새 PC용 원클릭 설치 패키지는 아직 검증하지 않았습니다.
+## 빌드와 실행
 
-Windows에서 .NET Framework 4.8과 해당 PC 설정이 준비된 경우 프로젝트 폴더의 PowerShell에서 빌드합니다.
+검증 환경은 **Windows 11, Windows PowerShell 5.1, .NET Framework 4.8**입니다. 기존 Framework C# 컴파일러를 사용하며 Electron·Node.js 기반 UI 도구는 필요하지 않습니다.
+
+이 저장소는 기존 사용 환경의 소스 스냅샷입니다. 타사 설치본·개인 설정·백업·배경 원본은 포함하지 않습니다. 먼저 [PC별 설정 예시](config/examples/README.md)를 확인하세요. 자리표시자는 앱이 자동 치환하지 않으므로 실제 설치 경로와 센서 구성을 준비해야 합니다.
+
+앱 창을 닫은 뒤 프로젝트 루트의 Windows PowerShell에서 순서대로 실행합니다. 상단 바 빌드는 센서 DLL도 생성합니다.
 
 ```powershell
 .\scripts\build-configuration.ps1
-.\scripts\build-control-center.ps1
 .\scripts\build.ps1
+.\scripts\build-control-center.ps1
+& .\bin\GUNT.ControlCenter.exe (Get-Location).Path overview
 ```
 
-제어 센터는 빌드 전 닫아야 합니다. `build.ps1`은 프로젝트 상단 바를 교체하므로, 빌드 후 기존 시작 복원 또는 상단 바 실행 절차를 사용합니다. Explorer를 자동 재시작하지 않습니다. PC별 설정은 [설정 예시](config/examples/README.md)를 참고하세요.
+`build.ps1`은 실행 중인 프로젝트 상단 바를 교체할 수 있습니다. Explorer를 자동 재시작하지 않습니다. WSL에서 Windows PE 자동 실행이 등록되지 않은 경우의 실행 방법은 [Windows 검증 안내](docs/v30-screenshots.md#실행-명령)를 따릅니다. 새 PC 일괄 설치·SDK 방식 빌드는 별도 검증 대상입니다.
 
-로고 재생성은 Python의 Pillow·NumPy·SciPy 환경에서 실행합니다.
+## 실험·호환성 안내
 
-```bash
-python scripts/prepare-branding.py --root .
-```
+- **Dock 자동 적용 보류**, **File Explorer Styler 비활성**을 유지합니다. 원인 미확정인 과거 Explorer 교체를 해결 완료로 표시하지 않습니다.
+- 자동화 규칙은 기본 중지 상태이며 사용자가 켭니다. 모든 전원·앱·화면 조합을 검증한 것은 아닙니다.
+- dev.2의 실제 화면 검증은 연결 화면 1개·2880×1800·175%입니다. 다른 DPI, 물리 다중 화면 재연결, 고대비·스크린리더, 재로그인·장시간 사용은 후속 범위입니다.
+- HWiNFO 설치·공급자 갱신·개별 장치 연결과 WSL 도구 설치·인증은 해당 PC에서 준비해야 합니다.
 
-## 검증과 남은 제한
+문제가 생기면 [v2.6 구성 요소 복구](docs/v26-recovery.md), [제어 센터·설정 복구](docs/v25-recovery.md), [Windhawk 복구](docs/windhawk-recovery.md)를 확인하세요. 다른 PC의 과거 체크포인트를 그대로 적용하지 마세요.
 
-- 실제 시작 메뉴 검색·앱 실행, 탐색기 파일 작업·탭·검색, 달력·빠른 설정, Dock 앱 전환·초 시계, 제어 센터 탐색·공식 아이콘 리소스를 검사했습니다.
-- 시스템 모니터 간단히/자세히는 숨김 실행으로 전환하며, 이전 실제 클릭 시험에서 가시 콘솔 이벤트 0건을 확인했습니다.
-- File Explorer Styler는 XAML diagnostics 충돌 때문에 비활성 상태입니다. 기본 어두운 탐색기를 유지합니다.
-- Windhawk 확장 작업 중 Explorer 교체 1회가 발생했습니다. 원인은 미확정이며 최근 Dock 자동 폭 표현식을 철회했습니다. 최종 검증은 기존 폭 계산 방식으로 수행했습니다.
-- 재부팅·재로그인·장시간 배터리·모든 PC의 센서·Alt+Tab 아이콘의 별도 시각 검증은 완료로 표시하지 않습니다.
-- 과거 문서의 `logs/`, `state/`, `backups/`, `screenshots/` 경로는 해당 PC의 로컬 검증 자료입니다. 공개 이미지에는 이 페이지의 명시적 첨부 파일만 포함합니다.
+## 구조
+
+C# WinForms 상단 바와 WPF/.NET Framework 4.8 제어 센터가 기존 개발 서비스·JSON 설정을 공유합니다. Rainmeter는 측정 표시, Windhawk는 Windows UI 조정, Lively는 배경 재생을 담당합니다. Flow Launcher·Windows Terminal·PowerShell·WSL은 기존 설치와 연결합니다.
+
+`src/` · `control-center/` · `rainmeter/` · `windhawk/` · `scripts/` · `config/` · `assets/` · `docs/`
+
+[기반 구조](docs/v24-architecture.md) · [개발 작업공간 구조](docs/v26-developer-workspace.md) · [UI 설계](docs/v30-ui-design-system.md)
+
+## 다음 개발
+
+다른 DPI·접근성·장시간 사용 검증, 남은 보조창 통일, 편집기·갤러리 구성 비용을 먼저 검토합니다. 아직 구현하지 않은 다음 기능은 현재 기능 목록에 포함하지 않습니다.
+
+[실제 v3.0 로드맵](docs/v30-roadmap.md)
 
 ## 문서
 
-- [공식 로고 통합](docs/branding-integration.md)
-- [Windhawk 확장 결과](docs/windhawk-enhancement-report.md) · [모드 호환성표](windhawk/compatibility-matrix.md)
-- [Windhawk 복구](docs/windhawk-recovery.md) · [v2.4 복구](docs/v24-recovery.md)
-- [v2.4 구현 보고](docs/v24-report.md) · [검증 기록](docs/v24-testing.md)
-- [한국어 표시 수정](docs/monitor-korean-fix.md) · [숨김 실행과 모드 추가](docs/v24-flicker-mods-report.md)
-- [공개 저장소 구성](docs/repository-publishing.md) · [변경 기록](CHANGELOG.md)
+- [변경 기록](CHANGELOG.md) · [버전별 시각 기록](docs/visual-history.md) · [공개 이미지 출처·검토 목록](docs/images/releases/manifest.json)
+- [v2.4 보고·검증](docs/v24-report.md) · [v2.5 UI 보고](docs/v25-ux-overhaul.md) · [v2.6 검증](docs/v26-testing.md)
+- [dev.2 UI 결과](docs/v30-ui-overhaul.md) · [화면 검증](docs/v30-screenshots.md) · [성능 결과](docs/v30-performance.md)
+- [개발 세션](docs/v26-development-sessions.md) · [명령·빠른 패널](docs/v26-command-palette.md) · [자동화](docs/v26-automation.md)
+- [설정 예시](config/examples/README.md) · [탐색·설정 형식](docs/v25-navigation.md) · [센서·한글 표시](docs/monitor-korean-fix.md)
+- [공식 브랜딩](docs/branding-integration.md) · [Windhawk 결과](docs/windhawk-enhancement-report.md) · [호환성표](windhawk/compatibility-matrix.md)
+- [v2.4 복구](docs/v24-recovery.md) · [v2.5 복구](docs/v25-recovery.md) · [v2.6 복구](docs/v26-recovery.md)
+- [공개 저장소 구성](docs/repository-publishing.md) · [README·릴리스 이미지 유지관리](docs/readme-maintenance.md)
 
-## 외부 구성 요소
+## 크레딧과 라이선스
 
-Rainmeter·Windhawk·Lively·Flow Launcher·HWiNFO는 각 프로젝트의 설치 및 라이선스 조건을 따릅니다. Windhawk 모드 소스의 원래 저작권·라이선스 헤더, 글꼴의 배포 안내를 보존했습니다. 타사 프로그램 설치본과 사용자 배경 원본을 재배포하지 않습니다.
+공식 로고·마스코트는 승인된 [브랜드 자산](assets/branding/README.md)을 사용합니다. 로고 재생성은 기존 `scripts/prepare-branding.py`와 Pillow·NumPy·SciPy 환경을 사용하며 [브랜딩 문서](docs/branding-integration.md)에 절차가 있습니다.
+
+Rainmeter·Windhawk·Lively·Flow Launcher·HWiNFO와 각 Windhawk 모드의 원래 저작권·설치·라이선스 조건을 따릅니다. [아이콘 라이선스](assets/icons/LICENSE.txt), [S-Core Dream 안내](assets/fonts/S-Core-license.txt), [Manrope OFL](assets/fonts/Manrope-OFL.txt)를 보존합니다. 별도의 프로젝트 전체 라이선스를 새로 지정하지 않았습니다. 타사 프로그램 설치본과 사용자 배경 원본은 재배포하지 않습니다.

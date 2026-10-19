@@ -1,5 +1,13 @@
 # 3.0.0-dev.2 실제 화면 검증
 
+## 공개 README용 화면
+
+[버전별 시각 기록](visual-history.md)에 개인정보를 포함하지 않는 **새 실제 앱 캡처**를 공개했다. dev.1 보존 빌드 2개와 dev.2 빌드 4개를 별도 문서용 예제 설정으로 다시 실행했다. 공개 export는 `docs/images/releases/v3.0/dev.1/`, `dev.2/`에 있고 [manifest](images/releases/manifest.json)에 출처·버전·해시·시각 검토를 기록한다.
+
+이 이미지는 아래 개인 환경 검증 원본 19개를 그대로 Git에 넣은 것이 아니다. 예제 Git 저장소의 실제 파일을 조회하며 WSL 미지정·사용 기록 없음·기존 표시 제한을 유지한다. 별도 RGB 내보내기·메타데이터 제거·폭 제한 후 최종 이미지를 다시 열어 검토했다. 개인 정보가 처음부터 없어 픽셀 가림은 필요하지 않았다. 타사 배경 썸네일이 포함된 갤러리 원본은 공개하지 않았다.
+
+공개 이미지는 제품 설명용이며 새 성능 측정이나 다른 DPI 검증을 뜻하지 않는다. [유지관리 절차](readme-maintenance.md)를 따른다.
+
 ## 이번 실행의 증거
 
 dev.1과 dev.2를 **실제 Windows WPF 앱으로 빌드·실행·캡처**했다. 이전 dev.1 보고의 “실행 불가/캡처 0개” 상태는 현재 결과가 아니다. PE 자동 해석 대신 WSL `/init` 명시 호출로 Windows GUI를 실행했다.
@@ -32,10 +40,12 @@ dev.1과 dev.2를 **실제 Windows WPF 앱으로 빌드·실행·캡처**했다.
 
 ## 실행 명령
 
+아래 `C:\src\GUNT-Desktop`은 설명용 경로이며 실제 체크아웃 경로로 바꾼다.
+
 실제 Windows 대화형 세션:
 
 ```powershell
-Set-Location 'C:\Users\김건트\GUNT-Desktop'
+Set-Location 'C:\src\GUNT-Desktop'
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-control-center.ps1
 powershell.exe -MTA -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-v30-ui.ps1 -Label dev2-final -Samples 3 -IncludeSizes
 powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-v30-interactions.ps1
@@ -45,7 +55,7 @@ powershell.exe -MTA -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify-v3
 WSL에서 Windows PE 자동 실행이 등록되지 않은 경우:
 
 ```bash
-/init /mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe -MTA -NoProfile -ExecutionPolicy Bypass -File 'C:\Users\김건트\GUNT-Desktop\scripts\verify-v30-ui.ps1' -Label dev2-final -Samples 3 -IncludeSizes
+/init /mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe -MTA -NoProfile -ExecutionPolicy Bypass -File 'C:\src\GUNT-Desktop\scripts\verify-v30-ui.ps1' -Label dev2-final -Samples 3 -IncludeSizes
 ```
 
 외부 UIA 클라이언트와 실제 WPF 컨트롤을 만드는 STA 검사를 분리한다. 수집 도구는 기존 제어 센터가 열려 있으면 중단하고 직접 연 창만 정상 종료한다. 창 위치 기록을 복원하며 실패한 캡처를 자동으로 시각 통과 처리하지 않는다.

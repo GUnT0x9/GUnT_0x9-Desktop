@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "reviewScope": "README와 시각 기록에서 사용하는 실제 앱 PNG. 시각/개인정보 검토와 기계적 파일 검사를 분리. 로컬 원본/실행 로그는 미포함.",
+  "images": [
+    {
+      "path": "docs/images/releases/v3.0/dev.1/developer-setup.png",
+      "version": "3.0.0-dev.1",
+      "capturedAt": "2026-10-19T23:38:12.1619525+09:00",
+      "sourceRevision": "9e5e928",
+      "sourceExecutableSha256": "3e4cc432430f958aaba7ab4cdb8a58ad2f28e43edd30de0f4aa8cbf9fbdf31ae",
+      "sourceImageSha256": "e9c7dd68dba3989fce4b622a98d07b08f1cc1a3fd7d054ff0e8a799fa0407e5c",
+      "dimensions": [
+        1600,
+        983
+      ],
+      "sha256": "6db9ad2f23a6e5f0482bd1404d081e9f8840f203c80db87c056479865b7f1679",
+      "source": "실제 Windows 앱, 독립 문서용 설정. 동일 구조의 공개 예제 프로젝트. 1400x860 DIP, 175%; 팝업은 원래 크기.",
+      "processing": "별도 24bit RGB PNG, 최대 폭 1600px. 원본 픽셀 좌표로 내보내기. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 검토. 개인 계정/홈/프로젝트/장치 ID/알림/타사 배경 없음. 예제 경로 C:\\GUNT-DocDemo 만 사용.",
+      "rights": "승인된 GUNT 브랜드와 실제 자체 앱 UI. 타사 배경 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.1/development-sessions.png",
+      "version": "3.0.0-dev.1",
+      "capturedAt": "2026-10-19T23:38:12.1619525+09:00",
+      "sourceRevision": "9e5e928",
+      "sourceExecutableSha256": "3e4cc432430f958aaba7ab4cdb8a58ad2f28e43edd30de0f4aa8cbf9fbdf31ae",
+      "sourceImageSha256": "824919204d4aead4b770328c7ad8432784c7a62207f30a90b7e87ce13b8bdc15",
+      "dimensions": [
+        1600,
+        983
+      ],
+      "sha256": "7546be15fb903e479cbff7f02f7f84b0b5bf08b2383d21a5c1857322d160a001",
+      "source": "실제 Windows 앱, 독립 문서용 설정. 동일 구조의 공개 예제 프로젝트. 1400x860 DIP, 175%; 팝업은 원래 크기.",
+      "processing": "별도 24bit RGB PNG, 최대 폭 1600px. 원본 픽셀 좌표로 내보내기. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 검토. 개인 계정/홈/프로젝트/장치 ID/알림/타사 배경 없음. 예제 경로 C:\\GUNT-DocDemo 만 사용.",
+      "rights": "승인된 GUNT 브랜드와 실제 자체 앱 UI. 타사 배경 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.2/developer-setup.png",
+      "version": "3.0.0-dev.2",
+      "capturedAt": "2026-10-19T23:34:12.9501970+09:00",
+      "sourceRevision": "0c4c079",
+      "sourceExecutableSha256": "3eefc348f7d2bdcd5002aa71bdaaf29fa73550e1d6845b5ceea7a8482a8ec920",
+      "sourceImageSha256": "8314653a383c823049c3e804ec428355f15c65666b7e056453e27ef725591022",
+      "dimensions": [
+        1600,
+        983
+      ],
+      "sha256": "65f2fa103f85a9584c5bd26853f4409fe53fec9aeb50a646d0d1e16ad52af5c6",
+      "source": "실제 Windows 앱, 독립 문서용 설정. 동일 구조의 공개 예제 프로젝트. 1400x860 DIP, 175%; 팝업은 원래 크기.",
+      "processing": "별도 24bit RGB PNG, 최대 폭 1600px. 원본 픽셀 좌표로 내보내기. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 검토. 개인 계정/홈/프로젝트/장치 ID/알림/타사 배경 없음. 예제 경로 C:\\GUNT-DocDemo 만 사용.",
+      "rights": "승인된 GUNT 브랜드와 실제 자체 앱 UI. 타사 배경 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.2/development-sessions.png",
+      "version": "3.0.0-dev.2",
+      "capturedAt": "2026-10-19T23:34:12.9501970+09:00",
+      "sourceRevision": "0c4c079",
+      "sourceExecutableSha256": "3eefc348f7d2bdcd5002aa71bdaaf29fa73550e1d6845b5ceea7a8482a8ec920",
+      "sourceImageSha256": "d997acd27a80d2509672df0e746853f07f93caf524baedb21f6790d9c7b769ed",
+      "dimensions": [
+        1600,
+        983
+      ],
+      "sha256": "a2c380e2dd8c890030be67505342ff7609e781b0144a93be1242744ef2ae647d",
+      "source": "실제 Windows 앱, 독립 문서용 설정. 동일 구조의 공개 예제 프로젝트. 1400x860 DIP, 175%; 팝업은 원래 크기.",
+      "processing": "별도 24bit RGB PNG, 최대 폭 1600px. 원본 픽셀 좌표로 내보내기. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 검토. 개인 계정/홈/프로젝트/장치 ID/알림/타사 배경 없음. 예제 경로 C:\\GUNT-DocDemo 만 사용.",
+      "rights": "승인된 GUNT 브랜드와 실제 자체 앱 UI. 타사 배경 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.2/palette.png",
+      "version": "3.0.0-dev.2",
+      "capturedAt": "2026-10-19T23:34:12.9501970+09:00",
+      "sourceRevision": "0c4c079",
+      "sourceExecutableSha256": "3eefc348f7d2bdcd5002aa71bdaaf29fa73550e1d6845b5ceea7a8482a8ec920",
+      "sourceImageSha256": "0f517241c1bf91c024a490ac37fabba357f2c9fc1519d2e569408b5525c74f2b",
+      "dimensions": [
+        1190,
+        753
+      ],
+      "sha256": "3a1bd7fa3ad8ecf7feaff08f3ecd551ea9c883bce1dc06a825cff5b39f993f02",
+      "source": "실제 Windows 앱, 독립 문서용 설정. 동일 구조의 공개 예제 프로젝트. 1400x860 DIP, 175%; 팝업은 원래 크기.",
+      "processing": "별도 24bit RGB PNG, 최대 폭 1600px. 원본 픽셀 좌표로 내보내기. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 검토. 개인 계정/홈/프로젝트/장치 ID/알림/타사 배경 없음. 예제 경로 C:\\GUNT-DocDemo 만 사용.",
+      "rights": "승인된 GUNT 브랜드와 실제 자체 앱 UI. 타사 배경 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.2/quick-panel.png",
+      "version": "3.0.0-dev.2",
+      "capturedAt": "2026-10-19T23:34:12.9501970+09:00",
+      "sourceRevision": "0c4c079",
+      "sourceExecutableSha256": "3eefc348f7d2bdcd5002aa71bdaaf29fa73550e1d6845b5ceea7a8482a8ec920",
+      "sourceImageSha256": "3284b32bba06c119dca459abe48399e6141ea2ceebe42dee2b29bac8f7f90342",
+      "dimensions": [
+        630,
+        698
+      ],
+      "sha256": "fa2345543c62ea3f8b409dae4ac5242ef98f28362eae59aa6ad3344668a6e98f",
+      "source": "실제 Windows 앱, 독립 문서용 설정. 동일 구조의 공개 예제 프로젝트. 1400x860 DIP, 175%; 팝업은 원래 크기.",
+      "processing": "별도 24bit RGB PNG, 최대 폭 1600px. 원본 픽셀 좌표로 내보내기. 불투명 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "최종 export를 열어 검토. 개인 계정/홈/프로젝트/장치 ID/알림/타사 배경 없음. 예제 경로 C:\\GUNT-DocDemo 만 사용.",
+      "rights": "승인된 GUNT 브랜드와 실제 자체 앱 UI. 타사 배경 미디어 없음."
+    },
+    {
+      "path": "docs/images/v25-before-overview.png",
+      "version": "2.4",
+      "sourceRevision": "582d3eb",
+      "capturedAt": null,
+      "dateEvidence": "기존 이미지에 표시된 2026-10-17 시각. v2.5 작업 전의 v2.4 UI.",
+      "dimensions": [
+        1715,
+        1330
+      ],
+      "sha256": "0f84753a0591ebfa7a3319d39f50d16132b371a872a2ec08efcefc46f86e02fd",
+      "source": "기존 공개 실제 Windows 창 캡처. 원래 경로/바이트 유지, 중복 복사 없음.",
+      "processing": "기존 공개 PNG, 허용 청크만 포함하는지 재검사.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "재사용 전에 직접 열어 확인. 개인 경로/계정/비공개 정보/고유 장치 ID/타사 배경 이미지 없음. 초기 상태/결측 그대로 보존.",
+      "rights": "기존 공개 GUNT 자체 UI와 승인 브랜드. 타사 배경/사용자 미디어 없음."
+    },
+    {
+      "path": "docs/images/v25-overview.png",
+      "version": "2.5",
+      "sourceRevision": "582d3eb",
+      "capturedAt": null,
+      "dateEvidence": "당시 보고와 공개 커밋의 개발 기록. 정확한 캡처 시각은 새로 추정하지 않음.",
+      "dimensions": [
+        1715,
+        1330
+      ],
+      "sha256": "56c62af45f97791c47c54f5e129de56216b6d2cbf12205340641021762187346",
+      "source": "기존 공개 실제 Windows 창 캡처. 원래 경로/바이트 유지, 중복 복사 없음.",
+      "processing": "기존 공개 PNG, 허용 청크만 포함하는지 재검사.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "재사용 전에 직접 열어 확인. 개인 경로/계정/비공개 정보/고유 장치 ID/타사 배경 이미지 없음. 초기 상태/결측 그대로 보존.",
+      "rights": "기존 공개 GUNT 자체 UI와 승인 브랜드. 타사 배경/사용자 미디어 없음."
+    },
+    {
+      "path": "docs/images/v25-projects.png",
+      "version": "2.5",
+      "sourceRevision": "582d3eb",
+      "capturedAt": null,
+      "dateEvidence": "당시 보고와 공개 커밋의 개발 기록. 정확한 캡처 시각은 새로 추정하지 않음.",
+      "dimensions": [
+        1715,
+        1330
+      ],
+      "sha256": "9db4cc120ce9a9cfcdcc7afb5ff0010e3f6776243647796bbe9c063fa45cb08c",
+      "source": "기존 공개 실제 Windows 창 캡처. 원래 경로/바이트 유지, 중복 복사 없음.",
+      "processing": "기존 공개 PNG, 허용 청크만 포함하는지 재검사.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "재사용 전에 직접 열어 확인. 개인 경로/계정/비공개 정보/고유 장치 ID/타사 배경 이미지 없음. 초기 상태/결측 그대로 보존.",
+      "rights": "기존 공개 GUNT 자체 UI와 승인 브랜드. 타사 배경/사용자 미디어 없음."
+    },
+    {
+      "path": "docs/images/v26-developer-setup.png",
+      "version": "2.6",
+      "sourceRevision": "3ae33e2",
+      "capturedAt": null,
+      "dateEvidence": "당시 보고와 공개 커밋의 개발 기록. 정확한 캡처 시각은 새로 추정하지 않음.",
+      "dimensions": [
+        1715,
+        1330
+      ],
+      "sha256": "052d70e820ab24e0a239d28566667969c86d6972c4897dd062e848de66726a75",
+      "source": "기존 공개 실제 Windows 창 캡처. 원래 경로/바이트 유지, 중복 복사 없음.",
+      "processing": "기존 공개 PNG, 허용 청크만 포함하는지 재검사.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "재사용 전에 직접 열어 확인. 개인 경로/계정/비공개 정보/고유 장치 ID/타사 배경 이미지 없음. 초기 상태/결측 그대로 보존.",
+      "rights": "기존 공개 GUNT 자체 UI와 승인 브랜드. 타사 배경/사용자 미디어 없음."
+    },
+    {
+      "path": "docs/images/v26-development-sessions.png",
+      "version": "2.6",
+      "sourceRevision": "3ae33e2",
+      "capturedAt": null,
+      "dateEvidence": "당시 보고와 공개 커밋의 개발 기록. 정확한 캡처 시각은 새로 추정하지 않음.",
+      "dimensions": [
+        1715,
+        1330
+      ],
+      "sha256": "a133c99eaac723434359f7f4130875e8600a7367c032f3b4131913d8982cf9b8",
+      "source": "기존 공개 실제 Windows 창 캡처. 원래 경로/바이트 유지, 중복 복사 없음.",
+      "processing": "기존 공개 PNG, 허용 청크만 포함하는지 재검사.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "재사용 전에 직접 열어 확인. 개인 경로/계정/비공개 정보/고유 장치 ID/타사 배경 이미지 없음. 초기 상태/결측 그대로 보존.",
+      "rights": "기존 공개 GUNT 자체 UI와 승인 브랜드. 타사 배경/사용자 미디어 없음."
+    },
+    {
+      "path": "docs/images/v26-command-palette.png",
+      "version": "2.6",
+      "sourceRevision": "3ae33e2",
+      "capturedAt": null,
+      "dateEvidence": "당시 보고와 공개 커밋의 개발 기록. 정확한 캡처 시각은 새로 추정하지 않음.",
+      "dimensions": [
+        980,
+        753
+      ],
+      "sha256": "2ad2e8627e5fa6a46d4f404b7c7f0b0cf61af01b69d5f2e01f5028ccdacd5910",
+      "source": "기존 공개 실제 Windows 창 캡처. 원래 경로/바이트 유지, 중복 복사 없음.",
+      "processing": "기존 공개 PNG, 허용 청크만 포함하는지 재검사.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "재사용 전에 직접 열어 확인. 개인 경로/계정/비공개 정보/고유 장치 ID/타사 배경 이미지 없음. 초기 상태/결측 그대로 보존.",
+      "rights": "기존 공개 GUNT 자체 UI와 승인 브랜드. 타사 배경/사용자 미디어 없음."
+    },
+    {
+      "path": "docs/images/v26-quick-panel.png",
+      "version": "2.6",
+      "sourceRevision": "3ae33e2",
+      "capturedAt": null,
+      "dateEvidence": "당시 보고와 공개 커밋의 개발 기록. 정확한 캡처 시각은 새로 추정하지 않음.",
+      "dimensions": [
+        735,
+        633
+      ],
+      "sha256": "3e26c1a0031a4037bf1e7ab777d9665a6246faada2bb588a145c6362d2c74b77",
+      "source": "기존 공개 실제 Windows 창 캡처. 원래 경로/바이트 유지, 중복 복사 없음.",
+      "processing": "기존 공개 PNG, 허용 청크만 포함하는지 재검사.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "재사용 전에 직접 열어 확인. 개인 경로/계정/비공개 정보/고유 장치 ID/타사 배경 이미지 없음. 초기 상태/결측 그대로 보존.",
+      "rights": "기존 공개 GUNT 자체 UI와 승인 브랜드. 타사 배경/사용자 미디어 없음."
+    }
+  ]
+}

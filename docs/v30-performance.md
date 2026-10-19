@@ -46,10 +46,10 @@
 
 ## 재현
 
-Windows PowerShell에서 앱 창을 먼저 닫고 실행한다. 기존 창을 강제 종료하지 않는다.
+아래 `C:\src\GUNT-Desktop`은 설명용 경로다. 실제 체크아웃 경로로 바꾼다. Windows PowerShell에서 앱 창을 먼저 닫고 실행한다. 기존 창을 강제 종료하지 않는다.
 
 ```powershell
-Set-Location 'C:\Users\김건트\GUNT-Desktop'
+Set-Location 'C:\src\GUNT-Desktop'
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\build-control-center.ps1
 powershell.exe -MTA -NoProfile -ExecutionPolicy Bypass -File .\scripts\measure-v30-ui.ps1 -BaselineExecutable '기준빌드\GUNT.ControlCenter.exe' -CandidateExecutable '.\bin\GUNT.ControlCenter.exe' -Samples 5
 ```
