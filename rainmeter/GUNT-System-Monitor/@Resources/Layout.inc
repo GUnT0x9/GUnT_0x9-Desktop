@@ -105,7 +105,7 @@ MeterStyle=SecondaryText
 Y=((#CPUGraphY#-19)*#Scale#)
 Text=[&Sensors:CpuAxis()]
 Hidden=#HideCPUGraph#
-FontSize=(8.25*#Scale#)
+FontSize=(9*#Scale#)
 
 [CPUTimeAxis]
 Meter=String
@@ -113,7 +113,7 @@ MeterStyle=SecondaryText
 Y=((#CPUGraphY#+#CpuGraphHeight#+2)*#Scale#)
 Text=−#HistorySeconds#초
 Hidden=#HideCPUGraph#
-FontSize=(8.25*#Scale#)
+FontSize=(9*#Scale#)
 
 [CPUStats]
 Meter=String
@@ -324,7 +324,9 @@ Y=((#NetworkY#+27)*#Scale#)
 Text=[&Sensors:NetworkRates()]
 Hidden=#HideNetwork#
 FontFace=#MetricFont#
-FontSize=(12*#Scale#)
+FontSize=(11.25*#Scale#)
+StringAlign=Right
+X=((#PanelWidth#-16)*#Scale#)
 
 [NetworkInfo]
 Meter=String
@@ -368,7 +370,7 @@ MeterStyle=SecondaryText
 Y=((#NetworkGraphY#-19)*#Scale#)
 Text=[&Sensors:AxisLabel()]
 Hidden=#HideNetworkGraph#
-FontSize=(8.25*#Scale#)
+FontSize=(9*#Scale#)
 
 [NetworkTimeAxis]
 Meter=String
@@ -376,7 +378,7 @@ MeterStyle=SecondaryText
 Y=((#NetworkGraphY#+#NetworkGraphHeight#+2)*#Scale#)
 Text=−#HistorySeconds#초
 Hidden=#HideNetworkGraph#
-FontSize=(8.25*#Scale#)
+FontSize=(9*#Scale#)
 
 [NetworkTotal]
 Meter=String
@@ -416,7 +418,7 @@ MeterStyle=SecondaryText
 Y=((#SensorStatusY#)*#Scale#)
 Text=[&Sensors:TemperatureStatus()]
 Hidden=#HideSensorStatus#
-FontSize=(8.25*#Scale#)
+FontSize=(9*#Scale#)
 
 [CPUTimeRight]
 Meter=String
@@ -426,7 +428,7 @@ Y=((#CPUGraphY#+#CpuGraphHeight#+2)*#Scale#)
 X=((#PanelWidth#-16)*#Scale#)
 StringAlign=Right
 W=(50*#Scale#)
-FontSize=(8.25*#Scale#)
+FontSize=(9*#Scale#)
 Hidden=#HideCPUGraph#
 
 [NetworkTimeRight]
@@ -437,5 +439,5 @@ Y=((#NetworkGraphY#+#NetworkGraphHeight#+2)*#Scale#)
 X=((#PanelWidth#-16)*#Scale#)
 StringAlign=Right
 W=(50*#Scale#)
-FontSize=(8.25*#Scale#)
+FontSize=(9*#Scale#)
 Hidden=#HideNetworkGraph#
