@@ -6,15 +6,17 @@
 
 **Midnight Purple · Windows 11 개발자 데스크톱**
 
-네이티브 Windows 작업 표시줄과 시스템 기능을 유지하면서, 한국어 명령 바·실시간 시스템 모니터·배경화면 제어·WPF 제어 센터를 연결한 개인 데스크톱 커스터마이징 프로젝트입니다. 현재 개발 버전은 **3.0.0-dev.1 UI Foundation**입니다. 게시된 v2.5는 `main`, v2.6 기능 기준은 `feat/v26-developer-workspace`에 보존하고 UI 작업은 `feat/v30-ui-foundation`에서 진행합니다.
+네이티브 Windows 작업 표시줄과 시스템 기능을 유지하면서, 한국어 명령 바·실시간 시스템 모니터·배경화면 제어·WPF 제어 센터를 연결한 개인 데스크톱 커스터마이징 프로젝트입니다. 현재 개발 버전은 **3.0.0-dev.2 Visual Completion**입니다. 게시된 v2.5는 `main`, v2.6 기능 기준은 `feat/v26-developer-workspace`에 보존하고 UI 작업은 `feat/v30-ui-foundation`에서 진행합니다.
 
-## 3.0.0-dev.1 UI Foundation
+## 3.0.0-dev.2 — UI 시각 완성
 
-공통 WPF 스타일·그룹 탐색·개발 프로젝트 브라우저·세션 단계 편집·명령 팔레트·빠른 패널·가상화 배경 목록과 자원 관리를 개선하는 개발 프리뷰입니다. 기존 2.x 기능과 기술 스택을 유지합니다.
+프로젝트의 유형·실제 Git 상태·최근 사용·행 내부 즐겨찾기, 본문 세션 단계 편집기, 적응형 가상화 배경 그리드를 구현했습니다. 기존 WPF/.NET Framework 4.8과 v2.6 실행 서비스를 유지합니다.
 
-**안정판 3.0 또는 전체 리뉴얼 완료 상태가 아닙니다.** .NET Framework 4.8 참조 기준 교차 컴파일과 검색 회귀 검사는 통과했지만, 이번 환경에서는 Windows 실행이 차단돼 실제 화면 캡처·175% DPI·전후 성능 비교를 수행하지 못했습니다. 아래 v2.x 이미지는 이전 버전의 기록입니다.
+실제 Windows에서 빌드·실행하고 주요 화면 10개와 세 가지 창 크기를 **175% 배율**로 검토했습니다. 격리된 WPF 상호작용 검사와 dev.1/dev.2 각각 5회 교차 성능 측정을 수행했습니다. 프로젝트 페이지 초기 구성 중앙값은 이번 표본에서 54.8→44.1ms였습니다. 세션·갤러리 구성 비용과 약 3MiB의 메모리 증가도 함께 기록했습니다.
 
-[구현 범위·남은 작업](docs/v30-ui-overhaul.md) · [디자인 시스템](docs/v30-ui-design-system.md) · [UI 소스 점검](docs/v30-ui-audit.md) · [성능·재현 방법](docs/v30-performance.md) · [화면 검증 상태](docs/v30-screenshots.md) · [로드맵](docs/v30-roadmap.md)
+정식 3.0 출시 완료를 의미하지 않습니다. 다른 DPI·물리 다중 화면·스크린리더·장시간 성능은 추가 검증 대상입니다. 아래 v2.x 이미지는 이전 버전 기록이며 dev.2 증거와 구분합니다.
+
+[구현 결과](docs/v30-ui-overhaul.md) · [디자인 시스템](docs/v30-ui-design-system.md) · [실제 화면 검증·실행 명령](docs/v30-screenshots.md) · [측정 결과](docs/v30-performance.md) · [로드맵](docs/v30-roadmap.md)
 
 ## v2.6 Developer Workspace
 
