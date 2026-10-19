@@ -1,5 +1,5 @@
 ﻿# 동일 사용자 데이터·창 크기에서 두 Windows 네이티브 빌드를 번갈아 측정한다.
-param([Parameter(Mandatory=$true)][string]$BaselineExecutable,[string]$CandidateExecutable,[ValidateRange(3,10)][int]$Samples=5)
+param([Parameter(Mandatory=$true)][string]$BaselineExecutable,[string]$CandidateExecutable,[ValidateRange(3,10)][int]$Samples=5,[ValidatePattern('^[a-z0-9.-]+$')][string]$ResultLabel='dev2')
 . "$PSScriptRoot\enhancement-ui-common.ps1"
 if(!$CandidateExecutable){$CandidateExecutable=Join-Path $Root 'bin\GUNT.ControlCenter.exe'}
 foreach($file in @($BaselineExecutable,$CandidateExecutable)){if(!(Test-Path $file)){throw ('실행 파일 없음: '+$file)}}
@@ -50,7 +50,7 @@ try{
   }
  }
 }catch{$failure=$_.Exception.Message;throw}finally{
- Write-Json @{Failure=$failure;Samples=$Samples;BaselineSha256=(Get-FileHash $BaselineExecutable).Hash;CandidateSha256=(Get-FileHash $CandidateExecutable).Hash;Results=$results;Notes='각 빌드 5회 교차 실행. OS 캐시 초기화 안 함. 동일 1180x800 DIP·동일 사용자 데이터. 팔레트는 UIA Invoke로 열기. 전역 키 입력 시험과 분리. first-render는 비동기 상태 조회 완료를 포함하지 않음. UIA·계측 비용 포함. 마지막 표본에서 유휴 5초 관찰.'} (Join-Path $Root 'logs\v30-dev2-benchmark.json')
+ Write-Json @{Failure=$failure;Samples=$Samples;BaselineSha256=(Get-FileHash $BaselineExecutable).Hash;CandidateSha256=(Get-FileHash $CandidateExecutable).Hash;Results=$results;Notes=('각 빌드 '+$Samples+'회 교차 실행. OS 캐시 초기화 안 함. 동일 1180x800 DIP·동일 사용자 데이터. 팔레트는 UIA Invoke로 열기. 전역 키 입력 시험과 분리. first-render는 비동기 상태 조회 완료를 포함하지 않음. UIA·계측 비용 포함. 마지막 표본에서 유휴 5초 관찰.')} (Join-Path $Root ('logs\v30-'+$ResultLabel+'-benchmark.json'))
  foreach($process in $owned){try{if(!$process.HasExited){$process.CloseMainWindow()|Out-Null;$null=$process.WaitForExit(5000)}}finally{$process.Dispose()}}
  $env:GUNT_UI_METRICS=$oldMetrics
  if(!@(Get-Process GUNT.ControlCenter -ErrorAction SilentlyContinue).Count){if($null -ne $original){[IO.File]::WriteAllBytes($windowFile,$original)}elseif(Test-Path $windowFile){Remove-Item -LiteralPath $windowFile}}

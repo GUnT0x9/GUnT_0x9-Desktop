@@ -1,4 +1,4 @@
-﻿param([Parameter(Mandatory=$true)][string]$Executable,[Parameter(Mandatory=$true)][ValidatePattern('^[a-z0-9.-]+$')][string]$Version,[string[]]$Pages=@('developer-setup','development-sessions','palette','quick-panel'))
+﻿param([Parameter(Mandatory=$true)][string]$Executable,[Parameter(Mandatory=$true)][ValidatePattern('^[a-z0-9.-]+$')][string]$Version,[string[]]$Pages=@('developer-setup','development-sessions','palette','quick-panel'),[ValidateRange(780,1600)][int]$WidthDip=1400,[ValidateRange(560,1000)][int]$HeightDip=860,[switch]$ProjectEditor)
 . "$PSScriptRoot\enhancement-ui-common.ps1"
 # 실제 앱을 별도 문서용 설정으로 실행한다. 실행/적용 버튼은 누르지 않는다.
 if(Get-Process GUNT.ControlCenter -ErrorAction SilentlyContinue){throw '기존 제어 센터를 정상 종료한 뒤 실행하세요. 미저장 창은 자동 종료하지 않습니다.'}
@@ -39,7 +39,7 @@ public static class ReadmeCaptureNative {
  [DllImport("user32.dll")]public static extern uint GetDpiForWindow(IntPtr h);
 }
 '@
-$captures=@();$process=$null
+$captures=@();$process=$null;$originalCursor=[GuntEnhanceUi]::Cursor()
 try{
  foreach($page in $Pages){
   $process=Start-Process $Executable -ArgumentList ('"'+$demo+'" '+$page) -PassThru
@@ -47,19 +47,34 @@ try{
   $win=$null;for($attempt=0;$attempt -lt 100 -and !$win;$attempt++){Start-Sleep -Milliseconds 60;$win=Get-EnhancementWindows|Where-Object {$_.Current.ProcessId -eq $process.Id -and $_.Current.Name -eq $title}|Select-Object -First 1}
   if(!$win){throw ('실제 창 준비 실패: '+$page)}
   $h=[IntPtr]$win.Current.NativeWindowHandle;$scale=[ReadmeCaptureNative]::GetDpiForWindow($h)/96.0;$work=[Windows.Forms.Screen]::FromHandle($h).WorkingArea
-  if($title -eq 'GUnT_0x9 Desktop'){[GuntEnhanceUi]::SetWindowPos($h,[IntPtr]::Zero,$work.Left+8,$work.Top+8,[int][math]::Min(1400*$scale,$work.Width-16),[int][math]::Min(860*$scale,$work.Height-16),0x14)|Out-Null}
+  if($title -eq 'GUnT_0x9 Desktop'){[GuntEnhanceUi]::SetWindowPos($h,[IntPtr]::Zero,$work.Left+8,$work.Top+8,[int][math]::Min($WidthDip*$scale,$work.Width-16),[int][math]::Min($HeightDip*$scale,$work.Height-16),0x14)|Out-Null}
   [GuntEnhanceUi]::SetForegroundWindow($h)|Out-Null;Start-Sleep -Seconds 2
   if($page -eq 'palette'){
    $query=$win.FindFirst([Windows.Automation.TreeScope]::Descendants,(New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::NameProperty,'GUNT 명령 검색')))
    ($query.GetCurrentPattern([Windows.Automation.ValuePattern]::Pattern)).SetValue('codex');Start-Sleep -Milliseconds 200
   }
+  [GuntEnhanceUi]::MouseAt($work.Right-8,$work.Bottom-8)
   $r=$win.Current.BoundingRectangle;if($r.X -lt -10000 -or $r.Width -lt 200){throw '최소화된 창은 캡처하지 않습니다.'}
   $bitmap=New-Object Drawing.Bitmap([int]$r.Width,[int]$r.Height);$graphics=[Drawing.Graphics]::FromImage($bitmap);$dc=$graphics.GetHdc()
   try{if(![ReadmeCaptureNative]::PrintWindow($h,$dc,2)){throw 'PrintWindow 실패'}}finally{$graphics.ReleaseHdc($dc);$graphics.Dispose()}
   $file=Join-Path $raw ($page+'.png');try{$bitmap.Save($file,[Drawing.Imaging.ImageFormat]::Png)}finally{$bitmap.Dispose()}
   $captures+=@{Page=$page;File=$file;Dpi=[ReadmeCaptureNative]::GetDpiForWindow($h);Width=$r.Width;Height=$r.Height}
+  if($ProjectEditor -and $page -eq 'developer-setup'){
+   $settings=$win.FindFirst([Windows.Automation.TreeScope]::Descendants,(New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::NameProperty,'프로젝트 개발 설정')))
+   ($settings.GetCurrentPattern([Windows.Automation.InvokePattern]::Pattern)).Invoke()
+   $dialog=$null;for($i=0;$i -lt 60 -and !$dialog;$i++){Start-Sleep -Milliseconds 60;$dialog=Get-EnhancementWindows|Where-Object {$_.Current.ProcessId -eq $process.Id -and $_.Current.Name -eq '프로젝트 개발 설정'}|Select-Object -First 1}
+   if(!$dialog){$dialog=$win.FindFirst([Windows.Automation.TreeScope]::Descendants,(New-Object Windows.Automation.PropertyCondition([Windows.Automation.AutomationElement]::NameProperty,'프로젝트 개발 설정')))}
+   if(!$dialog -or $dialog.Current.NativeWindowHandle -eq 0){throw '실제 설정 편집창 준비 실패'}
+   Start-Sleep -Milliseconds 600;$dr=$dialog.Current.BoundingRectangle;$dh=[IntPtr]$dialog.Current.NativeWindowHandle
+   $db=New-Object Drawing.Bitmap([int]$dr.Width,[int]$dr.Height);$dg=[Drawing.Graphics]::FromImage($db);$ddc=$dg.GetHdc()
+   try{if(![ReadmeCaptureNative]::PrintWindow($dh,$ddc,2)){throw '편집창 캡처 실패'}}finally{$dg.ReleaseHdc($ddc);$dg.Dispose()}
+   try{$db.Save((Join-Path $raw 'project-editor.png'),[Drawing.Imaging.ImageFormat]::Png)}finally{$db.Dispose()}
+   $captures+=@{Page='project-editor';File=(Join-Path $raw 'project-editor.png');Dpi=[ReadmeCaptureNative]::GetDpiForWindow($dh);Width=$dr.Width;Height=$dr.Height}
+   # No values were edited. Cancel keeps both demo configuration and user settings untouched.
+   ($dialog.GetCurrentPattern([Windows.Automation.WindowPattern]::Pattern)).Close();Start-Sleep -Milliseconds 200
+  }
   ($win.GetCurrentPattern([Windows.Automation.WindowPattern]::Pattern)).Close();if(!$process.WaitForExit(10000)){throw '자체 캡처 창 정상 종료 실패. 강제 종료하지 않았습니다.'};$process.Dispose();$process=$null
  }
  Write-Json @{Version=$Version;CapturedAt=[DateTimeOffset]::Now.ToString('o');ExecutableSha256=(Get-FileHash $Executable).Hash;Mode='실제 앱 / 별도 문서용 설정 / 예제 Git 저장소 / 프로세스 실행 및 배경 적용 안 함';Captures=$captures} (Join-Path $raw 'capture-manifest.json')
  Write-Output ('공개 검토 전 원본: '+$raw)
-}finally{if($process){if(!$process.HasExited){$process.CloseMainWindow()|Out-Null;$null=$process.WaitForExit(5000)};$process.Dispose()}}
+}finally{[GuntEnhanceUi]::MouseAt($originalCursor.X,$originalCursor.Y);if($process){if(!$process.HasExited){$process.CloseMainWindow()|Out-Null;$null=$process.WaitForExit(5000)};$process.Dispose()}}
