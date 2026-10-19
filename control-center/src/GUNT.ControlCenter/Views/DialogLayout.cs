@@ -64,7 +64,9 @@ namespace Gunt.ControlCenter.Views
             var window = UxTheme.Dialog(this, title, 620, 650);
             var layout = new DockPanel { Margin = new Thickness(16) };
             var actions = new WrapPanel { HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 12, 0, 0) };
-            DockPanel.SetDock(actions, Dock.Bottom); layout.Children.Add(actions);
+            var footer = new StackPanel();
+            DockPanel.SetDock(footer, Dock.Bottom); layout.Children.Add(footer);
+            footer.Children.Add(actions);
             window.Tag = actions;
             panel = new StackPanel();
             layout.Children.Add(new ScrollViewer { Content = panel, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,

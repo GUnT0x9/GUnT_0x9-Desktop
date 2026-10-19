@@ -10,9 +10,9 @@ namespace Gunt.ControlCenter.Views {
   Window EditorWindow(string title,out StackPanel panel){return CreateEditorWindow(title,out panel);}
   void SaveEditor(Window w,Panel panel,Action save,string label="저장"){
    bool saved=false;string initial=null;Func<string> snapshot=()=>vm.Service.Json.Serialize(EditorValues(panel).ToArray());
-   var error=new TextBlock{Foreground=Accent,TextWrapping=TextWrapping.Wrap,Margin=new Thickness(0,8,0,0)};panel.Children.Add(error);
-   var buttons=(WrapPanel)w.Tag;var button=new Button{Content=label,IsDefault=true};
-   button.Click+=delegate{try{save();saved=true;w.DialogResult=true;}catch(Exception e){error.Text=e.Message;}};buttons.Children.Add(button);buttons.Children.Add(new Button{Content="취소",IsCancel=true});
+   var error=new TextBlock{Foreground=Accent,TextWrapping=TextWrapping.Wrap,Margin=new Thickness(0,8,0,0),Visibility=Visibility.Collapsed};
+   var buttons=(WrapPanel)w.Tag;((StackPanel)buttons.Parent).Children.Insert(0,error);var button=new Button{Content=label,IsDefault=true};
+   button.Click+=delegate{try{save();saved=true;w.DialogResult=true;}catch(Exception e){error.Text=e.Message;error.Visibility=Visibility.Visible;}};buttons.Children.Add(button);buttons.Children.Add(new Button{Content="취소",IsCancel=true});
    w.Loaded+=delegate{initial=snapshot();};w.Closing+=delegate(object sender,System.ComponentModel.CancelEventArgs e){if(saved||initial==null||snapshot()==initial)return;int choice=UxTheme.Confirm(w,"미저장 편집","편집 내용을 저장할까요?","저장하고 닫기","버리고 닫기","계속 편집");if(choice==2)e.Cancel=true;else if(choice==0){e.Cancel=true;w.Dispatcher.BeginInvoke((Action)(()=>button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent))));}};
   }
   string BrowseFolder(){using(var d=new System.Windows.Forms.FolderBrowserDialog{ShowNewFolderButton=false})return d.ShowDialog()==System.Windows.Forms.DialogResult.OK?d.SelectedPath:null;}
