@@ -336,6 +336,24 @@
       "reviewStatus": "reviewed",
       "privacyReview": "최종 export를 열어 작은 글자·경로·제목·버튼·잘림을 확인. C:\\GUNT-DocDemo 예제 경로만 표시. 계정·홈·개인 프로젝트·장치 ID·알림·타사 배경 없음. 최근 실행과 WSL 미설정 상태를 꾸미지 않음.",
       "rights": "승인된 GUNT 브랜드와 자체 앱 UI. 설치 배경·타사 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.4/all-apps.png",
+      "version": "3.0.0-dev.4",
+      "capturedAt": "2026-10-20T09:28:04.5733888+09:00",
+      "sourceRevision": "048be04 + dev.4 foundation candidate",
+      "sourceExecutableSha256": "d543764395bcad0cf935680bc47cbdd9d1d791bd4d490b95028c5cf3ff2dbe0e",
+      "sourceImageSha256": "bfbe502c2902d9aa525b9fb2c02a57511da4b672fc247ad7a927b5778932b06f",
+      "dimensions": [
+        1600,
+        1004
+      ],
+      "sha256": "2142d28e6388bd80cbafe7cce0385b7aa8949c125e5f8bc817b0d950d1195e73",
+      "source": "실제 Windows WPF 앱, 별도 문서용 설정, 실제 등록 앱의 공개 부분 목록과 예제 프로젝트, 940×590 DIP / 175%.",
+      "processing": "별도 24bit RGB PNG, 최대 폭 1600px. 가림 필요 없음. UI 상태·잘림을 보정하지 않음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 직접 검토. 공개 앱명·예제 프로젝트만 표시. 개인 경로·알림·타사 배경·계정·자격 증명 없음.",
+      "rights": "자체 앱 UI와 승인 GUNT 브랜드. 타사 앱 아이콘은 앱 식별을 위한 실제 UI 표시이며 별도 아이콘 팩으로 배포하지 않음."
     }
   ]
 }

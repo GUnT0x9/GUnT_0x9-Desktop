@@ -54,3 +54,6 @@
 /config/development-sessions.json
 /config/commands.json
 /config/smart-automation.json
+
+# Launchpad inventory, private shortcuts and per-user organization
+/config/launchpad.json

@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": 1,
+  "Shortcut": "Ctrl+Alt+L",
+  "HotkeyEnabled": true,
+  "Monitor": "pointer",
+  "DefaultCategory": "all",
+  "SelectedCategory": "all",
+  "IconTheme": "original",
+  "CloseAfterLaunch": true,
+  "Animations": true,
+  "Transparency": false,
+  "IconSize": 64,
+  "Columns": 7,
+  "Categories": [
+    {
+      "Id": "all",
+      "Name": "전체 앱",
+      "Builtin": true,
+      "Pose": "default"
+    },
+    {
+      "Id": "favorites",
+      "Name": "즐겨찾기",
+      "Builtin": true,
+      "Pose": "default"
+    },
+    {
+      "Id": "development",
+      "Name": "개발",
+      "Builtin": true,
+      "Pose": "coding"
+    },
+    {
+      "Id": "utilities",
+      "Name": "유틸리티",
+      "Builtin": true,
+      "Pose": "utility"
+    },
+    {
+      "Id": "internet",
+      "Name": "인터넷",
+      "Builtin": true,
+      "Pose": "network"
+    },
+    {
+      "Id": "games",
+      "Name": "게임",
+      "Builtin": true,
+      "Pose": "gaming"
+    },
+    {
+      "Id": "system",
+      "Name": "시스템",
+      "Builtin": true,
+      "Pose": "settings"
+    }
+  ],
+  "Folders": [],
+  "Shortcuts": [],
+  "Items": {}
+}

@@ -12,7 +12,7 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 
 ## 현재 버전
 
-- **개발 프리뷰: 3.0.0-dev.3 — UI Polish & Optimization**, `feat/v30-ui-foundation`.
+- **개발 프리뷰: 3.0.0-dev.4 — Launchpad Foundation**, `feat/v30-launchpad`.
 - **main 공개 기준: v2.5 소스**. v2.6 기능 개발 이력은 `feat/v26-developer-workspace`에 보존합니다.
 - 새 PC용 설치 패키지와 정식 3.0 배포는 준비되지 않았습니다. 이 저장소는 소스·설정 예시·검증 기록을 제공합니다.
 
@@ -31,6 +31,12 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 외부 CLI를 시작했다는 결과는 로그인·대화·개발 서버 준비 완료를 뜻하지 않습니다. [개발 작업공간 사용법](docs/v26-developer-workspace.md)과 [세션 안내](docs/v26-development-sessions.md)를 참고하세요.
 
 ## 최신 업데이트
+
+**3.0.0-dev.4 · Launchpad Foundation · 개발 프리뷰**
+
+설치 앱 검색·그리드 실행·카테고리·즐겨찾기·폴더·사용자 바로가기·드래그 정렬을 추가했습니다. 전역 키는 기존 상단 바가 등록하며 기본값은 `Ctrl+Alt+L`입니다. 사용자 목록은 비공개 로컬 설정에 보존합니다. [구현·검증 상태](docs/v30-launchpad.md).
+
+이하 dev.3 비교는 당시 기록입니다.
 
 **3.0.0-dev.3 · 2026-10-20 · UI Polish & Optimization · 개발 프리뷰**
 
@@ -84,6 +90,10 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 **2026-10-20.** 작은 창의 주요 동작과 보조 편집창을 정리하고 세션 행·갤러리 템플릿을 재사용했습니다. 실제 Windows 빌드·175% 화면·WPF 상호작용 42개·OS 키 입력/상단 바 통합 15개를 확인했습니다. 정식 3.0 또는 모든 환경의 시각 완성을 뜻하지 않습니다.
 
 [실제 화면·전후 비교](docs/visual-history.md#v300-dev3--ui-polish--optimization) · [결과 보고](docs/v30-dev3-report.md) · [전후 측정](docs/v30-performance.md)
+
+### v3.0.0-dev.4 — Launchpad Foundation
+
+**2026-10-20.** 앱 그리드·키보드·설치 앱 발견·즐겨찾기·카테고리·폴더·정렬과 로컬 설정 기반을 구현했습니다. [실제 초기 화면과 검증 범위](docs/v30-launchpad.md).
 
 ## 빌드와 실행
 
