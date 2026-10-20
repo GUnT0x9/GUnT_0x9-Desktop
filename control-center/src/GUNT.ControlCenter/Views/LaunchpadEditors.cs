@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows;
@@ -265,8 +265,8 @@ namespace Gunt.ControlCenter.Views
             };
             var pose = new ComboBox
             {
-                ItemsSource = LaunchpadIcons.Poses,
-                SelectedItem = item.Pose ?? "default"
+                ItemsSource = new[] { "원래 앱 아이콘" }.Concat(LaunchpadIcons.Poses),
+                SelectedItem = item.Pose ?? "원래 앱 아이콘"
             };
             Field(fields, "표시 이름", label);
             Field(fields, "검색 별칭", aliases);
@@ -281,7 +281,7 @@ namespace Gunt.ControlCenter.Views
                     var updated = DesktopService.Item(c, app.Id);
                     updated.Label = label.Text.Trim();
                     updated.Aliases = aliases.Text;
-                    updated.Pose = Convert.ToString(pose.SelectedItem);
+                    updated.Pose = Convert.ToString(pose.SelectedItem) == "원래 앱 아이콘" ? null : Convert.ToString(pose.SelectedItem);
                 });
                 RefreshGrid();
             });

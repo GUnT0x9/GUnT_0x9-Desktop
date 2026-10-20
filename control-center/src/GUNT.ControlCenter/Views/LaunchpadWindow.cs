@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -544,7 +544,9 @@ namespace Gunt.ControlCenter.Views
                 b.Content = stack;
                 AutomationProperties.SetName(b, (item.Label ?? app.Name) + " · " + app.Context);
                 AutomationProperties.SetAutomationId(b, app.Id);
-                string pose = item.Pose ?? (app.Kind == "group" ? "folder" : config.Categories.Where(x => x.Id == (item.Category ?? app.Category)).Select(x => x.Pose).FirstOrDefault());
+                string pose = item.Pose;
+                if (pose == null && app.Kind == "group")
+                    pose = config.Folders.Where(x => x.Id == app.Id).Select(x => x.Pose).FirstOrDefault();
                 var iconTask = icons.Get(app, pose, config.IconTheme == "mascot", iconRequests.Token);
                 if (iconTask.Status == System.Threading.Tasks.TaskStatus.RanToCompletion)
                     image.Source = iconTask.Result;
