@@ -354,6 +354,24 @@
       "reviewStatus": "reviewed",
       "privacyReview": "원본과 최종 export 직접 검토. 공개 앱명·예제 프로젝트만 표시. 개인 경로·알림·타사 배경·계정·자격 증명 없음.",
       "rights": "자체 앱 UI와 승인 GUNT 브랜드. 타사 앱 아이콘은 앱 식별을 위한 실제 UI 표시이며 별도 아이콘 팩으로 배포하지 않음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.5/mascot-theme.png",
+      "version": "3.0.0-dev.5",
+      "capturedAt": "2026-10-20T09:34:42.2350845+09:00",
+      "sourceRevision": "82b7c5e + mascot candidate",
+      "sourceExecutableSha256": "f7370f191b23443174069986b86194d9828b0a6f44f9e22042cafea2675d9430",
+      "sourceImageSha256": "eaca75813e0016869d1753e289a5d276df81a6c5d17792d5e3d140e806e13fa7",
+      "dimensions": [
+        1600,
+        1004
+      ],
+      "sha256": "7e484d4f3db983cff3366f9d2b472cca9ac88f024a0b9552d7fac75901bcb259",
+      "source": "실제 Windows WPF / 별도 공개용 앱 목록·예제 프로젝트 / 수동 포즈 지정 / 175%.",
+      "processing": "24bit RGB PNG 재인코딩, 폭 1600px, 메타데이터 제거. 가림 필요 없음.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본·최종 export 직접 검토. 공개 앱명·예제명만 노출. 개인 경로·알림·계정·타사 배경 없음.",
+      "rights": "승인 캐릭터를 참조한 자체 신규 그림과 GUNT UI. 외부 배경 미디어 없음."
     }
   ]
 }

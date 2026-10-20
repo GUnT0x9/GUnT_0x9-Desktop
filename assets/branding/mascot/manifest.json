@@ -1,0 +1,338 @@
+{
+  "schemaVersion": 1,
+  "source": "승인 원본 기반 개별 imagegen 변형. coding은 기존 승인 원본. UI 스크린샷과 별개의 브랜드 그림 자산.",
+  "processing": "실제 알파의 표시 영역 crop, 정사각 캔버스의 84% 안에 비율 유지, 크기별 Lanczos. PNG 메타데이터 제거.",
+  "poses": [
+    {
+      "id": "default",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "93c777aa4090b7f48433fd0960cc33bbae4d49a62931ba5da03bc32eb6fae197",
+      "masterSha256": "692512d80d8213c7d5eaf0be7a6bef1141123baf8b08dc04fff7d61d33bfcf8f",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/default/32.png",
+          "size": 32,
+          "sha256": "72fae843a6639ad0b7d2e163f959c104b5e9ca8f6e4a627c6eb1b6a79197f4d0"
+        },
+        {
+          "path": "assets/branding/mascot/default/48.png",
+          "size": 48,
+          "sha256": "cbb504f3ca7a7bd4887fceb5e1859ec93808ed0370f91f869e6ae8f51fa9be55"
+        },
+        {
+          "path": "assets/branding/mascot/default/64.png",
+          "size": 64,
+          "sha256": "c58f5968f9a0bdb3671936b7ff6b5c38f496d9dbfb4316e86d7725363faacb90"
+        },
+        {
+          "path": "assets/branding/mascot/default/128.png",
+          "size": 128,
+          "sha256": "b9e158169fec3588ed61816a58016c0b5a5ee4ee11b748148722e520c9f0d1a6"
+        },
+        {
+          "path": "assets/branding/mascot/default/256.png",
+          "size": 256,
+          "sha256": "6cb098bb5b03a6cf3a73434a6e2de68f6d362d9e6b4105c9d68c6e6ba6a65bc4"
+        }
+      ]
+    },
+    {
+      "id": "coding",
+      "origin": "approved-original",
+      "inputSha256": "6d25c8741eec610180b92352f0b1371b43df2aefe85c82d50521024fe8f66360",
+      "masterSha256": "756e533607087fb72ff3eafd82104116b81d521db15dfc4f67d2a92066b6af07",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/coding/32.png",
+          "size": 32,
+          "sha256": "2d3881bac3601da6fb60b346eeb698920f7b3f8bbac56dfc5708d0cded64f977"
+        },
+        {
+          "path": "assets/branding/mascot/coding/48.png",
+          "size": 48,
+          "sha256": "16f724b0c18bab52cf139102800bab6a6f1ab1d8b3584f96b66919a88aa61657"
+        },
+        {
+          "path": "assets/branding/mascot/coding/64.png",
+          "size": 64,
+          "sha256": "725e57dcb9d6af947d7fb92ec1888190422306ba631e7cd45c8d10314eab3de0"
+        },
+        {
+          "path": "assets/branding/mascot/coding/128.png",
+          "size": 128,
+          "sha256": "5902e2d7d0df4a9f801ceec81af316ca6c84fa6f75c7d0ee419f5e9549c2f5d5"
+        },
+        {
+          "path": "assets/branding/mascot/coding/256.png",
+          "size": 256,
+          "sha256": "85ec77eeeb13ce4625b01b19c53e88aaac3f685562bd867eacdb87e3611dc9de"
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "13d7951b4b8eaa5f4267704f316363e364e8e022434f3796ca2d78e53a07f494",
+      "masterSha256": "3df6fcb21a59ac72a8132fd35cd06ac6c29dd60406ceceb207e55899fce147a5",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/ai/32.png",
+          "size": 32,
+          "sha256": "9ab79a1f22ea90f4d2aacbc98a489a039c7b782295bbc63ba4b507551c57486e"
+        },
+        {
+          "path": "assets/branding/mascot/ai/48.png",
+          "size": 48,
+          "sha256": "490b3194ed0c0706ccaa897641622021982058bda2e36c1bd19269728674bff3"
+        },
+        {
+          "path": "assets/branding/mascot/ai/64.png",
+          "size": 64,
+          "sha256": "0e4dbbd40b93b9e9cd8f8839fb7e7cfbb89521a98332e52c52630bd4b953b21d"
+        },
+        {
+          "path": "assets/branding/mascot/ai/128.png",
+          "size": 128,
+          "sha256": "bbe7df2c44511fc5cf8cc8d5a8368710201b01d689ce3010d29d12395806387e"
+        },
+        {
+          "path": "assets/branding/mascot/ai/256.png",
+          "size": 256,
+          "sha256": "0ae884f101e6e126a0276f144d0b21073eedad05127af54320f7856451007bb4"
+        }
+      ]
+    },
+    {
+      "id": "search",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "8dfdd0365c54bcbaf237dd50bf376b8c0c34bc1ee270dffdbed41e15f8331687",
+      "masterSha256": "be9fa1ce0b6d17a50580a3986032d68dc2b49da90b191952c9dc77bca76d6d70",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/search/32.png",
+          "size": 32,
+          "sha256": "9404511ffd20f361f94b00149175824656cbbe1050aef22c96cced9312997e70"
+        },
+        {
+          "path": "assets/branding/mascot/search/48.png",
+          "size": 48,
+          "sha256": "003ae2c49a1ded70fcea1970b8c398d98ea3b1beb13d8322e88840b5a96d2043"
+        },
+        {
+          "path": "assets/branding/mascot/search/64.png",
+          "size": 64,
+          "sha256": "fce19b7c6a9281108a73bbb1f1b9a77cf686f6b9f5616e5fe6b4e50755ce7e73"
+        },
+        {
+          "path": "assets/branding/mascot/search/128.png",
+          "size": 128,
+          "sha256": "da7bff8207c19dd77e2fa9d8301d67c3cdab4063cca221c66e0c5685c3ebeb7b"
+        },
+        {
+          "path": "assets/branding/mascot/search/256.png",
+          "size": 256,
+          "sha256": "39c76aaeb43cb56a0edcd67a702c6bdfe31de5caa1210668cd94e39d83c14e3f"
+        }
+      ]
+    },
+    {
+      "id": "utility",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "a7975a4dbbde1a91269a681d4431fd67a2126872e8d2916070e1f2c3a2fd4e50",
+      "masterSha256": "5254d945b0b7bf199239e703bd7563a2e2808eab7f4711375880d901bf9c7063",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/utility/32.png",
+          "size": 32,
+          "sha256": "43ff1f26184b0b3f95272fadc18aad9e47021a410daedb4062796876fd4d0a5e"
+        },
+        {
+          "path": "assets/branding/mascot/utility/48.png",
+          "size": 48,
+          "sha256": "f70d2b89182f51cd50bb2b7c75d2b76c90506d2cbf5a47cdb31bf12ec7cc2fa4"
+        },
+        {
+          "path": "assets/branding/mascot/utility/64.png",
+          "size": 64,
+          "sha256": "d1af17d6bf70a10a706e7071567e84a82addb06c30aaafa1989af679957d9e99"
+        },
+        {
+          "path": "assets/branding/mascot/utility/128.png",
+          "size": 128,
+          "sha256": "a5b70f55cd7914fe86f6c7ae8d3cf70d209c8b63e63d2d289ee39f8bc792f44d"
+        },
+        {
+          "path": "assets/branding/mascot/utility/256.png",
+          "size": 256,
+          "sha256": "1d640ab4fd1f835377b57671b67e627ff3f8758e5772457c7afc1003463d6bb6"
+        }
+      ]
+    },
+    {
+      "id": "gaming",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "0d82f927da8a75d8bd72b82dc0da14f4ed27de8c06a57e532919c35cc2da53b2",
+      "masterSha256": "1e4dac7f8db957d99780d28f9b376a1617c1257bbd38dd84e4ea4ad3c8361610",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/gaming/32.png",
+          "size": 32,
+          "sha256": "c1c5ee604e230d9f6f24fac83941062385cb2f3098b44b38f0f3ec49141fc547"
+        },
+        {
+          "path": "assets/branding/mascot/gaming/48.png",
+          "size": 48,
+          "sha256": "9f5fadb4d59aac39cc37affd04b65275261fe565bbe261f349cec2fd91966c8a"
+        },
+        {
+          "path": "assets/branding/mascot/gaming/64.png",
+          "size": 64,
+          "sha256": "1fa44a5c6c9cc26b8ec1f1c286c49c3aa009e4666d994d47ac9321b2d9fac7ad"
+        },
+        {
+          "path": "assets/branding/mascot/gaming/128.png",
+          "size": 128,
+          "sha256": "bb5b3f057e3be94cb25d2b769add4f406019325da18589c9345d1da1ba94e35b"
+        },
+        {
+          "path": "assets/branding/mascot/gaming/256.png",
+          "size": 256,
+          "sha256": "bb6071179110c65ee04fe69ff861c057a495f3a4ac6c847dd386df37d8ebd4fe"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "9178737013ca706b90f415d071432fdeb5ff161f8afd222c2886d383d0fe9a5f",
+      "masterSha256": "317a85c14d8d352243834ebb7f7645fe0ddff6c0b393857ce13e59ce5fad95bf",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/settings/32.png",
+          "size": 32,
+          "sha256": "2f55e454b3d15b3a9e50d95e8200832b23013f929b3e4fe656a90608903ccffe"
+        },
+        {
+          "path": "assets/branding/mascot/settings/48.png",
+          "size": 48,
+          "sha256": "51360ba1dfd4975d26e9ff137b88c554d90c85b45e01896a6ee516f0dc3da6d8"
+        },
+        {
+          "path": "assets/branding/mascot/settings/64.png",
+          "size": 64,
+          "sha256": "5d8986e6ab52c1ec4bf7e8aa27ba14d37428566a43bf746bda44bb3d3d0bf59f"
+        },
+        {
+          "path": "assets/branding/mascot/settings/128.png",
+          "size": 128,
+          "sha256": "0b0922903fadf417e12f23a44d33f61902a973bf8a68a7dceca01b6cf69f3115"
+        },
+        {
+          "path": "assets/branding/mascot/settings/256.png",
+          "size": 256,
+          "sha256": "4aa729543db015543517d43069323a7168fa094d76d392f7f47bb17e6f0e5a0f"
+        }
+      ]
+    },
+    {
+      "id": "sleep",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "d3f2880a5fa6ea21ee78f65e248686d5b4c5aa3f479a49b04eedf01e91b853ce",
+      "masterSha256": "e413fd94cd1cf843c71472d554293d74f4d243248d340c6edb2d65f8ebf8578c",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/sleep/32.png",
+          "size": 32,
+          "sha256": "296d9e61836abe5c498b03a2591a856e1639f5e7e60e84b65ee9993bef47c7e1"
+        },
+        {
+          "path": "assets/branding/mascot/sleep/48.png",
+          "size": 48,
+          "sha256": "df1428efebd5f3db9ae30377043172bc2debf75843ecc67b342d8b1f73dd89f4"
+        },
+        {
+          "path": "assets/branding/mascot/sleep/64.png",
+          "size": 64,
+          "sha256": "8e4f4fa50ff0491f5e2741478c6bb3690430ebb0360629a11d46d4d37f133258"
+        },
+        {
+          "path": "assets/branding/mascot/sleep/128.png",
+          "size": 128,
+          "sha256": "f0507964b943b2eff5b643a8cafa4e337f90b7cefe334f9e1d1cd71f316f3fae"
+        },
+        {
+          "path": "assets/branding/mascot/sleep/256.png",
+          "size": 256,
+          "sha256": "af3f6dd8b656b34f3342732b84d73dbbae602898f53fe24e0c57aaef16ad6a17"
+        }
+      ]
+    },
+    {
+      "id": "network",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "8bda6485285a5a3927f8977997ef463ad2b1796dbaa28bfb1c0de04c19ec2854",
+      "masterSha256": "88a8c238ec3d13edc763041dc972d7648feee868ade5b329fbc08a9e537cb1f1",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/network/32.png",
+          "size": 32,
+          "sha256": "2ebcc125eac7b1d01d0e7cc6f3a5cfc1aa5aafe92ec4483b36547b68da9b75a9"
+        },
+        {
+          "path": "assets/branding/mascot/network/48.png",
+          "size": 48,
+          "sha256": "a37d8d7806ff0339ab529bb807884b2fc15b9bd9d210ffae76495dd11ccdff21"
+        },
+        {
+          "path": "assets/branding/mascot/network/64.png",
+          "size": 64,
+          "sha256": "8b0694ef8911ad2793378a7de701f1eba31de831c235542e240081f5a3664fc5"
+        },
+        {
+          "path": "assets/branding/mascot/network/128.png",
+          "size": 128,
+          "sha256": "12e6bacee714a7380db995797522c498a8f7543699b181eb59e81e77568348ae"
+        },
+        {
+          "path": "assets/branding/mascot/network/256.png",
+          "size": 256,
+          "sha256": "8a26ed1c4401b5df509e5e8669babe9b8289cee0fb1567ce2a8899fdab0c2df0"
+        }
+      ]
+    },
+    {
+      "id": "folder",
+      "origin": "imagegen-reference-variation",
+      "inputSha256": "0be80bdffe3fb2eb4c73ead14c1ba9fced380926d462a13568dca76c9d8fe833",
+      "masterSha256": "a5b583a0cf3102376731d8de5e41284bcb728df1c545f05860c03bb46e2642ac",
+      "exports": [
+        {
+          "path": "assets/branding/mascot/folder/32.png",
+          "size": 32,
+          "sha256": "011b56ee1a0711108e7a9eb5404101358a3b3f0fb3d9e9d60c5c6d3db755e632"
+        },
+        {
+          "path": "assets/branding/mascot/folder/48.png",
+          "size": 48,
+          "sha256": "33ea6ddd0480fdc9731a351af3d881d344a80d22942a0cca9eb82374b1036510"
+        },
+        {
+          "path": "assets/branding/mascot/folder/64.png",
+          "size": 64,
+          "sha256": "bddc0217b4a81d2b7f9f99f6efbc76e2a7450c7cb7faeecf8a5dd606f75777b6"
+        },
+        {
+          "path": "assets/branding/mascot/folder/128.png",
+          "size": 128,
+          "sha256": "01b7363db61dd5826923e3e51c32b949404bcc6f1c7df71630e2496e8743d87e"
+        },
+        {
+          "path": "assets/branding/mascot/folder/256.png",
+          "size": 256,
+          "sha256": "b891beed072fc3e2f8572feef64cd4a94c969801a7b2a8fa6d903c8a016be372"
+        }
+      ]
+    }
+  ],
+  "review": "10종 마스터와 64px 검수표를 직접 비교. 원본 캐릭터 특징·서로 다른 소품/자세·실제 알파·1024px 및 5개 내보내기 크기·해시 중복 부재 확인. 새 포즈의 별도 사용자 승인과 구분."
+}

@@ -12,7 +12,7 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 
 ## 현재 버전
 
-- **개발 프리뷰: 3.0.0-dev.4 — Launchpad Foundation**, `feat/v30-launchpad`.
+- **개발 프리뷰: 3.0.0-dev.5 — Mascot Experience**, `feat/v30-launchpad`.
 - **main 공개 기준: v2.5 소스**. v2.6 기능 개발 이력은 `feat/v26-developer-workspace`에 보존합니다.
 - 새 PC용 설치 패키지와 정식 3.0 배포는 준비되지 않았습니다. 이 저장소는 소스·설정 예시·검증 기록을 제공합니다.
 
@@ -31,6 +31,11 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 외부 CLI를 시작했다는 결과는 로그인·대화·개발 서버 준비 완료를 뜻하지 않습니다. [개발 작업공간 사용법](docs/v26-developer-workspace.md)과 [세션 안내](docs/v26-development-sessions.md)를 참고하세요.
 
 ## 최신 업데이트
+
+**3.0.0-dev.5 · Mascot Experience · 개발 프리뷰**
+
+선택형 마스코트 아이콘 테마와 앱·카테고리별 포즈 지정, 10종 그림 자산, Windows 동작 줄이기를 따르는 짧은 전환을 추가했습니다. 원래 앱 아이콘이 기본이며 승인 원본은 보존합니다. [자산 출처·포즈·한계](assets/branding/mascot/README.md).
+
 
 **3.0.0-dev.4 · Launchpad Foundation · 개발 프리뷰**
 
@@ -94,6 +99,10 @@ Windows 데스크톱 꾸미기와 개발 작업공간을 연결하는 네이티�
 ### v3.0.0-dev.4 — Launchpad Foundation
 
 **2026-10-20.** 앱 그리드·키보드·설치 앱 발견·즐겨찾기·카테고리·폴더·정렬과 로컬 설정 기반을 구현했습니다. [실제 초기 화면과 검증 범위](docs/v30-launchpad.md).
+
+### v3.0.0-dev.5 — Mascot Experience
+
+**2026-10-20.** 기존 승인 코딩 포즈와 새 파생 포즈 9종, 크기별 투명 아이콘·선택형 테마·누락 시 원래 아이콘 복귀를 통합했습니다. [자산 검수표](assets/branding/mascot/README.md) · [구현 상태](docs/v30-launchpad.md).
 
 ## 빌드와 실행
 

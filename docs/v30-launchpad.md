@@ -24,3 +24,13 @@ Windows Framework C# 5 후보 빌드와 `verify-launchpad.ps1`의 38개 검사�
 ![dev.4 실제 Launchpad 기반 화면 — 공개 앱과 예제 프로젝트](images/releases/v3.0/dev.4/all-apps.png)
 
 이 첫 화면의 반복 GUNT 아이콘·일부 잘린 보조 문구는 후속 다듬기 대상으로 남겼다. 실제 캡처의 결함을 이미지 편집으로 숨기지 않았다.
+
+## dev.5 — Mascot Experience
+
+포즈 10종(승인 코딩 원본 1종 + 개별 참조 생성 9종)을 실제로 제작·직접 검수했다. [자산과 생성 프롬프트](../assets/branding/mascot/README.md)에서 출처·투명 내보내기·중복 검사·크기별 결과를 구분한다. 원래 앱 아이콘이 기본이며 앱과 카테고리별 포즈를 선택할 수 있다. 없는 포즈 파일은 원래 아이콘을 유지한다.
+
+WPF 90ms hover opacity·110ms 재열기 opacity만 사용하며 Windows ClientAreaAnimation과 사용자 설정을 따른다. 숨김 시 animation clock을 해제한다. 반복 프레임 루프·눈 깜빡임 프레임·하이브리드 배지는 구현하지 않았다.
+
+Windows 후보 빌드·50개 검사를 통과했다. 10종 파일 존재와 실제 다른 해시, 사용자가 애니메이션을 끈 상태와 Windows 동작 줄이기 연동, 공통 앱 실행·정렬·저장 회귀를 포함한다. UI 화면과 그림 검수표는 서로 다른 증거다.
+
+![dev.5 실제 마스코트 테마 — 예제 항목에 코딩·AI·폴더 포즈 지정](images/releases/v3.0/dev.5/mascot-theme.png)
