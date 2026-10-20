@@ -1,6 +1,6 @@
 # 3.0 UI 구현 기록
 
-현재 프리뷰: **3.0.0-dev.3**. [이번 결과](v30-dev3-report.md) · [전후 화면](visual-history.md#v300-dev3--ui-polish--optimization). 아래 dev.2 기록은 당시 결과로 보존한다.
+현재 프리뷰: **3.0.0-dev.6**, `feat/v30-launchpad`. [Launchpad와 영역 분리 결과](v30-launchpad-report.md) · [실제 화면](visual-history.md#v300-dev4--dev6--gunt-launchpad). 아래 dev.2/dev.3 기록은 당시 결과로 보존한다.
 
 ## dev.2 — 시각 완성 및 Windows 검증
 
@@ -106,3 +106,11 @@ dev.2 검토에서 남긴 최소 창 동작·중복 센서 상태·보조창 표
 확인된 문제는 반복 표기·빈 목록 공간·스크롤·동작 위치였다. 기존 화면에 없던 글로우/그라디언트를 제거했다고 주장하지 않는다. 로고·Midnight Purple·선택 테두리·기존 실행 서비스를 보존했다.
 
 실제 화면 10개와 센서·프로필·디스플레이·Windhawk·정보 페이지를 추가 검토했다. Rainmeter는 소스 글꼴/정렬을 기존 배포 표현과 맞췄고, 숨긴 미터 좌표를 보존한 적용 후 위치·크기·측정 파일 해시를 확인했다. 수치·범위·남은 결함은 [dev.3 보고](v30-dev3-report.md)와 [성능](v30-performance.md)에 기록한다.
+
+## dev.4–dev.6 — Launchpad와 앱 영역 분리
+
+이번 확장 요청은 기존 UI 유지보수를 넘어 Launchpad를 추가한다. WPF·Framework4.8·C#5와 DesktopService/CommandRegistry/프로젝트/세션 서비스는 유지한다. 세 프로세스로 분리하지 않고 사용자 목적에 따라 Settings/Launchpad/Workspace로 탐색을 구분했다.
+
+초기 Launchpad의 반복 관리 버튼·경로와 불균일한 아이콘/문맥 높이를 줄였다. 관리 동작은 메뉴, 폴더는 뒤로·경로, 그리드는 페이지 단위로 표시한다. 원래 앱 아이콘이 기본이다. 카테고리 포즈와 앱별 포즈를 분리해 미지정 앱을 같은 마스코트로 덮지 않는다. 새 브랜치의 서비스·뷰 파일은 C#5 토큰을 유지해 정리했으며 별도 UI 추상화 프레임워크는 도입하지 않았다.
+
+실제 Windows WPF 63개·데스크톱 입력 26개·키 재등록3개와 기존 WPF 회귀42개를 확인했다. dev.6 전용 캡처10개·원본/내보내기 검토와 두 화면150/175% 검증을 수행했다. [전체 근거·수치·제한](v30-launchpad-report.md). 기존 Rainmeter 측정·Lively 선택·Dock 사용자 파일·Explorer 제한은 보존했다.

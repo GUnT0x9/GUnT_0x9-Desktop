@@ -372,6 +372,186 @@
       "reviewStatus": "reviewed",
       "privacyReview": "원본·최종 export 직접 검토. 공개 앱명·예제명만 노출. 개인 경로·알림·계정·타사 배경 없음.",
       "rights": "승인 캐릭터를 참조한 자체 신규 그림과 GUNT UI. 외부 배경 미디어 없음."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/all-apps.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "94d9dd89add2dc5d1ae5fe5c0152b1d43fed491f6d098b59cf3e0835bb1d99df",
+      "dimensions": [
+        1600,
+        1055
+      ],
+      "sha256": "90871f77e613d386dee9791708575e2b60dba6bc5b51169cc8360ab3f525ccd1",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/customization.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "b5037d9ffe8ce18a45e21266d31462a3ad65cd9fd7cf8fa94c25bae563e9d108",
+      "dimensions": [
+        980,
+        1057
+      ],
+      "sha256": "8b3548bbdb7e97b0164306dc1c9b7356aec77a85779ec743c0d645c688c6ac23",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/development.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "6e5687cef2e10481aaf154a8b603ddaca88789a53ec3740753f15bbd38d45fd1",
+      "dimensions": [
+        1600,
+        1055
+      ],
+      "sha256": "b6faf8d028ba851753db264c184e40bbc6dcd9b9705894dcb82287c75c868921",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/favorites.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "342b58bd582c5080ca0dd90aa3706e51f12ca68552826ff115b226c6f585f62f",
+      "dimensions": [
+        1600,
+        1055
+      ],
+      "sha256": "2c7d8fc21ad6d468da0ced672dc0bd20fbbad5a88076008399b247489c0dbc0e",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/integrated-windows.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "2eb47caefc1c7e9ee472045917b73ff22e8022336a9c1566accb76b3fe0203ed",
+      "dimensions": [
+        1600,
+        1047
+      ],
+      "sha256": "f1d4ae75423e4506205c5f85dcf9c9af9b8322113d2e3169dfbe7c9b3b436382",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/mascot-theme.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "3926b52882c4985bf2834e4b49a81a840d6b8187fa69bc04ce1b1b12f5c9a88b",
+      "dimensions": [
+        1600,
+        1055
+      ],
+      "sha256": "26a4f1fda474fc5cfe5520ba57f25f89869bd9e98f31a0be195dccc4aa896fb0",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/search.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "633158d008120497dbba2617f0e3f8ab82f9d595537594444b987047dde40087",
+      "dimensions": [
+        1600,
+        1055
+      ],
+      "sha256": "30decbc5dd9c78cf91418b9790dca16fa1e2ffcda3847d58a114a3aef3addea7",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/settings.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "4c06f0fabfba1cb27b892092153a99adebc01c2a7f377fefa03ce81e847d47c5",
+      "dimensions": [
+        1600,
+        1085
+      ],
+      "sha256": "57ac51ca0c07b52831840cb83d7be08b883f370d5f5648ec331f433312241580",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/utilities-folder.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "2c5e93b49c522472214bc63e71529d77b037f0ae54c22bcf4cfc55b2d79143fb",
+      "dimensions": [
+        1600,
+        1055
+      ],
+      "sha256": "2fde3becfeee6a6dce3971b7b72b301f9de20666a84e1aba0dc0c68358c9c25e",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
+    },
+    {
+      "path": "docs/images/releases/v3.0/dev.6/workspace.png",
+      "version": "3.0.0-dev.6",
+      "capturedAt": "2026-10-20T14:26:24.1357672+09:00",
+      "sourceRevision": "ce77dcc",
+      "sourceExecutableSha256": "962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58",
+      "sourceImageSha256": "a783714676b85a6bf2d4205377f4ba47b0ef8a845788104d1234ffdba84a6f23",
+      "dimensions": [
+        1600,
+        1085
+      ],
+      "sha256": "5663ef0e878b15f9088027900e5ffc4664fe974507e57adf4d66280888a6c72c",
+      "source": "실제 Windows WPF/.NET Framework 4.8. 별도 공개용 앱 부분 목록·실제 예제 폴더. 175% DPI168. 통합 장면은 Workspace 클라이언트 영역 안의 실제 두 창을 화면 캡처.",
+      "processing": "검토한 원본을 별도 24bit RGB PNG로 재인코딩, 최대 폭1600px. 불투명 가림 불필요. 원본 메타데이터와 알파 미전달.",
+      "reviewStatus": "reviewed",
+      "privacyReview": "원본과 최종 export 10개를 각각 열어 검토. 개인 계정/경로/등록 앱 목록/키/알림/장치 ID/타사 배경 없음. Lively 식별자가 나온 초기 설정 개요와 창 밖 픽셀이 나온 초기 통합 장면은 제외하고 재캡처.",
+      "rights": "자체 앱 UI·기존 GUNT 브랜드·프로젝트용 신규 마스코트 파생 자산. Windows/공개 앱 아이콘은 실제 인터페이스 설명 범위. 설치된 배경 미디어 미포함."
     }
   ]
 }

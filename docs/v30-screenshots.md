@@ -1,6 +1,6 @@
 # 3.0 실제 화면 검증 기록
 
-현재 검증은 아래 [dev.3 추가 기록](#dev3--2026-10-20)을 참조한다. dev.2의 날짜·개수·환경은 당시 기록으로 보존했다.
+현재 검증은 [Launchpad dev.6](#launchpad-dev6--2026-10-20)을 참조한다. 아래 dev.2/dev.3의 날짜·개수·환경은 당시 기록으로 보존했다.
 
 ## 공개 README용 화면
 
@@ -93,3 +93,30 @@ WSL2에서 `/init`으로 Windows 네이티브 빌드·GUI를 실행했다. 현�
 `78ddf11` 이후의 Dispatcher 수정 빌드에서 실제 센서 새로고침을 읽기 전용으로 요청하고 “센서 목록을 새로 요청했습니다.” 표시를 추가 확인했다. `logs/v30-dev3-sensor-request.json`, `screenshots/enhancement-v30-dev3-sensors-final-request.png`는 로컬 증거이며 공개하지 않는다. 요청과 완료를 혼동하지 않도록 하는 문구 보정이다.
 
 센서 첫 화면 직접 실행에서 UI 컨텍스트 부재를 재현해 완료 처리를 명시적 Dispatcher로 보정했다. 이후 `scripts/verify-v30-sensor-startup.ps1 -Label dev3-final`에서 별도 이동 IPC 없이 직접 시작·WPF 컨트롤 준비·읽기 요청/피드백을 통과했다. 최신 증거는 `logs/v30-dev3-final-sensor-startup.json`과 `screenshots/enhancement-v30-dev3-final-sensors-direct-start.png`이며 공개 원본에 넣지 않는다. 마지막 WPF 42개 재검사도 같은 수정 바이너리에서 통과했다.
+
+## Launchpad dev.6 — 2026-10-20
+
+최종 Windows 실행 파일 `962364d555505414be3f55de755ff22f398fa16ae151581eab5f9f6976520d58`를 실제 실행했다. 제품 버전 검사를 통과한 캡처 도구가 별도 공개 루트·실제 설치 앱의 공개 부분 목록·실제 예제 폴더를 사용했다. 175% DPI168에서 캡처했고 실제 입력 시험은 보조 화면150% DPI144·음수 좌표·전경 화면 배치도 확인했다. **100/125/200%·모니터 재연결은 미검증**이다.
+
+| 대상 | 실제 캡처·검토 | 공개 파일 |
+|---|---|---|
+| 전체 앱 | 원래 앱 아이콘·선택·페이징 | [화면](images/releases/v3.0/dev.6/all-apps.png) |
+| 개발 | 프로젝트/세션/명령 구분·긴 문맥 | [화면](images/releases/v3.0/dev.6/development.png) |
+| 유틸리티 폴더 | 뒤로·경로·실제 Windows 도구 | [화면](images/releases/v3.0/dev.6/utilities-folder.png) |
+| 검색 | Codex와 실제 예제 프로젝트 문맥 | [화면](images/releases/v3.0/dev.6/search.png) |
+| 즐겨찾기 | 고정 예제와 즐겨찾기 표시 | [화면](images/releases/v3.0/dev.6/favorites.png) |
+| 마스코트 | 앱별 지정·미지정 원래 아이콘 | [화면](images/releases/v3.0/dev.6/mascot-theme.png) |
+| 사용자화 | 키 기록·선택 입력·고정 저장/취소 | [화면](images/releases/v3.0/dev.6/customization.png) |
+| Settings | 시스템 탐색과 Launchpad 설정 | [화면](images/releases/v3.0/dev.6/settings.png) |
+| Workspace | 개발 탐색·예제 프로젝트 | [화면](images/releases/v3.0/dev.6/workspace.png) |
+| 실제 통합 창 | Workspace 클라이언트 안의 두 창 | [화면](images/releases/v3.0/dev.6/integrated-windows.png) |
+
+각 원본과 최대1600px RGB export를 각각 열어 개인정보·한글·줄 높이·선택·아이콘·클리핑을 확인했다. 길어진 이름은 여전히 말줄임이며 툴팁/접근성 이름을 제공한다. 초기 설정 개요에는 실제 Lively 식별자가 나왔고 초기 통합 캡처의 창 테두리 밖에도 픽셀이 있어 공개 제외 후 다시 캡처했다. 성공 상태를 그려 넣거나 오류를 지운 것이 아니라 캡처 대상을 안전한 설정 페이지와 클라이언트 영역으로 바꿨다. 최종 예제에는 불투명 가림이 필요하지 않았다.
+
+원본·로컬 카탈로그·로그는 ignored 경로에 두고 내보낸10개만 [manifest](images/releases/manifest.json)에 출처/버전/해시/권리와 함께 기록했다. 전체 사용자 바탕화면·타사 배경은 공개하지 않는다. UI 화면은 이미지 생성 도구로 만들지 않았다. 신규 마스코트 그림 제작과 실제 앱 캡처는 구분한다.
+
+```powershell
+powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File .\scripts\capture-launchpad.ps1 -Executable .\bin\GUNT.ControlCenter.exe -Version 3.0.0-dev.6 -Workspace
+```
+
+키보드·마우스 시험은 MTA UIAutomation 스크립트, 이 캡처/직접 WPF 검사는 STA에서 실행한다. [스크린샷 유지관리](readme-maintenance.md) · [전체 검사와 한계](v30-launchpad-report.md).

@@ -23,7 +23,7 @@ README는 제품 소개·대표 화면·현재 버전·기능·빌드 진입점�
 
 사용자 프로젝트·알림·배경·센서 설정을 공개용으로 바꾸지 않습니다. 문서용 별도 루트에 예제 데이터만 만듭니다. 예제 이름과 공개용 경로, 빈 실행 기록, 실제 예제 Git 저장소를 사용하고 설정되지 않은 도구는 그대로 표시합니다.
 
-현재 제공하는 Windows PowerShell 도구는 개발 세팅·세션·팔레트·빠른 패널만 캡처합니다. 사용자별 Lively·센서를 읽는 화면은 기본 대상에 넣지 않았습니다. 실행/적용 버튼·전역 키 등록·Explorer 재시작을 요청하지 않습니다.
+기존 `capture-readme-demo.ps1`는 개발 세팅·세션·팔레트·빠른 패널을 캡처합니다. `capture-launchpad.ps1`는 실제 Launchpad 7개 상태와 선택적으로 Settings·Workspace·실제 두 창 장면을 캡처합니다. 사용자별 Lively·센서를 읽는 화면은 기본 대상에 넣지 않았습니다. 실행/적용 버튼·전역 키 등록·Explorer 재시작을 요청하지 않습니다.
 
 ```powershell
 # 기존 제어 센터/팝업을 정상 종료한 뒤, 검증한 실행 파일로 실행
@@ -33,6 +33,16 @@ powershell.exe -MTA -NoProfile -ExecutionPolicy Bypass -File .\scripts\capture-r
 `C:\GUNT-DocDemo\<새 식별자>` 생성 권한과 Git for Windows가 필요합니다. 예제 Git 저장소의 작성자는 `Documentation Demo`, 주소는 예약된 `demo@example.invalid`이며 원격 저장소는 등록하지 않습니다. 실행 파일 해시는 로컬 capture manifest에 남깁니다. `-Version`은 **해당 소스로 검증한 실제 빌드 버전과 일치하게** 지정해야 하며 앱 버전을 바꿔 역사 화면을 꾸미는 용도가 아닙니다. 보존 빌드 비교는 해당 빌드·의존 DLL과 기록이 있는 경우에만 수행합니다.
 
 캡처 중 원본은 고유한 `screenshots/readme-<버전>-<식별자>/`에 보존합니다. 실패한 수집을 통과로 기록하지 않습니다. 예제 디렉터리는 임의 삭제하지 않으며 불필요해졌을 때 도구가 만든 경로인지 확인한 후 정리합니다.
+
+## Launchpad 릴리스 캡처
+
+```powershell
+powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File .\scripts\capture-launchpad.ps1 -Executable .\bin\GUNT.ControlCenter.exe -Version 3.0.0-dev.6 -Workspace
+```
+
+도구는 실행 파일의 실제 제품 버전과 지정 버전이 일치해야 동작합니다. 별도 문서 루트에서 실제 설치 앱을 발견한 뒤 공개 가능한 부분 목록만 저장하고 실제 Windows exe·공개 URL·예제 프로젝트로 구성합니다. 개인 루트의 앱 순서·즐겨찾기를 바꾸지 않습니다. 전역 키 등록·앱 실행 버튼을 누르지 않습니다. Settings 개요는 현재 프로세스/장치 식별자가 나올 수 있어 Launchpad 설정 페이지를 선택합니다. 통합 장면은 Workspace 클라이언트 영역 안에서 실제 화면을 캡처해 창 바깥 배경을 제외합니다. 숨은 리사이즈 경계가 포함되는 GetWindowRect 기반 전체 화면 복사는 쓰지 않습니다.
+
+아래 단계는 여전히 사람이 최종 이미지마다 수행해야 합니다. 발견 필터나 문서 루트를 썼다는 이유로 개인정보 검토를 생략하지 않습니다. 마스코트 제작에 사용한 이미지 생성과 실제 UI 캡처를 혼동하지 않습니다. 같은 이름의 앱 등록을 시각적으로 합쳐 보이게 편집하지 않습니다.
 
 ## 개인정보와 저작권 검토
 

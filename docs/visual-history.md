@@ -109,3 +109,49 @@ README에는 현재 제품과 대표 화면을 먼저 소개하고, 이 문서�
 최종 RGB PNG 6개를 다시 열어 검토했습니다. 예제 데이터로 개인정보를 배제해 불투명 가림은 필요하지 않았습니다. 개인 원본과 권리를 확인하지 못한 갤러리 썸네일은 공개하지 않습니다. 기존 13개 이미지 경로는 유지합니다.
 
 [dev.3 보고](v30-dev3-report.md) · [수치·퇴행·제외 범위](v30-performance.md) · [화면 검증 범위](v30-screenshots.md) · [공개 manifest](images/releases/manifest.json)
+
+## v3.0.0-dev.4 → dev.6 — GUNT Launchpad
+
+**2026-10-20 개발 프리뷰.** dev.4는 네이티브 앱 발견·그리드·정리와 전역 키 기반, dev.5는 실제 포즈 10종과 선택형 테마, dev.6은 Settings/Workspace 분리·명령 통합·재열기 작업 절감을 구현했다. [기능과 사용법](v30-launchpad.md) · [실제 검증/한계](v30-launchpad-report.md).
+
+| dev.4 — 첫 기반 | dev.6 — 관리 메뉴·정렬된 아이콘 영역 |
+|---|---|
+| ![dev.4 실제 Launchpad — 반복 버튼 줄과 일부 보조 문구 잘림](images/releases/v3.0/dev.4/all-apps.png) | ![dev.6 실제 Launchpad — 관리 메뉴와 원래 앱 아이콘](images/releases/v3.0/dev.6/all-apps.png) |
+
+실제 175% Windows 창이다. dev.6은 940×620 DIP, dev.4는 940×590 DIP다. 같은 구조의 별도 공개용 카탈로그지만 dev.6은 App Paths 발견과 전체 앱의 GUNT 명령 기본 표시 범위를 바꿔 항목 구성이 다르다. 동일 픽셀/데이터 벤치마크로 읽지 않는다. 의미 없는 버튼 줄·반복 제목을 줄이고 높이와 줄 영역을 맞췄다. 긴 이름은 말줄임·툴팁/접근성 이름으로 제공하며 미해결 사항도 아래에 남긴다.
+
+### 탐색과 정리
+
+| 개발 | 유틸리티 폴더 |
+|---|---|
+| ![dev.6 개발 카테고리 — 실제 예제 프로젝트별 명령](images/releases/v3.0/dev.6/development.png) | ![dev.6 실제 Windows 도구 폴더 — 뒤로와 경로](images/releases/v3.0/dev.6/utilities-folder.png) |
+
+| 검색 | 즐겨찾기 |
+|---|---|
+| ![dev.6 Codex 검색 — 프로젝트별 문맥](images/releases/v3.0/dev.6/search.png) | ![dev.6 실제 즐겨찾기 — 예제 고정 항목](images/releases/v3.0/dev.6/favorites.png) |
+
+브라우저 중복 이름은 서로 다른 등록/실행 인수를 이름만 보고 합치지 않은 결과다. 앱 인식과 사용자 숨기기 기능을 보존했다. 공개 URL 바로가기는 웹사이트 아이콘의 기본 fallback으로 보인다. 이 상태를 완성된 전용 사이트 아이콘으로 주장하지 않는다.
+
+### 마스코트와 사용자화
+
+| 수동 포즈 지정 | 사용자화 대화상자 |
+|---|---|
+| ![dev.6 선택형 AI·폴더 포즈와 원래 Git/VS Code 아이콘](images/releases/v3.0/dev.6/mascot-theme.png) | ![dev.6 실제 사용자화 — 키 기록·표시·크기와 고정 저장/취소](images/releases/v3.0/dev.6/customization.png) |
+
+앱별 미지정 포즈는 원래 아이콘을 유지한다. 카테고리 포즈는 탐색 아이콘에만 적용한다. 대화상자의 아래 옵션은 본문 스크롤에서 접근하고 저장/취소는 고정한다. [승인 원본과 신규 파생 그림 9종](../assets/branding/mascot/README.md)의 출처를 구분한다.
+
+### 세 인터페이스 영역
+
+| GUNT Settings | GUNT Workspace |
+|---|---|
+| ![dev.6 Settings — Launchpad 설정 페이지와 시스템 탐색](images/releases/v3.0/dev.6/settings.png) | ![dev.6 Workspace — 선택한 예제 프로젝트와 개발 탐색](images/releases/v3.0/dev.6/workspace.png) |
+
+![dev.6 실제 두 창 — Workspace 위 Launchpad, Workspace 클라이언트 영역만 캡처](images/releases/v3.0/dev.6/integrated-windows.png)
+
+통합 장면은 실제 화면의 두 창이며 앱 화면을 합성한 이미지가 아니다. 사용자의 타사 배경·상단 바·알림을 피하려고 Workspace 클라이언트 영역으로 제한했다. 완전한 사용자 데스크톱 공개 캡처가 아니다.
+
+### 검토 결과와 제한
+
+최종 빌드의 원본 10개와 RGB export 10개를 각각 열어 한글·정렬·선택·잘림·경로를 확인했다. 공개 파일은 최대1600px이며 [출처/해시 목록](images/releases/manifest.json)에 기록한다. 초기 설정 개요의 실제 Lively ID와 초기 통합 캡처 테두리 밖 픽셀은 공개하지 않고 재캡처했다. 최종 별도 예제 상태는 픽셀 가림이 필요하지 않았다. 원본·캐시 인벤토리는 Git 제외다.
+
+실제 입력으로 연결 화면 175%·150%와 음수 좌표/전경 선택을 확인했다. 긴 프로젝트 문맥 일부는 여전히 말줄임이며, 두 줄 이름/접근성 확대·100/125/200%·재연결·전체 스크린리더 검증은 남아 있다. [성능 수치와 예비 퇴행](v30-performance.md#launchpad-dev4--dev6--2026-10-20)은 시각 검토와 별도다.
