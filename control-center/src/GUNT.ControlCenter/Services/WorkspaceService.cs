@@ -3,7 +3,7 @@ namespace Gunt.ControlCenter.Services {
  public sealed partial class DesktopService {
   public Action<ProcessStartInfo> LaunchOverride;
   public static string Quote(string value){if(value==null)return "\"\"";return "\""+Regex.Replace(Regex.Replace(value,@"(\\*)""","$1$1\\\""),@"(\\+)$","$1$1")+"\"";}
-  void Launch(ProcessStartInfo info){if(LaunchOverride!=null)LaunchOverride(info);else Process.Start(info);}
+  void Launch(ProcessStartInfo info){if(LaunchOverride!=null)LaunchOverride(info);else using(var process=Process.Start(info)){}}
   public Dictionary<string,object> Optional(string name){string p=Path.Combine(Root,"config",name+".json");return File.Exists(p)?Read(name):new Dictionary<string,object>();}
   public static string S(Dictionary<string,object> d,string key,string fallback=""){object v;return d!=null&&d.TryGetValue(key,out v)&&v!=null?Convert.ToString(v,CultureInfo.InvariantCulture):fallback;}
   public static bool B(Dictionary<string,object> d,string key,bool fallback=false){object v;return d!=null&&d.TryGetValue(key,out v)&&v!=null?Convert.ToBoolean(v):fallback;}

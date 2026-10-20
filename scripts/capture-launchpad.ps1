@@ -1,5 +1,6 @@
 ﻿param([Parameter(Mandatory=$true)][string]$Executable,[ValidatePattern('^3\.0\.0-dev\.[456]$')][string]$Version='3.0.0-dev.4',[switch]$Workspace)
 . "$PSScriptRoot\enhancement-ui-common.ps1"
+if([Diagnostics.FileVersionInfo]::GetVersionInfo($Executable).ProductVersion -ne $Version){throw '실행 파일 제품 버전과 캡처 버전이 다릅니다. 올바른 검증 빌드를 지정하세요.'}
 Add-Type -AssemblyName PresentationFramework,PresentationCore,WindowsBase,System.Xaml
 $bin=Split-Path $Executable -Parent;$framework=Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319';$wpf=Join-Path $framework 'WPF'
 $refs=@('System.dll','System.Core.dll','System.Xaml.dll','System.Web.Extensions.dll','System.Windows.Forms.dll','System.Drawing.dll')|ForEach-Object {Join-Path $framework $_}
@@ -13,13 +14,15 @@ foreach($file in Get-ChildItem (Join-Path $Root 'config\examples') -Filter '*.ex
 $code=@'
 using System;using System.IO;using System.Linq;using System.Collections.Generic;using System.Reflection;using System.Diagnostics;using System.Runtime.InteropServices;using System.Windows;using System.Windows.Controls;using System.Windows.Interop;using System.Windows.Media;using System.Windows.Threading;using Gunt.ControlCenter.Models;using Gunt.ControlCenter.Services;using Gunt.ControlCenter.Views;
 public static class LaunchpadCapture {
+ static readonly List<object> shots=new List<object>();
  static object Field(object o,string name){return o.GetType().GetField(name,BindingFlags.NonPublic|BindingFlags.Instance).GetValue(o);}
  static void Set(object o,string name,object value){o.GetType().GetField(name,BindingFlags.NonPublic|BindingFlags.Instance).SetValue(o,value);}
  static object Call(object o,string name,params object[] args){return o.GetType().GetMethod(name,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(o,args);}
  static void Pump(int ms){var frame=new DispatcherFrame();var timer=new DispatcherTimer{Interval=TimeSpan.FromMilliseconds(ms)};timer.Tick+=delegate{timer.Stop();frame.Continue=false;};timer.Start();Dispatcher.PushFrame(frame);}
+ [DllImport("user32.dll")]static extern bool SetCursorPos(int x,int y);
  [DllImport("user32.dll")]static extern bool PrintWindow(IntPtr hwnd,IntPtr dc,uint flags);
  [DllImport("user32.dll")]static extern uint GetDpiForWindow(IntPtr hwnd);
- static void Shot(Window win,string path){win.Activate();Pump(450);var handle=new WindowInteropHelper(win).Handle;var source=PresentationSource.FromVisual(win);double dpi=GetDpiForWindow(handle)/96.0;int width=(int)Math.Ceiling(win.ActualWidth*dpi),height=(int)Math.Ceiling(win.ActualHeight*dpi);using(var bitmap=new System.Drawing.Bitmap(width,height,System.Drawing.Imaging.PixelFormat.Format24bppRgb)){using(var graphics=System.Drawing.Graphics.FromImage(bitmap)){IntPtr dc=graphics.GetHdc();try{if(!PrintWindow(handle,dc,2))throw new Exception("PrintWindow failed");}finally{graphics.ReleaseHdc(dc);}}bitmap.Save(path,System.Drawing.Imaging.ImageFormat.Png);}}
+ static void Shot(Window win,string path){win.Activate();var work=System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(win).Handle).WorkingArea;SetCursorPos(work.Right-4,work.Bottom-4);Pump(450);var handle=new WindowInteropHelper(win).Handle;var source=PresentationSource.FromVisual(win);double dpi=GetDpiForWindow(handle)/96.0;int width=(int)Math.Ceiling(win.ActualWidth*dpi),height=(int)Math.Ceiling(win.ActualHeight*dpi);using(var bitmap=new System.Drawing.Bitmap(width,height,System.Drawing.Imaging.PixelFormat.Format24bppRgb)){using(var graphics=System.Drawing.Graphics.FromImage(bitmap)){IntPtr dc=graphics.GetHdc();try{if(!PrintWindow(handle,dc,2))throw new Exception("PrintWindow failed");}finally{graphics.ReleaseHdc(dc);}}bitmap.Save(path,System.Drawing.Imaging.ImageFormat.Png);}shots.Add(new{File=Path.GetFileName(path),Width=width,Height=height,Dpi=GetDpiForWindow(handle)});}
  public static string Run(string root,string output,bool workspace){var app=Application.Current??new Application();app.ShutdownMode=ShutdownMode.OnExplicitShutdown;var service=new DesktopService(root);var cat=service.DiscoverApplicationsAsync().Result;
   // Public presentation is a separate filtered real catalog, never the user's live arrangement.
   string[] allowed={"Visual Studio Code","Git Bash","Git CMD","Git GUI","Microsoft Edge","Firefox","Google Chrome","Windows Terminal","터미널","메모장","계산기","그림판","Notepad","Calculator","Paint","PowerShell","작업 관리자","파일 탐색기","설정"};cat.Apps=cat.Apps.Where(x=>allowed.Any(n=>String.Equals(n,x.Name,StringComparison.OrdinalIgnoreCase)||x.Name.StartsWith("Windows PowerShell",StringComparison.OrdinalIgnoreCase))).ToList();cat.Refreshed=DateTimeOffset.Now.ToString("o");File.WriteAllText(Path.Combine(root,"state","launchpad-catalog.json"),service.Json.Serialize(cat));
@@ -32,13 +35,14 @@ public static class LaunchpadCapture {
    var updated=service.Launchpad();updated.IconTheme="mascot";service.SaveLaunchpad(updated);Set(win,"config",service.Launchpad());Set(win,"category","development");Call(win,"BuildCategories");Call(win,"RefreshGrid");Pump(1200);Shot(win,Path.Combine(output,"mascot-theme.png"));
    var timer=new DispatcherTimer{Interval=TimeSpan.FromMilliseconds(900)};timer.Tick+=delegate{var dialog=app.Windows.Cast<Window>().FirstOrDefault(x=>x.Title=="Launchpad 사용자화");if(dialog!=null){timer.Stop();Shot(dialog,Path.Combine(output,"customization.png"));dialog.Close();}};timer.Start();Call(win,"EditPreferences");Set(win,"modal",true);
   }finally{Set(win,"terminating",true);win.Close();}
-  if(workspace){foreach(string page in new[]{"settings","workspace"}){var main=new MainWindow(root,page);main.Show();Pump(1700);Shot(main,Path.Combine(output,page+".png"));main.Close();Pump(100);}}
-  return service.Json.Serialize(new{CatalogApps=cat.Apps.Count,Screens=System.Windows.Forms.Screen.AllScreens.Select(x=>new{Width=x.Bounds.Width,Height=x.Bounds.Height,Scale=GuntLayout.Scale(x)}).ToArray()});
+  if(workspace){foreach(string page in new[]{"settings","workspace"}){var main=new MainWindow(root,page);main.Show();Pump(1700);Shot(main,Path.Combine(output,page+".png"));if(page=="workspace"){var overlay=new LaunchpadWindow(root);Set(overlay,"modal",true);overlay.Show();Pump(1800);var work=System.Windows.Forms.Screen.FromHandle(new WindowInteropHelper(main).Handle).WorkingArea;SetCursorPos(work.Right-4,work.Bottom-4);var point=main.PointToScreen(new Point());double dpi=GetDpiForWindow(new WindowInteropHelper(main).Handle)/96.0;using(var image=new System.Drawing.Bitmap((int)(main.ActualWidth*dpi),(int)(main.ActualHeight*dpi),System.Drawing.Imaging.PixelFormat.Format24bppRgb)){using(var graphics=System.Drawing.Graphics.FromImage(image))graphics.CopyFromScreen((int)point.X,(int)point.Y,0,0,image.Size);image.Save(Path.Combine(output,"integrated-windows.png"),System.Drawing.Imaging.ImageFormat.Png);}Set(overlay,"terminating",true);overlay.Close();}main.Close();Pump(100);}}
+  return service.Json.Serialize(new{CatalogApps=cat.Apps.Count,Captures=shots,Screens=System.Windows.Forms.Screen.AllScreens.Select(x=>new{Width=x.Bounds.Width,Height=x.Bounds.Height,Scale=GuntLayout.Scale(x)}).ToArray()});
  }
 }
 '@
 # Framework CodeDOM accepts already loaded native .exe references without Add-Type's path resolver.
 $provider=New-Object Microsoft.CSharp.CSharpCodeProvider;$parameters=New-Object CodeDom.Compiler.CompilerParameters;$parameters.GenerateInMemory=$true;$parameters.ReferencedAssemblies.AddRange([string[]]$refs);$compiled=$provider.CompileAssemblyFromSource($parameters,$code);if($compiled.Errors.HasErrors){throw ($compiled.Errors|Out-String)};$null=$compiled.CompiledAssembly
-$details=[LaunchpadCapture]::Run($demo,$raw,$Workspace.IsPresent)
+$cursor=[GuntEnhanceUi]::Cursor()
+try{$details=[LaunchpadCapture]::Run($demo,$raw,$Workspace.IsPresent)}finally{[GuntEnhanceUi]::MouseAt($cursor.X,$cursor.Y)}
 Write-Json @{Version=$Version;CapturedAt=[DateTimeOffset]::Now.ToString('o');ExecutableSha256=(Get-FileHash $Executable).Hash;DemoRoot=$demo;Details=$details;Note='실제 Windows WPF 후보 빌드 / 별도 공개용 실제 앱 부분 목록 / 예제 프로젝트 / 실행하지 않음'} (Join-Path $raw 'capture-manifest.json')
 Write-Output $raw

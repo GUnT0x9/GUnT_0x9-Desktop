@@ -27,5 +27,5 @@ with tempfile.TemporaryDirectory(prefix='gunt-v30-compile-') as temp:
     compile('Gunt.Configuration.dll', [root / 'src/Configuration.cs'])
     compile('Gunt.Sensors.dll', [root / 'src' / name for name in ['Sensors.cs', 'AdditionalTelemetry.cs', 'HwinfoTelemetry.cs']])
     shared = [output / 'Gunt.Configuration.dll', output / 'Gunt.Sensors.dll']
-    compile('GUNT.ControlCenter.exe', list((root / 'control-center/src').rglob('*.cs')), shared + [args.references / (name + '.dll') for name in ['System.Xaml', 'PresentationFramework', 'PresentationCore', 'WindowsBase']], 'winexe')
-    compile('GUNT-Bar.exe', [root / 'src/GuntBar.cs', root / 'src/GuntDeveloperIntegration.cs'], shared, 'winexe')
+    compile('GUNT.ControlCenter.exe', list((root / 'control-center/src').rglob('*.cs')) + [root / 'src/LaunchpadHotkey.cs'], shared + [args.references / (name + '.dll') for name in ['System.Xaml', 'PresentationFramework', 'PresentationCore', 'WindowsBase']], 'winexe')
+    compile('GUNT-Bar.exe', [root / 'src/GuntBar.cs', root / 'src/GuntDeveloperIntegration.cs', root / 'src/LaunchpadHotkey.cs'], shared, 'winexe')
